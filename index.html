@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1d2d4f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kelime Kutusu">
+<title>Kelime Kutusu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a calm, encouraging study desk for a busy student
+   IDEA: a box of typed index cards on a night-blue desk
+   PICTURE: the cards themselves: a stack on the home screen, one large ruled card while studying
+   COLOUR and TYPE: night navy ground, ruled white cards, index-card red accent; Courier Prime words, Work Sans UI
+   LAYOUT: one centred column up to 640px, answer buttons under the card within thumb reach */
+:root{color-scheme:light dark;--bg:light-dark(#1d2d4f,#0e1730);--panel:light-dark(#273a62,#17233f);--ink:#f4f2ec;--muted:light-dark(#c3cce0,#9ba6c0);--card:light-dark(#fdfcf8,#e8e5dc);--cink:#1b2131;--cmuted:#5a6275;--rule:light-dark(#bcd5ee,#a9c2da);--red:#e0483e;--blue:#3d7be0;--teal:#1d9a86;--slate:#5d6d92}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Work Sans",system-ui,sans-serif;overflow-x:clip;min-height:100vh}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,.card:focus-visible{outline:3px solid #9cc2ff;outline-offset:2px}
+.wrap{max-width:640px;margin:0 auto;padding:18px max(4vw,16px) 40px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.top h1{font:700 22px/1.1 "Courier Prime",monospace;margin:0;letter-spacing:.01em}
+.streak{font-size:14px;color:var(--muted);white-space:nowrap}
+.streak b{color:var(--ink);font-size:17px}
+.status{background:var(--panel);border-left:4px solid var(--red);padding:12px 14px;border-radius:6px;margin-bottom:16px;font-size:15px}
+.stack{position:relative;display:block;width:100%;height:250px;border:0;background:none;padding:0;margin:8px 0 22px;text-align:left}
+.sc{position:absolute;inset:16px 8px 0;border-radius:7px;background:var(--card);box-shadow:0 18px 36px -14px rgba(0,0,0,.6)}
+.s3{transform:rotate(-4deg) translate(-4px,8px);opacity:.45}
+.s2{transform:rotate(2.6deg) translate(6px,3px);opacity:.75}
+.s1,.card{color:var(--cink);background-color:var(--card);background-image:linear-gradient(var(--card) 0 52px,transparent 52px),repeating-linear-gradient(transparent 0 31px,var(--rule) 31px 32px)}
+.s1{display:flex;flex-direction:column;justify-content:space-between;padding:60px 22px 20px;transition:transform .25s}
+.stack:hover .s1{transform:translateY(-3px)}
+.redline{position:absolute;left:0;right:0;top:42px;height:2px;background:var(--red);opacity:.85}
+.stk-label{position:absolute;top:12px;left:22px;font:700 14px "Courier Prime",monospace;color:var(--red)}
+.stk-nums{font:700 clamp(26px,7vw,36px)/1.15 "Courier Prime",monospace}
+.stk-nums i{font-style:normal;color:var(--cmuted)}
+.stk-go{align-self:flex-end;background:var(--red);color:#fff;font-weight:600;padding:10px 18px;border-radius:999px;font-size:16px}
+.stk-go.off{background:#d9d6cc;color:var(--cmuted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{border:1.5px solid #4a5f8c;background:transparent;border-radius:999px;padding:8px 14px;min-height:40px;font-size:15px}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600}
+.chip small{opacity:.7;margin-left:4px}
+.note{background:var(--panel);border-radius:8px;padding:14px 16px;margin-bottom:18px}
+.note h2{font:700 15px "Courier Prime",monospace;color:#ff8a80;margin:0 0 4px}
+.note p{margin:0;white-space:pre-line}
+.note small{color:var(--muted);font-size:13px}
+.statrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.statrow div{background:var(--panel);border-radius:8px;padding:12px;text-align:center}
+.statrow b{display:block;font:700 26px/1.1 "Courier Prime",monospace}
+.statrow span{font-size:13px;color:var(--muted)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ghost{background:transparent;border:1.5px solid #4a5f8c;border-radius:8px;min-height:46px;padding:10px;font-weight:500}
+.bar{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.icon{width:44px;height:44px;border-radius:50%;border:0;background:var(--panel);display:grid;place-items:center;flex:none}
+.icon svg{width:20px;height:20px}
+.prog{flex:1;height:8px;background:var(--panel);border-radius:99px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--red);transition:width .3s}
+#progTxt{font-size:14px;color:var(--muted);white-space:nowrap}
+.vt{font:700 20px "Courier Prime",monospace;margin:0}
+.card{position:relative;border-radius:7px;padding:56px 22px 24px;min-height:330px;box-shadow:0 22px 44px -16px rgba(0,0,0,.65)}
+.ctop{position:absolute;top:12px;left:22px;right:16px;display:flex;gap:8px;align-items:center}
+.tag{font:700 13px "Courier Prime",monospace;color:var(--red)}
+.tag.new{background:var(--red);color:#fff;padding:1px 8px;border-radius:99px}
+.word-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.word{font:700 clamp(28px,8vw,40px)/1.15 "Courier Prime",monospace;margin:4px 0 10px;overflow-wrap:anywhere}
+.spk{width:44px;height:44px;flex:none;border-radius:50%;border:0;background:#e9eef7;color:var(--cink);display:grid;place-items:center}
+.spk svg{width:20px;height:20px}
+.spk.sm{width:36px;height:36px;display:inline-grid;vertical-align:middle;margin-left:4px}
+.spk.sm svg{width:16px;height:16px}
+.ex{font-size:18px;line-height:32px;margin:0}
+.ex mark{background:#ffe08a;color:inherit;padding:0 2px;border-radius:2px}
+.back{margin-top:14px;padding-top:12px;border-top:2px dashed #c9cfdb;animation:rise .25s ease-out}
+.tr{font:700 24px/1.25 "Work Sans",sans-serif;margin:0 0 6px;color:#14306b}
+.extr{margin:0 0 8px;color:var(--cmuted);font-size:16px}
+.cnote{margin:0;font-size:15px;background:#fff6d6;border-radius:6px;padding:8px 10px;color:#4a3d10}
+.cnote:empty{display:none}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.show{display:block;width:100%;margin-top:18px;min-height:56px;border:0;border-radius:10px;background:var(--ink);color:var(--bg);font-weight:700;font-size:17px}
+.rate{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:18px}
+.rate button{border:0;border-radius:10px;min-height:64px;padding:8px 4px;color:#fff;font-weight:600;font-size:15px;line-height:1.2}
+.rate small{display:block;font-weight:400;font-size:13px;opacity:.9;margin-top:3px}
+.r0{background:var(--red)}.r1{background:var(--slate)}.r2{background:var(--blue)}.r3{background:var(--teal)}
+.done h2{font:700 28px/1.15 "Courier Prime",monospace;margin:0 0 10px}
+.done p{margin:0 0 10px;font-size:17px;line-height:32px}
+.wrongs{display:flex;flex-wrap:wrap;gap:6px}
+.wrongs span{background:#fde3e0;color:#8a1f17;border-radius:99px;padding:3px 10px;font-size:14px}
+.hint{color:var(--muted);font-size:14px;text-align:center;margin:10px 0 18px}
+textarea{width:100%;min-height:120px;font:15px/1.4 "Work Sans",sans-serif;border-radius:8px;padding:10px;margin-bottom:14px}
+input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px;border:1.5px solid #4a5f8c;background:var(--panel);color:var(--ink);margin-bottom:12px}
+.wlist{list-style:none;margin:0;padding:0}
+.wlist li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid #34476f}
+.wlist .w{font:700 17px "Courier Prime",monospace}
+.wlist .t{display:block;font-size:14px;color:var(--muted)}
+.pill{font-size:12px;padding:3px 9px;border-radius:99px;white-space:nowrap;background:#33476f}
+.pill.k{background:var(--teal)}.pill.n{background:var(--red)}
+.empty{color:var(--muted);text-align:center;padding:24px 8px}
+.lbl{font-size:13px;color:var(--muted);margin:0 0 6px}
+.chip[disabled]{opacity:.4;cursor:not-allowed}
+.prompt{font:700 13px "Courier Prime",monospace;color:var(--cmuted);margin:0 0 6px}
+.trh{font:700 clamp(24px,6.5vw,32px)/1.2 "Work Sans",sans-serif;margin:4px 0 8px;color:#14306b;overflow-wrap:anywhere}
+.blank{display:inline-block;border-bottom:2px solid var(--cink);line-height:22px;margin:0 2px}
+.ans{display:flex;gap:8px;margin-top:16px}
+.ans input{flex:1;width:100%;font:18px "Courier Prime",monospace;padding:12px;border:2px solid #9aa6bf;border-radius:8px;background:#fff;color:var(--cink)}
+.ans button{border:0;border-radius:8px;background:var(--cink);color:#fff;font-weight:600;padding:0 16px;min-height:48px}
+.ans :disabled{opacity:.55}
+.skip{background:none;border:0;color:var(--cmuted);text-decoration:underline;padding:10px 0;font-size:15px;min-height:44px}
+.bigspk{display:flex;align-items:center;gap:12px;border:0;background:var(--cink);color:#fff;border-radius:999px;padding:14px 22px;font-weight:600;font-size:17px;margin:12px 0 4px}
+.bigspk svg{width:24px;height:24px}
+.res{font-weight:700;margin:0 0 10px;font-size:17px;line-height:1.4}.res.ok{color:#137a52}.res.mid{color:#8a6500}.res.no{color:#b3261e}
+.res s{font-weight:400}
+.wordb{font:700 clamp(26px,7vw,34px)/1.15 "Courier Prime",monospace;margin:0 0 6px;display:flex;align-items:center;gap:10px;justify-content:space-between;overflow-wrap:anywhere}
+.addbtn{width:100%;margin-bottom:10px;font-weight:600;border-style:dashed}.addbtn small{color:var(--muted);font-weight:400}
+.addf input{width:100%;font-size:17px;padding:13px 14px;border-radius:8px;border:1.5px solid #4a5f8c;background:var(--panel);color:var(--ink);margin-bottom:12px}
+.del{background:none;border:1.5px solid #4a5f8c;border-radius:8px;min-height:40px;padding:6px 12px;font-size:14px;flex:none}
+.rate button.sug{box-shadow:0 0 0 3px var(--bg),0 0 0 6px #fff}
+@media(max-width:400px){.rate{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><h1>Kelime Kutusu</h1><div class="streak" id="streak"></div></header>
+<div class="status" id="status">Yükleniyor…</div>
+
+<section id="v-login" hidden>
+  <div class="card done"><span class="redline"></span><h2>Hoş geldin!</h2><p>İlerlemen telefonda ve tablette aynı kalsın diye Google hesabınla giriş yap. İki cihazda da aynı hesabı kullan.</p></div>
+  <button class="show" id="loginBtn">Google ile giriş yap</button>
+  <p class="hint" id="loginMsg"></p>
+</section>
+
+<section id="v-home" hidden>
+  <button class="stack" id="stack" aria-label="Çalışmaya başla">
+    <span class="sc s3"></span><span class="sc s2"></span>
+    <span class="sc s1"><span class="redline"></span><span class="stk-label" id="stkLabel">Bugün</span>
+      <span class="stk-nums"><b id="nDue">0</b> tekrar <i>·</i> <b id="nNew">0</b> yeni</span>
+      <span class="stk-go" id="goLabel">Başla →</span>
+    </span>
+  </button>
+  <p class="lbl">Çalışma modu</p><div class="chips" id="modes" role="group" aria-label="Çalışma modu"></div>
+  <p class="lbl">Deste</p><div class="chips" id="decks" role="group" aria-label="Deste seç"></div>
+  <p class="lbl">Günde yeni kelime</p><div class="chips" id="perday" role="group" aria-label="Günde yeni kelime"></div>
+  <article class="note" id="note" hidden><h2>Claude'dan not</h2><p id="noteText"></p><small id="noteDate"></small></article>
+  <div class="statrow">
+    <div><b id="sTotal">0</b><span>kelime</span></div>
+    <div><b id="sLearn">0</b><span>öğreniliyor</span></div>
+    <div><b id="sKnown">0</b><span>oturdu</span></div>
+  </div>
+  <button class="ghost addbtn" id="toAdd">+ Kelime ekle <small id="inboxCount"></small></button>
+  <div class="row2"><button class="ghost" id="toList">Tüm kelimeler</button><button class="ghost" id="toHist">Geçmiş</button></div>
+  <div class="row2" style="margin-top:10px"><button class="ghost" id="toSend">Claude'a gönder</button><button class="ghost" id="toImp">Kelime içe aktar</button></div>
+  <p class="hint"><span id="acct"></span> · <button class="skip" id="logout" style="color:var(--muted);min-height:0;padding:0">Çıkış yap</button></p>
+</section>
+
+<section id="v-send" hidden>
+  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Claude'a gönder</h2></div>
+  <p class="lbl" style="font-size:15px">Bu raporu kopyala ve Claude sohbetine yapıştır. İçinde son çalışmaların, zorlandığın kelimeler ve eklenecek kelimelerin var.</p>
+  <textarea id="sendText" readonly style="min-height:260px"></textarea>
+  <button class="show" id="sendCopy" style="margin-top:0">Kopyala</button>
+  <p class="hint" id="sendMsg"></p>
+</section>
+
+<section id="v-imp" hidden>
+  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Kelime içe aktar</h2></div>
+  <p class="lbl" style="font-size:15px">Claude'un verdiği kod bloğunun tamamını kopyala, buraya yapıştır ve "İçe aktar"a bas.</p>
+  <textarea id="impText" placeholder='{"cards":[ ... ]}' autocapitalize="none" spellcheck="false" style="min-height:200px"></textarea>
+  <button class="show" id="impBtn" style="margin-top:0">İçe aktar</button>
+  <p class="hint" id="impMsg"></p>
+</section>
+
+<section id="v-study" hidden>
+  <div class="bar">
+    <button class="icon" id="quit" aria-label="Çık"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="prog"><i id="progFill"></i></div><span id="progTxt">0/0</span>
+  </div>
+  <div class="card" id="card" tabindex="0">
+    <span class="redline"></span>
+    <div class="ctop"><span class="tag" id="cDeck"></span><span class="tag new" id="cNew" hidden>yeni</span><span class="tag" id="cMode" style="margin-left:auto;color:var(--cmuted)"></span></div>
+    <div id="front"></div>
+    <div class="back" id="back" hidden></div>
+  </div>
+  <button class="show" id="showBtn">Cevabı göster</button>
+  <div class="rate" id="rate" hidden>
+    <button data-r="0" class="r0">Bilmedim<small></small></button>
+    <button data-r="1" class="r1">Zor<small></small></button>
+    <button data-r="2" class="r2">Bildim<small></small></button>
+    <button data-r="3" class="r3">Çok kolay<small></small></button>
+  </div>
+</section>
+
+<section id="v-done" hidden>
+  <div class="card done"><span class="redline"></span><h2 id="doneTitle">Bugünlük bu kadar!</h2><p id="doneTxt"></p><div class="wrongs" id="doneWrong"></div></div>
+  <button class="show" id="copyBtn">Sonucu kopyala</button>
+  <p class="hint" id="copyMsg">Ya da ana sayfadaki "Claude'a gönder" ile tüm raporu yolla.</p>
+  <textarea id="copyArea" readonly hidden></textarea>
+  <button class="ghost" style="width:100%" id="doneHome">Ana sayfa</button>
+</section>
+
+<section id="v-list" hidden>
+  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Tüm kelimeler</h2></div>
+  <input id="q" type="search" placeholder="Ara (İngilizce ya da Türkçe)" autocomplete="off">
+  <ul class="wlist" id="wlist"></ul>
+</section>
+
+<section id="v-add" hidden>
+  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Eklenecek kelimeler</h2></div>
+  <p class="lbl" style="font-size:15px">Dizide, oyunda ya da kitapta gördüğün kelimeyi buraya yaz. Cümlesini de yazarsan daha iyi kart yaparım. Hazır olduğunda ana sayfadaki "Claude'a gönder" ile listeyi bana yolla.</p>
+  <form class="addf" id="addForm" autocomplete="off">
+    <input id="addText" type="text" placeholder="Kelime ya da cümle" autocapitalize="none" spellcheck="false" enterkeyhint="done" aria-label="Kelime ya da cümle">
+    <div class="chips" id="srcChips" role="group" aria-label="Nerede gördün"></div>
+    <button class="show" type="submit" style="margin-top:4px">Listeye ekle</button>
+  </form>
+  <ul class="wlist" id="ilist"></ul>
+</section>
+
+<section id="v-hist" hidden>
+  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Geçmiş</h2></div>
+  <ul class="wlist" id="hlist"></ul>
+</section>
+</div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import {getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import {initializeFirestore,getFirestore,persistentLocalCache,persistentMultipleTabManager,collection,doc,setDoc,deleteDoc,onSnapshot,query,orderBy as fsOrderBy,limit as fsLimit,writeBatch,getDocFromServer} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+const firebaseConfig={apiKey:"AIzaSyD6qa_2d6x9d670KUIGalp8iiJHkBFup18",authDomain:"kelimecim-59671.firebaseapp.com",projectId:"kelimecim-59671",storageBucket:"kelimecim-59671.firebasestorage.app",messagingSenderId:"687418566304",appId:"1:687418566304:web:06cd6c3ddb35a4bac00bc5"};
+{
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const reEsc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const DAY=864e5,pad=n=>String(n).padStart(2,'0');
+const dstr=(d=new Date())=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const sod=()=>{const d=new Date();d.setHours(0,0,0,0);return +d};
+const eod=()=>sod()+DAY-1;
+const AYLAR=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+const SPK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>';
+const MODES=[['flip','Kart'],['rev','Ters'],['type','Yazarak'],['cloze','Boşluk'],['listen','Dinleme'],['mix','Karışık']];
+const MODE_LBL={flip:'EN → TR',rev:'TR → EN',type:'yazarak',cloze:'boşluk',listen:'dinleme'};
+const PERDAY=[5,10,15,20,30];
+
+const SRCS=['Dizi/film','Oyun','Kitap','Ippo','Okul','Diğer'];let src='Dizi/film';
+const S={inbox:[],cards:[],prog:{},sessions:[],note:null,settings:{newPerDay:10},deck:'Tümü',ready:false};
+let db=null,tts=null,Q=[],cur=null,cm='flip',sess=null,view='home',lastSum='';
+let mode='flip';try{mode=localStorage.getItem('kk-mode')||'flip'}catch(e){}
+const chains={};
+
+function status(t){const el=$('status');el.textContent=t;el.hidden=!t}
+function show(v){view=v;for(const k of ['login','home','study','done','list','hist','add','send','imp'])$('v-'+k).hidden=k!==v;window.scrollTo(0,0);render()}
+
+/* --- spaced repetition (SM-2 style) --- */
+function schedule(prev,r){
+  const p=Object.assign({ease:2.5,ivl:0,reps:0,lapses:0},prev||{});
+  if(r===0){p.reps=0;p.lapses+=1;p.ease=Math.max(1.3,+(p.ease-.2).toFixed(2));p.ivl=0;p.due=Date.now()+6e5}
+  else{
+    let iv;
+    if(p.reps===0)iv=[0,1,1,3][r];
+    else if(p.reps===1)iv=[0,2,3,5][r];
+    else iv=r===1?Math.max(p.ivl+1,p.ivl*1.2):r===2?Math.max(p.ivl+1,p.ivl*p.ease):Math.max(p.ivl+2,p.ivl*p.ease*1.3);
+    iv=Math.round(iv);
+    if(r===1)p.ease=Math.max(1.3,+(p.ease-.15).toFixed(2));
+    if(r===3)p.ease=+(p.ease+.15).toFixed(2);
+    p.reps+=1;p.ivl=iv;p.due=sod()+iv*DAY;
+  }
+  p.last=Date.now();p.lastR=r;return p;
+}
+const fmtIvl=d=>d<1?'10 dk':d<30?d+' gün':Math.round(d/30)+' ay';
+const stateOf=c=>{const p=S.prog[c.id];return !p?'n':p.ivl>=21?'k':'l'};
+const inDeck=c=>S.deck==='Tümü'||c.deck===S.deck;
+const perDay=()=>+S.settings.newPerDay||10;
+function dueCards(){const e=eod();return S.cards.filter(c=>inDeck(c)&&S.prog[c.id]&&(S.prog[c.id].due||0)<=e).sort((a,b)=>S.prog[a.id].due-S.prog[b.id].due)}
+function newCards(){
+  const t=dstr(),seenToday=Object.values(S.prog).filter(p=>p.seen===t).length;
+  return S.cards.filter(c=>inDeck(c)&&!S.prog[c.id]).slice(0,Math.max(0,perDay()-seenToday));
+}
+function streak(){
+  const days=new Set(S.sessions.map(s=>s.date));let n=0;const d=new Date();
+  if(!days.has(dstr(d)))d.setDate(d.getDate()-1);
+  while(days.has(dstr(d))){n++;d.setDate(d.getDate()-1)}
+  return n;
+}
+
+/* --- answer checking --- */
+const norm=s=>String(s||'').toLowerCase().replace(/[’‘`]/g,"'").replace(/\(.*?\)/g,' ').replace(/…|\.\.\./g,' ').replace(/[?!.,;:"]/g,' ').replace(/\s+/g,' ').trim().replace(/^to /,'');
+function lev(a,b){let p=Array.from({length:b.length+1},(_,j)=>j);for(let i=1;i<=a.length;i++){const q=[i];for(let j=1;j<=b.length;j++)q[j]=Math.min(p[j]+1,q[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=q}return p[b.length]}
+function check(input,list){
+  const a=norm(input);if(!a)return 0;
+  const ts=list.filter(Boolean).flatMap(t=>[norm(t),norm(String(t).replace(/[()]/g,''))]).filter(Boolean);
+  if(ts.includes(a))return 2;
+  return ts.some(t=>t.length>=5&&lev(a,t)<=1)?1:0;
+}
+const keyOf=c=>(c.hl||String(c.en).replace(/^to /i,'').replace(/\s*\(.*?\)\s*/g,' ')).replace(/…/g,'').trim();
+function clozeMatch(c){const k=keyOf(c);return k&&c.ex?c.ex.match(new RegExp(reEsc(k),'i')):null}
+
+/* --- card faces --- */
+const canSpeak=()=>('speechSynthesis' in window);
+const spk=(w,sm)=>canSpeak()?`<button class="spk${sm?' sm':''}" data-say="${w}" aria-label="Dinle">${SPK}</button>`:'';
+function highlight(c){const ex=esc(c.ex||''),k=keyOf(c);if(!k)return ex;return ex.replace(new RegExp('('+reEsc(esc(k))+')','i'),'<mark>$1</mark>')}
+function blanked(c){const m=clozeMatch(c);if(!m)return esc(c.ex);return esc(c.ex.slice(0,m.index))+'<span class="blank">'+'&nbsp;'.repeat(Math.max(6,m[0].length+2))+'</span>'+esc(c.ex.slice(m.index+m[0].length))}
+const form=()=>`<form class="ans" id="ansForm" autocomplete="off"><input id="ans" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done" aria-label="Cevabın"><button type="submit">Kontrol</button></form><button class="skip" id="skipBtn" type="button">Bilmiyorum, göster</button>`;
+function pickMode(c){
+  const ok={flip:1,rev:1,type:1,cloze:!!clozeMatch(c),listen:canSpeak()};
+  if(mode==='mix'){const opts=Object.keys(ok).filter(k=>ok[k]);return opts[Math.floor(Math.random()*opts.length)]}
+  if(ok[mode])return mode;
+  return mode==='cloze'?'type':'flip';
+}
+function frontHTML(c,m){
+  if(m==='flip')return `<div class="word-row"><h2 class="word">${esc(c.en)}</h2>${spk('w')}</div>${c.ex?`<p class="ex">${highlight(c)}${spk('ex',1)}</p>`:''}`;
+  const tr=`<h2 class="trh">${esc(c.tr)}</h2>${c.exTr?`<p class="ex">${esc(c.exTr)}</p>`:''}`;
+  if(m==='rev')return `<p class="prompt">İngilizcesi ne? Önce aklından söyle.</p>${tr}`;
+  if(m==='type')return `<p class="prompt">İngilizcesini yaz</p>${tr}${form()}`;
+  if(m==='cloze')return `<p class="prompt">Boşluğu doldur</p><p class="ex">${blanked(c)}</p><p class="extr">İpucu: ${esc(c.tr)}</p>${form()}`;
+  return `<p class="prompt">Dinle ve anlamaya çalış</p><button class="bigspk" data-say="ex">${SPK} Cümleyi dinle</button><button class="skip" data-say="w">Sadece kelimeyi dinle</button>`;
+}
+function backHTML(c,m,res){
+  let h='';
+  if(res){
+    h+=res.r===2?'<p class="res ok">✓ Doğru!</p>':res.r===1?`<p class="res mid">Neredeyse! Doğru yazımı: ${esc(res.right)}</p>`:`<p class="res no">${res.input?`Senin cevabın: <s>${esc(res.input)}</s><br>`:''}Doğrusu: ${esc(res.right)}</p>`;
+  }
+  if(m!=='flip'){h+=`<div class="wordb"><span>${esc(c.en)}</span>${spk('w')}</div>`;if(c.ex)h+=`<p class="ex">${highlight(c)}${spk('ex',1)}</p>`}
+  if(m!=='rev'&&m!=='type'){h+=`<p class="tr">${esc(c.tr)}</p>`;if(c.exTr)h+=`<p class="extr">${esc(c.exTr)}</p>`}
+  if(c.note)h+=`<p class="cnote">${esc(c.note)}</p>`;
+  return h;
+}
+
+/* --- render --- */
+function render(){
+  const st=streak();$('streak').innerHTML=st?`<b>${st}</b> gün seri`:'';
+  if(view==='home')renderHome();else if(view==='list')renderList();else if(view==='hist')renderHist();else if(view==='add')renderAdd();
+}
+function renderHome(){
+  const due=dueCards().length,nw=newCards().length;
+  $('nDue').textContent=due;$('nNew').textContent=nw;
+  const go=$('goLabel');
+  if(!S.ready){go.textContent='Yükleniyor…';go.className='stk-go off'}
+  else if(!S.cards.length){go.textContent='Kart yok';go.className='stk-go off'}
+  else if(due+nw===0){go.textContent='Bugünlük tamam';go.className='stk-go off'}
+  else{go.textContent='Başla →';go.className='stk-go'}
+  $('modes').innerHTML=MODES.map(([k,l])=>`<button class="chip" data-mode="${k}" aria-pressed="${k===mode}"${k==='listen'&&!canSpeak()?' disabled':''}>${l}</button>`).join('');
+  const decks=[...new Set(S.cards.map(c=>c.deck).filter(Boolean))];
+  if(!decks.includes(S.deck))S.deck='Tümü';
+  $('decks').innerHTML=['Tümü',...decks].map(d=>{const n=d==='Tümü'?S.cards.length:S.cards.filter(c=>c.deck===d).length;return `<button class="chip" data-deck="${esc(d)}" aria-pressed="${d===S.deck}">${esc(d)}<small>${n}</small></button>`}).join('');
+  $('perday').innerHTML=PERDAY.map(n=>`<button class="chip" data-per="${n}" aria-pressed="${n===perDay()}">${n}</button>`).join('');
+  const nt=S.note;$('note').hidden=!(nt&&nt.text);
+  if(nt&&nt.text){$('noteText').textContent=nt.text;$('noteDate').textContent=nt.date||''}
+  $('inboxCount').textContent=S.inbox.length?`(${S.inbox.length} bekliyor)`:'';
+  const counts={n:0,l:0,k:0};S.cards.forEach(c=>counts[stateOf(c)]++);
+  $('sTotal').textContent=S.cards.length;$('sLearn').textContent=counts.l;$('sKnown').textContent=counts.k;
+}
+function renderList(){
+  const q=$('q').value.trim().toLocaleLowerCase('tr');
+  const rows=S.cards.filter(c=>!q||(c.en+' '+c.tr+' '+(c.deck||'')).toLocaleLowerCase('tr').includes(q));
+  const lab={n:'yeni',l:'öğreniliyor',k:'oturdu'};
+  $('wlist').innerHTML=rows.length?rows.map(c=>{const s=stateOf(c),p=S.prog[c.id];let when='';
+    if(p){const d=Math.round((p.due-sod())/DAY);when=d<=0?' · bugün':` · ${d} gün sonra`}
+    return `<li><div><span class="w">${esc(c.en)}</span><span class="t">${esc(c.tr)} · ${esc(c.deck||'')}${when}</span></div><span class="pill ${s}">${lab[s]}</span></li>`}).join(''):'<li class="empty">Kelime bulunamadı.</li>';
+}
+function renderAdd(){
+  $('srcChips').innerHTML=SRCS.map(s=>`<button type="button" class="chip" data-src="${esc(s)}" aria-pressed="${s===src}">${esc(s)}</button>`).join('');
+  $('ilist').innerHTML=S.inbox.length?S.inbox.map(i=>`<li><div><span class="w">${esc(i.text)}</span><span class="t">${esc(i.src||'')} · Claude'un eklemesini bekliyor</span></div><button class="del" data-del="${esc(i.id)}">Sil</button></li>`).join(''):'<li class="empty">Liste boş. Yeni bir kelime gördüğünde buraya yaz.</li>';
+}
+function renderHist(){
+  $('hlist').innerHTML=S.sessions.length?S.sessions.map(s=>{const d=new Date(s.ts||0);
+    const w=(s.wrong||[]).length?`Zorlandıkların: ${esc(s.wrong.join(', '))}`:'Hepsini bildin';
+    return `<li><div><span class="w">${d.getDate()} ${AYLAR[d.getMonth()]} · ${s.cards||0} kart</span><span class="t">${w}</span></div><span class="pill">${s.newCount||0} yeni</span></li>`}).join(''):'<li class="empty">Henüz çalışma yok.</li>';
+}
+
+/* --- study --- */
+function start(){
+  if(!S.ready||!db)return;
+  Q=[...dueCards(),...newCards()];
+  if(!Q.length)return;
+  sess={start:Date.now(),ans:[0,0,0,0],seen:new Set(),wrong:new Set(),newCount:0,done:0};
+  show('study');next();
+}
+function next(){
+  if(!Q.length){finish();return}
+  cur=Q[0];cm=pickMode(cur);
+  $('cDeck').textContent=cur.deck||'';$('cNew').hidden=!!S.prog[cur.id];$('cMode').textContent=MODE_LBL[cm];
+  $('front').innerHTML=frontHTML(cur,cm);$('back').innerHTML='';$('back').hidden=true;
+  $('rate').hidden=true;$('rate').querySelectorAll('button').forEach(b=>b.classList.remove('sug'));
+  $('showBtn').hidden=cm==='type'||cm==='cloze';
+  const tot=sess.done+Q.length;$('progFill').style.width=(tot?sess.done/tot*100:0)+'%';$('progTxt').textContent=sess.done+'/'+tot;
+  if(cm==='type'||cm==='cloze'){const a=$('ans');if(a)a.focus({preventScroll:true})}else $('card').focus({preventScroll:true});
+  if(cm==='listen')speak(cur.ex||cur.en);
+}
+function rightAnswer(){if(cm==='cloze'){const m=clozeMatch(cur);return m?m[0]:keyOf(cur)}return cur.en}
+function reveal(res){
+  if(!cur||!$('back').hidden)return;
+  $('back').innerHTML=backHTML(cur,cm,res);$('back').hidden=false;$('showBtn').hidden=true;$('rate').hidden=false;
+  const f=$('ansForm');if(f)f.querySelectorAll('input,button').forEach(x=>{x.disabled=true});
+  const sk=$('skipBtn');if(sk)sk.hidden=true;
+  for(const b of $('rate').querySelectorAll('button')){const r=+b.dataset.r;b.querySelector('small').textContent=fmtIvl(schedule(S.prog[cur.id],r).ivl);b.classList.toggle('sug',!!res&&res.r===r)}
+}
+function save(path,data){
+  const p=(chains[path]||Promise.resolve()).then(()=>db.doc(path).set(data)).catch(e=>{status('Kaydedilemedi ('+(e&&e.code||'hata')+'). Bağlantını kontrol et.')});
+  chains[path]=p;return p;
+}
+function rate(r){
+  if(!cur||$('back').hidden)return;
+  const prev=S.prog[cur.id];const p=schedule(prev,r);
+  p.seen=prev&&prev.seen?prev.seen:dstr();if(!prev)sess.newCount++;
+  S.prog={...S.prog,[cur.id]:p};save('progress/'+cur.id,p);
+  sess.ans[r]++;sess.seen.add(cur.en);
+  Q.shift();
+  if(r===0){sess.wrong.add(cur.en);Q.splice(Math.min(3,Q.length),0,cur)}else sess.done++;
+  next();
+}
+function record(){
+  if(!sess||!sess.seen.size)return null;
+  const s={date:dstr(),ts:Date.now(),mode,cards:sess.seen.size,newCount:sess.newCount,again:sess.ans[0],hard:sess.ans[1],good:sess.ans[2],easy:sess.ans[3],wrong:[...sess.wrong],minutes:Math.max(1,Math.round((Date.now()-sess.start)/6e4))};
+  save('sessions/s'+s.ts,s);return s;
+}
+function summary(s){
+  return `Kelime Kutusu, ${s.date} (${s.mode} modu): ${s.cards} kart çalıştım (${s.newCount} yeni), ${s.minutes} dk.\nBildim: ${s.good}, Çok kolay: ${s.easy}, Zor: ${s.hard}, Bilmedim: ${s.again}.`+(s.wrong.length?`\nZorlandıklarım: ${s.wrong.join(', ')}`:'');
+}
+function finish(){
+  const s=record();sess=null;cur=null;
+  show('done');
+  if(!s){$('doneTxt').textContent='Bugün çalışılacak kart kalmadı.';$('doneWrong').innerHTML='';return}
+  $('doneTitle').textContent=s.wrong.length?'Bugünlük bu kadar!':'Harika, hepsini bildin!';
+  $('doneTxt').textContent=`${s.cards} kart, ${s.minutes} dakika. ${s.newCount} yeni kelime gördün.`;
+  $('doneWrong').innerHTML=s.wrong.length?'<p style="margin:6px 0 4px;font-size:15px;line-height:1.4">Yarın tekrar gelecekler:</p>'+s.wrong.map(w=>`<span>${esc(w)}</span>`).join(''):'';
+  lastSum=summary(s);$('copyArea').hidden=true;
+}
+
+/* --- speech --- */
+function speak(text){
+  text=String(text||'').replace(/…/g,'').trim();if(!text)return;
+  const web=()=>{try{const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}};
+  web();
+}
+
+/* --- events --- */
+$('stack').addEventListener('click',start);
+$('modes').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(b&&!b.disabled){mode=b.dataset.mode;try{localStorage.setItem('kk-mode',mode)}catch(x){}render()}});
+$('decks').addEventListener('click',e=>{const b=e.target.closest('[data-deck]');if(b){S.deck=b.dataset.deck;render()}});
+$('perday').addEventListener('click',e=>{const b=e.target.closest('[data-per]');if(!b||!db)return;const n=+b.dataset.per;if(n===perDay())return;S.settings={...S.settings,newPerDay:n};save('meta/settings',{...S.settings});render()});
+$('showBtn').addEventListener('click',()=>reveal());
+$('card').addEventListener('click',e=>{
+  const s=e.target.closest('[data-say]');
+  if(s){if(cur)speak(s.dataset.say==='w'?cur.en:(cur.ex||cur.en));return}
+  if(e.target.closest('#skipBtn')){reveal({r:0,input:'',right:rightAnswer()});return}
+  if(e.target.closest('form'))return;
+  if(cm==='flip'||cm==='rev'||cm==='listen')reveal();
+});
+document.addEventListener('submit',e=>{
+  if(e.target.id==='addForm'){e.preventDefault();const inp=$('addText');const t=inp.value.trim().slice(0,300);if(!t||!db)return;
+    const ts=Date.now();db.collection('inbox').doc('i'+ts).set({text:t,src,ts}).then(()=>{inp.value='';inp.focus()},er=>status('Eklenemedi ('+(er&&er.code||'hata')+').'));return}
+  if(e.target.id!=='ansForm')return;e.preventDefault();
+  const v=$('ans').value;if(!v.trim()||!cur)return;
+  const right=rightAnswer();const list=cm==='cloze'?[right,...(cur.alt||[])]:[cur.en,cur.hl,...(cur.alt||[])];
+  reveal({r:check(v,list),input:v,right});
+});
+$('rate').addEventListener('click',e=>{const b=e.target.closest('[data-r]');if(b)rate(+b.dataset.r)});
+$('quit').addEventListener('click',()=>{if(sess&&sess.seen.size)finish();else{sess=null;show('home')}});
+$('doneHome').addEventListener('click',()=>show('home'));
+$('toList').addEventListener('click',()=>show('list'));
+$('toHist').addEventListener('click',()=>show('hist'));
+$('toAdd').addEventListener('click',()=>show('add'));
+$('srcChips').addEventListener('click',e=>{const b=e.target.closest('[data-src]');if(b){src=b.dataset.src;renderAdd()}});
+$('ilist').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(b&&db){b.disabled=true;db.doc('inbox/'+b.dataset.del).delete().catch(()=>{b.disabled=false;status('Silinemedi, tekrar dene.')})}});
+document.querySelectorAll('[data-home]').forEach(b=>b.addEventListener('click',()=>show('home')));
+$('q').addEventListener('input',renderList);
+$('copyBtn').addEventListener('click',()=>{
+  const a=$('copyArea');a.value=lastSum;
+  const fail=()=>{a.hidden=false;a.select();$('copyMsg').textContent='Metni seçip kopyala.'};
+  try{navigator.clipboard.writeText(lastSum).then(()=>{$('copyMsg').textContent='Kopyalandı. Sohbete yapıştırabilirsin.'},fail)}catch(x){fail()}
+});
+document.addEventListener('keydown',e=>{
+  if(view!=='study'||e.target.tagName==='INPUT')return;
+  if((e.key===' '||e.key==='Enter')&&(cm==='flip'||cm==='rev'||cm==='listen')){e.preventDefault();reveal()}
+  else if(['1','2','3','4'].includes(e.key))rate(+e.key-1);
+  else if(e.key==='Escape')$('quit').click();
+});
+
+/* --- data --- */
+function initDb(){
+  let gotCards=false;
+  const timer=setTimeout(()=>{if(!gotCards)status('Veriler henüz yüklenemedi. İnternet bağlantını kontrol et; sayfa açık kalırsa kendiliğinden yüklenir.')},10000);
+  const onErr=e=>{clearTimeout(timer);status('Bağlantı kesildi ('+(e&&e.code||'hata')+'). Sayfayı kapatıp yeniden aç.')};
+  db.collection('cards').onSnapshot(s=>{
+    S.cards=s.docs.map(d=>({id:d.id,...d.data()})).filter(c=>c.en&&c.tr).sort((a,b)=>(a.n??1e9)-(b.n??1e9)||String(a.en).localeCompare(String(b.en)));
+    gotCards=true;S.ready=true;
+    if(!s.metadata.fromCache){clearTimeout(timer);status(S.cards.length?'':'Henüz kart yok. "Kelime içe aktar" ile kart ekle.')}
+    render();
+  },onErr);
+  db.collection('progress').onSnapshot(s=>{const o={};s.docs.forEach(d=>{o[d.id]=d.data()});S.prog=o;render()},onErr);
+  db.collection('sessions').orderBy('ts','desc').limit(60).onSnapshot(s=>{S.sessions=s.docs.map(d=>d.data());render()},onErr);
+  db.collection('inbox').orderBy('ts','desc').onSnapshot(s=>{S.inbox=s.docs.map(d=>({id:d.id,...d.data()}));render()},onErr);
+  db.doc('meta/note').onSnapshot(d=>{S.note=d.exists?d.data():null;render()},onErr);
+  db.doc('meta/settings').onSnapshot(d=>{if(d.exists)S.settings={...S.settings,...d.data()};render()},onErr);
+}
+/* --- Firebase --- */
+const FB=(()=>{
+  const app=initializeApp(firebaseConfig),auth=getAuth(app),provider=new GoogleAuthProvider();
+  let fs;try{fs=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})})}catch(e){fs=getFirestore(app)}
+  let base='';
+  const P=p=>base+p;
+  const wrap=d=>({id:d.id,exists:d.exists(),data:()=>d.data(),metadata:d.metadata});
+  const Q=(path,ops=[])=>({
+    orderBy:(f,dir)=>Q(path,[...ops,fsOrderBy(f,dir||'asc')]),
+    limit:n=>Q(path,[...ops,fsLimit(n)]),
+    doc:id=>D(path+'/'+id),
+    onSnapshot:(next,err)=>onSnapshot(query(collection(fs,P(path)),...ops),s=>next({docs:s.docs.map(wrap),metadata:s.metadata}),err)
+  });
+  const D=path=>({
+    set:data=>setDoc(doc(fs,P(path)),data),
+    delete:()=>deleteDoc(doc(fs,P(path))),
+    onSnapshot:(next,err)=>onSnapshot(doc(fs,P(path)),s=>next(wrap(s)),err)
+  });
+  const api={collection:p=>Q(p),doc:p=>D(p)};
+  async function seed(){
+    let seeded;
+    try{seeded=(await getDocFromServer(doc(fs,P('meta/seeded')))).exists()}catch(e){return}
+    if(seeded)return;
+    try{
+      const r=await fetch('seed.json',{cache:'no-store'});const s=await r.json();
+      const b=writeBatch(fs);
+      s.cards.forEach(c=>{const {id,...rest}=c;b.set(doc(fs,P('cards/'+id)),rest)});
+      Object.entries(s.progress||{}).forEach(([k,v])=>b.set(doc(fs,P('progress/'+k)),v));
+      Object.entries(s.sessions||{}).forEach(([k,v])=>b.set(doc(fs,P('sessions/'+k)),v));
+      if(s.settings)b.set(doc(fs,P('meta/settings')),s.settings);
+      if(s.note)b.set(doc(fs,P('meta/note')),s.note);
+      b.set(doc(fs,P('meta/seeded')),{ts:Date.now()});
+      await b.commit();
+    }catch(e){status('Başlangıç kelimeleri yüklenemedi ('+(e&&e.code||e.message||'hata')+').')}
+  }
+  const FIELDS=['en','tr','ex','exTr','hl','note','deck','n','alt'];
+  async function importJSON(txt){
+    let obj;try{obj=JSON.parse(txt)}catch(e){throw new Error('Kod okunamadı. Claude\'un verdiği bloğun tamamını kopyaladığından emin ol.')}
+    const list=(Array.isArray(obj)?obj:(obj.cards||[])).filter(c=>c&&c.en&&c.tr).slice(0,400);
+    const b=writeBatch(fs);let n=0;
+    for(const c of list){
+      const id=String(c.id||('c-'+String(c.en).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-'+Date.now().toString(36))).replace(/[\/]/g,'-').slice(0,80);
+      const d={};FIELDS.forEach(f=>{if(c[f]!==undefined&&c[f]!==null)d[f]=c[f]});
+      b.set(doc(fs,P('cards/'+id)),d);n++;
+    }
+    if(!Array.isArray(obj)){
+      if(obj.note){const t=new Date();b.set(doc(fs,P('meta/note')),{text:String(obj.note),date:t.getDate()+' '+AYLAR[t.getMonth()]+' '+t.getFullYear()})}
+      if(obj.clearInbox)S.inbox.forEach(i=>b.delete(doc(fs,P('inbox/'+i.id))));
+      if(obj.deleteCards)obj.deleteCards.forEach(id=>b.delete(doc(fs,P('cards/'+id))));
+    }
+    await b.commit();return n;
+  }
+  function start(){
+    $('loginBtn').addEventListener('click',()=>{
+      $('loginMsg').textContent='Giriş penceresi açılıyor…';
+      signInWithPopup(auth,provider).catch(e=>{
+        if(['auth/popup-blocked','auth/operation-not-supported-in-this-environment','auth/cancelled-popup-request'].includes(e.code))signInWithRedirect(auth,provider);
+        else $('loginMsg').textContent=e.code==='auth/popup-closed-by-user'?'Giriş penceresi kapatıldı.':'Giriş olmadı: '+(e.code||e.message);
+      });
+    });
+    $('logout').addEventListener('click',()=>signOut(auth).then(()=>location.reload()));
+    onAuthStateChanged(auth,async u=>{
+      if(!u){status('');show('login');return}
+      if(db)return;
+      base='users/'+u.uid+'/';$('acct').textContent=u.email||'';
+      status('Yükleniyor…');show('home');
+      await seed();db=api;initDb();
+    });
+  }
+  return {start,importJSON};
+})();
+$('toSend').addEventListener('click',()=>{$('sendText').value=report();$('sendMsg').textContent='';show('send')});
+$('toImp').addEventListener('click',()=>{$('impMsg').textContent='';show('imp')});
+$('sendCopy').addEventListener('click',()=>{
+  const a=$('sendText');const ok=()=>{$('sendMsg').textContent='Kopyalandı! Şimdi Claude sohbetine yapıştır.'};
+  const fb=()=>{a.focus();a.select();try{document.execCommand('copy');ok()}catch(x){$('sendMsg').textContent='Metni seçip kopyala.'}};
+  try{navigator.clipboard.writeText(a.value).then(ok,fb)}catch(x){fb()}
+});
+$('impBtn').addEventListener('click',async()=>{
+  const t=$('impText').value.trim();if(!t||!db)return;
+  $('impBtn').disabled=true;$('impMsg').textContent='Aktarılıyor…';
+  try{const n=await FB.importJSON(t);$('impMsg').textContent=n+' kart eklendi/güncellendi.';$('impText').value=''}
+  catch(e){$('impMsg').textContent=e.message||('Hata: '+e.code)}
+  $('impBtn').disabled=false;
+});
+function report(){
+  const c={n:0,l:0,k:0};S.cards.forEach(x=>c[stateOf(x)]++);
+  const L=['KELİME KUTUSU RAPORU · '+dstr(),`Toplam ${S.cards.length} kelime · yeni ${c.n} · öğreniliyor ${c.l} · oturdu ${c.k} · seri ${streak()} gün · günde ${perDay()} yeni`];
+  const rec=S.sessions.slice(0,7);
+  if(rec.length){L.push('','Son çalışmalar:');rec.forEach(s=>L.push(`- ${s.date}: ${s.cards} kart (${s.newCount} yeni, ${s.mode||'flip'}, ${s.minutes} dk) · bildim ${s.good}, kolay ${s.easy}, zor ${s.hard}, bilmedim ${s.again}`+((s.wrong||[]).length?` · zorlandıkların: ${s.wrong.join(', ')}`:'')))}
+  else L.push('','Henüz çalışma yok.');
+  const hard=S.cards.filter(x=>(S.prog[x.id]||{}).lapses>=2).map(x=>x.en);
+  if(hard.length)L.push('','En çok unuttukların: '+hard.join(', '));
+  if(S.inbox.length){L.push('','Eklenecek kelimeler:');S.inbox.slice().reverse().forEach(i=>L.push(`- ${i.text}${i.src?' ('+i.src+')':''}`))}
+  const decks=[...new Set(S.cards.map(x=>x.deck))];L.push('','Desteler: '+decks.join(', '),'Son kart sırası: '+Math.max(0,...S.cards.map(x=>+x.n||0)));
+  return L.join('\n');
+}
+FB.start();
+render();
+}
+</script>
+</body>
+</html>
