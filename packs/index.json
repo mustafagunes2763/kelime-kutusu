@@ -1,5 +1,12 @@
 [
  {
+  "id": "basketbol",
+  "title": "Basketbol & Alperen Şengün",
+  "desc": "Maç kelimeleri ve İngilizce spiker dili",
+  "file": "packs/basketbol.json",
+  "count": 22
+ },
+ {
   "id": "rdr2",
   "title": "Red Dead Redemption 2",
   "desc": "Kanun kaçakları, kamp, av ve 1899'un konuşma dili",
