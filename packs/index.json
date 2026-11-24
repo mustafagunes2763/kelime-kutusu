@@ -1,0 +1,16 @@
+[
+ {
+  "id": "rdr2",
+  "title": "Red Dead Redemption 2",
+  "desc": "Kanun kaçakları, kamp, av ve 1899'un konuşma dili",
+  "file": "packs/rdr2.json",
+  "count": 20
+ },
+ {
+  "id": "spiderman",
+  "title": "Spider-Man",
+  "desc": "Suç, kovalamaca ve kahramanlık kelimeleri",
+  "file": "packs/spiderman.json",
+  "count": 12
+ }
+]

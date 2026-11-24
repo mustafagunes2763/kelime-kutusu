@@ -1,5 +1,5 @@
 // Kelime Kutusu: basit servis çalışanı. Sitenin kendi dosyalarını önbelleğe alır, internet yokken de açılsın diye.
-const CACHE = 'kk-v1';
+const CACHE = 'kk-v2';
 const FILES = ['./', './index.html', './seed.json', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));

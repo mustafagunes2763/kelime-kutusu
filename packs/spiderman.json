@@ -1,0 +1,121 @@
+{
+"cards": [
+{
+"id": "sp1",
+"n": 111,
+"deck": "Spider-Man",
+"en": "villain",
+"tr": "kötü adam",
+"ex": "Every good story needs a good villain.",
+"exTr": "Her iyi hikâyenin iyi bir kötü adama ihtiyacı vardır."
+},
+{
+"id": "sp2",
+"n": 112,
+"deck": "Spider-Man",
+"en": "to rescue",
+"tr": "kurtarmak",
+"ex": "Spider-Man had to rescue the people trapped in the building.",
+"exTr": "Spider-Man binada mahsur kalan insanları kurtarmak zorundaydı.",
+"hl": "rescue",
+"note": "trapped = mahsur kalmış"
+},
+{
+"id": "sp3",
+"n": 113,
+"deck": "Spider-Man",
+"en": "crime",
+"tr": "suç",
+"ex": "There's a crime in progress near you.",
+"exTr": "Yakınında işlenmekte olan bir suç var.",
+"note": "criminal = suçlu"
+},
+{
+"id": "sp4",
+"n": 114,
+"deck": "Spider-Man",
+"en": "to chase",
+"tr": "kovalamak",
+"ex": "The police are chasing a car through the city.",
+"exTr": "Polis şehirde bir arabayı kovalıyor.",
+"hl": "chasing"
+},
+{
+"id": "sp5",
+"n": 115,
+"deck": "Spider-Man",
+"en": "suspect",
+"tr": "şüpheli",
+"ex": "The suspect ran into the subway.",
+"exTr": "Şüpheli metroya kaçtı."
+},
+{
+"id": "sp6",
+"n": 116,
+"deck": "Spider-Man",
+"en": "to take down",
+"tr": "alt etmek, etkisiz hâle getirmek",
+"ex": "You have to take down all the enemies without being seen.",
+"exTr": "Görülmeden bütün düşmanları etkisiz hâle getirmen gerekiyor.",
+"hl": "take down"
+},
+{
+"id": "sp7",
+"n": 117,
+"deck": "Spider-Man",
+"en": "gadget",
+"tr": "alet, ufak cihaz",
+"ex": "Use your gadgets to stop the enemies from far away.",
+"exTr": "Düşmanları uzaktan durdurmak için aletlerini kullan."
+},
+{
+"id": "sp8",
+"n": 118,
+"deck": "Spider-Man",
+"en": "citizen",
+"tr": "vatandaş",
+"ex": "He always tries to protect the citizens of New York.",
+"exTr": "Her zaman New York vatandaşlarını korumaya çalışır."
+},
+{
+"id": "sp9",
+"n": 119,
+"deck": "Spider-Man",
+"en": "mayor",
+"tr": "belediye başkanı",
+"ex": "The mayor gave a speech in front of City Hall.",
+"exTr": "Belediye başkanı belediye binasının önünde konuşma yaptı.",
+"note": "City Hall = belediye binası"
+},
+{
+"id": "sp10",
+"n": 120,
+"deck": "Spider-Man",
+"en": "to swing",
+"tr": "sallanmak, (ağla) salınarak gitmek",
+"ex": "It's so fun to swing between the buildings.",
+"exTr": "Binaların arasında salınarak gitmek çok eğlenceli.",
+"hl": "swing"
+},
+{
+"id": "sp11",
+"n": 121,
+"deck": "Spider-Man",
+"en": "backup",
+"tr": "destek (ekip)",
+"ex": "We need backup! There are too many of them!",
+"exTr": "Desteğe ihtiyacımız var! Çok fazlalar!"
+},
+{
+"id": "sp12",
+"n": 122,
+"deck": "Spider-Man",
+"en": "to make it",
+"tr": "başarmak; yetişmek; hayatta kalmak",
+"ex": "Hurry up, or we won't make it in time!",
+"exTr": "Acele et, yoksa zamanında yetişemeyeceğiz!",
+"hl": "make it",
+"note": "Did you make it? = Başardın mı? / Yetiştin mi?"
+}
+]
+}

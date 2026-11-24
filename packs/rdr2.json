@@ -1,0 +1,208 @@
+{
+"cards": [
+{
+"id": "r1",
+"n": 91,
+"deck": "RDR2",
+"en": "outlaw",
+"tr": "kanun kaçağı, eşkıya",
+"ex": "Arthur is an outlaw, and the law is always one step behind him.",
+"exTr": "Arthur bir kanun kaçağı ve kanun hep bir adım arkasında."
+},
+{
+"id": "r2",
+"n": 92,
+"deck": "RDR2",
+"en": "gang",
+"tr": "çete",
+"ex": "The gang moves from place to place to stay safe.",
+"exTr": "Çete güvende kalmak için bir yerden bir yere taşınır."
+},
+{
+"id": "r3",
+"n": 93,
+"deck": "RDR2",
+"en": "camp",
+"tr": "kamp",
+"ex": "Don't forget to bring food back to camp.",
+"exTr": "Kampa yiyecek getirmeyi unutma."
+},
+{
+"id": "r4",
+"n": 94,
+"deck": "RDR2",
+"en": "bounty",
+"tr": "(birinin başına konan) ödül",
+"ex": "There's a $50 bounty on your head in this state.",
+"exTr": "Bu eyalette başına 50 dolar ödül konmuş.",
+"note": "bounty hunter = ödül avcısı"
+},
+{
+"id": "r5",
+"n": 95,
+"deck": "RDR2",
+"en": "wanted",
+"tr": "aranan",
+"ex": "He is wanted for robbery in two states.",
+"exTr": "İki eyalette soygundan aranıyor.",
+"note": "WANTED: Dead or Alive = Aranıyor: Ölü ya da diri"
+},
+{
+"id": "r6",
+"n": 96,
+"deck": "RDR2",
+"en": "sheriff",
+"tr": "şerif",
+"ex": "The sheriff and his men are looking for us.",
+"exTr": "Şerif ve adamları bizi arıyor.",
+"note": "lawman = kanun adamı"
+},
+{
+"id": "r7",
+"n": 97,
+"deck": "RDR2",
+"en": "to rob",
+"tr": "soymak",
+"ex": "They robbed a train in the middle of the night.",
+"exTr": "Gecenin ortasında bir treni soydular.",
+"hl": "robbed",
+"note": "robbery = soygun"
+},
+{
+"id": "r8",
+"n": 98,
+"deck": "RDR2",
+"en": "to lay low",
+"tr": "bir süre ortalıktan kaybolmak, sessiz durmak",
+"ex": "We need to lay low for a while until things calm down.",
+"exTr": "Ortalık sakinleşene kadar bir süre sessiz durmamız lazım.",
+"hl": "lay low"
+},
+{
+"id": "r9",
+"n": 99,
+"deck": "RDR2",
+"en": "I reckon",
+"tr": "sanırım, bence (eski/kırsal Amerikan)",
+"ex": "I reckon it's going to rain tonight.",
+"exTr": "Sanırım bu gece yağmur yağacak.",
+"hl": "I reckon",
+"note": "Bugün daha çok 'I think' denir; western ve güney aksanında çok duyarsın."
+},
+{
+"id": "r10",
+"n": 100,
+"deck": "RDR2",
+"en": "ain't",
+"tr": "değil (isn't / am not / aren't; gayriresmî)",
+"ex": "That ain't right, and you know it.",
+"exTr": "Bu doğru değil ve bunu sen de biliyorsun.",
+"hl": "ain't",
+"note": "Konuşma dili. Sınavda ya da yazıda kullanma."
+},
+{
+"id": "r11",
+"n": 101,
+"deck": "RDR2",
+"en": "fella",
+"tr": "adam, herif (fellow'un konuşma hâli)",
+"ex": "Who's that fella standing by the horses?",
+"exTr": "Atların yanında duran o adam kim?",
+"hl": "fella"
+},
+{
+"id": "r12",
+"n": 102,
+"deck": "RDR2",
+"en": "to owe",
+"tr": "borçlu olmak",
+"ex": "He owes us money, so we're going to collect it.",
+"exTr": "Bize borcu var, o yüzden tahsil edeceğiz.",
+"hl": "owes",
+"note": "debt = borç"
+},
+{
+"id": "r13",
+"n": 103,
+"deck": "RDR2",
+"en": "loyalty",
+"tr": "sadakat",
+"ex": "In this gang, loyalty is everything.",
+"exTr": "Bu çetede sadakat her şeydir.",
+"note": "loyal = sadık"
+},
+{
+"id": "r14",
+"n": 104,
+"deck": "RDR2",
+"en": "to track",
+"tr": "iz sürmek",
+"ex": "You can track the deer by following its footprints.",
+"exTr": "Ayak izlerini takip ederek geyiğin izini sürebilirsin.",
+"hl": "track",
+"note": "tracks = iz, ayak izi"
+},
+{
+"id": "r15",
+"n": 105,
+"deck": "RDR2",
+"en": "to hunt",
+"tr": "avlanmak",
+"ex": "I spent the whole day hunting in the mountains.",
+"exTr": "Bütün günü dağlarda avlanarak geçirdim.",
+"hl": "hunting",
+"note": "pelt = post, hayvan derisi"
+},
+{
+"id": "r16",
+"n": 106,
+"deck": "RDR2",
+"en": "trail",
+"tr": "patika, iz",
+"ex": "Follow the trail north until you reach the river.",
+"exTr": "Nehre varana kadar patikayı kuzeye doğru takip et."
+},
+{
+"id": "r17",
+"n": 107,
+"deck": "RDR2",
+"en": "to hold up",
+"tr": "silah zoruyla soymak",
+"ex": "Two men held up the stagecoach on the road.",
+"exTr": "İki adam yolda posta arabasını silah zoruyla soydu.",
+"hl": "held up",
+"note": "stagecoach = posta arabası. Günlük dilde 'hold up' = bekle demek de olur."
+},
+{
+"id": "r18",
+"n": 108,
+"deck": "RDR2",
+"en": "hideout",
+"tr": "saklanma yeri, sığınak",
+"ex": "The gang has a hideout deep in the woods.",
+"exTr": "Çetenin ormanın derinliklerinde bir sığınağı var."
+},
+{
+"id": "r19",
+"n": 109,
+"deck": "RDR2",
+"en": "to scout",
+"tr": "keşfe çıkmak, etrafı kollamak",
+"ex": "Go and scout the area before we ride in.",
+"exTr": "Biz atla içeri girmeden önce git, etrafı keşfet.",
+"hl": "scout"
+},
+{
+"id": "r20",
+"n": 110,
+"deck": "RDR2",
+"en": "to bond (with)",
+"tr": "(biriyle) bağ kurmak",
+"ex": "Brush and feed your horse to bond with it.",
+"exTr": "Atınla bağ kurmak için onu tımarla ve besle.",
+"hl": "bond",
+"note": "Oyunda: Horse bonding level = atla bağ seviyesi"
+}
+],
+"note": "RDR2 paketi eklendi: kanun kaçakları, kamp hayatı ve 1899'un konuşma dili (I reckon, ain't, fella). Oyuna dönmeden önce bu desteyi bitir!"
+}
