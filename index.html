@@ -120,6 +120,8 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
 .res{font-weight:700;margin:0 0 10px;font-size:17px;line-height:1.4}.res.ok{color:#137a52}.res.mid{color:#8a6500}.res.no{color:#b3261e}
 .res s{font-weight:400}
 .wordb{font:700 clamp(26px,7vw,34px)/1.15 "Courier Prime",monospace;margin:0 0 6px;display:flex;align-items:center;gap:10px;justify-content:space-between;overflow-wrap:anywhere}
+.upd{position:sticky;top:8px;z-index:5;display:flex;align-items:center;gap:12px;background:var(--ink);color:var(--bg);border-radius:10px;padding:10px 12px 10px 16px;margin-bottom:14px;box-shadow:0 10px 24px -8px rgba(0,0,0,.6)}
+.upd span{flex:1;font-size:15px;line-height:1.35}.upd button{border:0;border-radius:8px;background:var(--red);color:#fff;font-weight:700;min-height:44px;padding:0 16px;flex:none}
 .addbtn{width:100%;margin-bottom:10px;font-weight:600;border-style:dashed}.addbtn small{color:var(--muted);font-weight:400}
 .addf input{width:100%;font-size:17px;padding:13px 14px;border-radius:8px;border:1.5px solid #4a5f8c;background:var(--panel);color:var(--ink);margin-bottom:12px}
 .del{background:none;border:1.5px solid #4a5f8c;border-radius:8px;min-height:40px;padding:6px 12px;font-size:14px;flex:none}
@@ -131,6 +133,7 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
 <body>
 <div class="wrap">
 <header class="top"><h1>Kelime Kutusu</h1><div class="streak" id="streak"></div></header>
+<div class="upd" id="upd" hidden role="status"><span id="updTxt">Yeni sürüm hazır!</span><button id="updBtn">Yenile</button></div>
 <div class="status" id="status">Yükleniyor…</div>
 
 <section id="v-login" hidden>
@@ -156,7 +159,7 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
     <div><b id="sLearn">0</b><span>öğreniliyor</span></div>
     <div><b id="sKnown">0</b><span>oturdu</span></div>
   </div>
-  <button class="ghost addbtn" id="toAdd">+ Kelime ekle <small id="inboxCount"></small></button>
+  <button class="ghost addbtn" id="toAdd">+ Claude'a iletilecekler <small id="inboxCount"></small></button>
   <div class="row2"><button class="ghost" id="toList">Tüm kelimeler</button><button class="ghost" id="toHist">Geçmiş</button></div>
   <div class="row2" style="margin-top:10px"><button class="ghost" id="toSend">Claude'a gönder</button><button class="ghost" id="toImp">Yeni kelimeler <small id="packBadge" style="color:#ff8a80"></small></button></div>
   <p class="hint"><span id="acct"></span> · <button class="skip" id="logout" style="color:var(--muted);min-height:0;padding:0">Çıkış yap</button></p>
@@ -215,14 +218,19 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
 </section>
 
 <section id="v-add" hidden>
-  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Eklenecek kelimeler</h2></div>
-  <p class="lbl" style="font-size:15px">Dizide, oyunda ya da kitapta gördüğün kelimeyi buraya yaz. Cümlesini de yazarsan daha iyi kart yaparım. Hazır olduğunda ana sayfadaki "Claude'a gönder" ile listeyi bana yolla.</p>
+  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Claude'a iletilecekler</h2></div>
+  <p class="lbl" style="font-size:15px">Bilmediğin kelimeyi, anlamadığın cümleyi ya da aklına takılan soruyu yaz. Biriktir, sonra <b>Hepsini kopyala</b>'ya bas ve Claude sohbetine yapıştır.</p>
   <form class="addf" id="addForm" autocomplete="off">
-    <input id="addText" type="text" placeholder="Kelime ya da cümle" autocapitalize="none" spellcheck="false" enterkeyhint="done" aria-label="Kelime ya da cümle">
+    <input id="addText" type="text" placeholder="Kelime, cümle ya da soru" autocapitalize="none" spellcheck="false" enterkeyhint="done" aria-label="Kelime ya da cümle">
+    <div class="chips" id="kindChips" role="group" aria-label="Ne ekliyorsun"></div>
+    <p class="lbl">Nerede gördün?</p>
     <div class="chips" id="srcChips" role="group" aria-label="Nerede gördün"></div>
     <button class="show" type="submit" style="margin-top:4px">Listeye ekle</button>
   </form>
+  <button class="show" id="copyAll" hidden style="background:var(--red);color:#fff">Hepsini kopyala</button>
+  <p class="hint" id="copyAllMsg"></p>
   <ul class="wlist" id="ilist"></ul>
+  <button class="ghost" id="clearAll" hidden style="width:100%;margin-top:16px">Claude'a gönderdim, listeyi temizle</button>
 </section>
 
 <section id="v-hist" hidden>
@@ -250,7 +258,8 @@ const MODES=[['flip','Kart'],['rev','Ters'],['type','Yazarak'],['cloze','Boşluk
 const MODE_LBL={flip:'EN → TR',rev:'TR → EN',type:'yazarak',cloze:'boşluk',listen:'dinleme'};
 const PERDAY=[5,10,15,20,30];
 
-const SRCS=['Dizi/film','Oyun','Kitap','Ippo','Okul','Diğer'];let src='Dizi/film';
+const SRCS=['Dizi/film','Oyun','Kitap','Basketbol','Ippo','Okul','Diğer'];let src='Dizi/film';
+const KINDS=['Kelime','Cümle','Soru'];let kind='Kelime',clearArmed=false;
 const S={packs:[],packsDone:[],inbox:[],cards:[],prog:{},sessions:[],note:null,settings:{newPerDay:10},deck:'Tümü',ready:false};
 let db=null,tts=null,Q=[],cur=null,cm='flip',sess=null,view='home',lastSum='';
 let mode='flip';try{mode=localStorage.getItem('kk-mode')||'flip'}catch(e){}
@@ -369,7 +378,10 @@ function renderList(){
 }
 function renderAdd(){
   $('srcChips').innerHTML=SRCS.map(s=>`<button type="button" class="chip" data-src="${esc(s)}" aria-pressed="${s===src}">${esc(s)}</button>`).join('');
-  $('ilist').innerHTML=S.inbox.length?S.inbox.map(i=>`<li><div><span class="w">${esc(i.text)}</span><span class="t">${esc(i.src||'')} · Claude'un eklemesini bekliyor</span></div><button class="del" data-del="${esc(i.id)}">Sil</button></li>`).join(''):'<li class="empty">Liste boş. Yeni bir kelime gördüğünde buraya yaz.</li>';
+  $('kindChips').innerHTML=KINDS.map(s=>`<button type="button" class="chip" data-kind="${esc(s)}" aria-pressed="${s===kind}">${esc(s)}</button>`).join('');
+  $('copyAll').hidden=!S.inbox.length;$('clearAll').hidden=!S.inbox.length;
+  $('copyAll').textContent=`Hepsini kopyala (${S.inbox.length})`;
+  $('ilist').innerHTML=S.inbox.length?S.inbox.map(i=>`<li><div><span class="w">${esc(i.text)}</span><span class="t">${esc(i.kind||'Kelime')} · ${esc(i.src||'')}</span></div><button class="del" data-del="${esc(i.id)}">Sil</button></li>`).join(''):'<li class="empty">Liste boş. Yeni bir kelime gördüğünde buraya yaz.</li>';
 }
 function renderImp(){
   $('packList').innerHTML=S.packs.length?S.packs.map(p=>{const done=S.packsDone.includes(p.id);
@@ -462,7 +474,7 @@ $('card').addEventListener('click',e=>{
 });
 document.addEventListener('submit',e=>{
   if(e.target.id==='addForm'){e.preventDefault();const inp=$('addText');const t=inp.value.trim().slice(0,300);if(!t||!db)return;
-    const ts=Date.now();db.collection('inbox').doc('i'+ts).set({text:t,src,ts}).then(()=>{inp.value='';inp.focus()},er=>status('Eklenemedi ('+(er&&er.code||'hata')+').'));return}
+    const ts=Date.now();db.collection('inbox').doc('i'+ts).set({text:t,kind,src,ts}).then(()=>{inp.value='';inp.focus()},er=>status('Eklenemedi ('+(er&&er.code||'hata')+').'));return}
   if(e.target.id!=='ansForm')return;e.preventDefault();
   const v=$('ans').value;if(!v.trim()||!cur)return;
   const right=rightAnswer();const list=cm==='cloze'?[right,...(cur.alt||[])]:[cur.en,cur.hl,...(cur.alt||[])];
@@ -474,6 +486,21 @@ $('doneHome').addEventListener('click',()=>show('home'));
 $('toList').addEventListener('click',()=>show('list'));
 $('toHist').addEventListener('click',()=>show('hist'));
 $('toAdd').addEventListener('click',()=>show('add'));
+$('kindChips').addEventListener('click',e=>{const b=e.target.closest('[data-kind]');if(b){kind=b.dataset.kind;renderAdd()}});
+function inboxText(){const L=[`Claude'a iletilecekler (${S.inbox.length}):`];S.inbox.slice().reverse().forEach(i=>L.push(`- [${i.kind||'Kelime'}] ${i.text}${i.src?' ('+i.src+')':''}`));return L.join('\n')}
+function copyText(t,msgEl){
+  const ok=()=>{msgEl.textContent='Kopyalandı! Şimdi Claude sohbetine yapıştır.'};
+  const fb=()=>{const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();let done=false;try{done=document.execCommand('copy')}catch(x){}a.remove();msgEl.textContent=done?'Kopyalandı! Şimdi Claude sohbetine yapıştır.':'Kopyalanamadı. Ana sayfadaki "Claude\'a gönder"i dene.'};
+  try{navigator.clipboard.writeText(t).then(ok,fb)}catch(x){fb()}
+}
+$('copyAll').addEventListener('click',()=>copyText(inboxText(),$('copyAllMsg')));
+$('clearAll').addEventListener('click',async()=>{
+  const b=$('clearAll');
+  if(!clearArmed){clearArmed=true;b.textContent='Emin misin? Silmek için tekrar dokun';setTimeout(()=>{clearArmed=false;b.textContent="Claude'a gönderdim, listeyi temizle"},4000);return}
+  clearArmed=false;b.disabled=true;
+  for(const i of S.inbox.slice()){try{await db.doc('inbox/'+i.id).delete()}catch(x){}}
+  b.disabled=false;b.textContent="Claude'a gönderdim, listeyi temizle";$('copyAllMsg').textContent='Liste temizlendi.';
+});
 $('srcChips').addEventListener('click',e=>{const b=e.target.closest('[data-src]');if(b){src=b.dataset.src;renderAdd()}});
 $('ilist').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(b&&db){b.disabled=true;db.doc('inbox/'+b.dataset.del).delete().catch(()=>{b.disabled=false;status('Silinemedi, tekrar dene.')})}});
 document.querySelectorAll('[data-home]').forEach(b=>b.addEventListener('click',()=>show('home')));
@@ -498,7 +525,7 @@ function initDb(){
   db.collection('cards').onSnapshot(s=>{
     S.cards=s.docs.map(d=>({id:d.id,...d.data()})).filter(c=>c.en&&c.tr).sort((a,b)=>(a.n??1e9)-(b.n??1e9)||String(a.en).localeCompare(String(b.en)));
     gotCards=true;S.ready=true;
-    if(!s.metadata.fromCache){clearTimeout(timer);status(S.cards.length?'':'Henüz kart yok. "Kelime içe aktar" ile kart ekle.')}
+    clearTimeout(timer);status(S.cards.length?'':'Henüz kart yok. "Yeni kelimeler" ile kart ekle.');
     render();
   },onErr);
   db.collection('progress').onSnapshot(s=>{const o={};s.docs.forEach(d=>{o[d.id]=d.data()});S.prog=o;render()},onErr);
@@ -613,11 +640,24 @@ function report(){
   else L.push('','Henüz çalışma yok.');
   const hard=S.cards.filter(x=>(S.prog[x.id]||{}).lapses>=2).map(x=>x.en);
   if(hard.length)L.push('','En çok unuttukların: '+hard.join(', '));
-  if(S.inbox.length){L.push('','Eklenecek kelimeler:');S.inbox.slice().reverse().forEach(i=>L.push(`- ${i.text}${i.src?' ('+i.src+')':''}`))}
+  if(S.inbox.length){L.push('','Claude\'a iletilecekler:');S.inbox.slice().reverse().forEach(i=>L.push(`- [${i.kind||'Kelime'}] ${i.text}${i.src?' ('+i.src+')':''}`))}
   const decks=[...new Set(S.cards.map(x=>x.deck))];L.push('','Desteler: '+decks.join(', '),'Son kart sırası: '+Math.max(0,...S.cards.map(x=>+x.n||0)));
   return L.join('\n');
 }
 FB.start();
+/* --- yeni sürüm bildirimi --- */
+const APP_VERSION='7';
+async function checkVersion(){
+  try{const r=await fetch('version.json?t='+Date.now(),{cache:'no-store'});const v=await r.json();
+    if(v&&v.v&&String(v.v)!==APP_VERSION){$('updTxt').textContent='Yeni sürüm hazır!'+(v.notes?' '+v.notes:'');$('upd').hidden=false}}catch(e){}
+}
+$('updBtn').addEventListener('click',async()=>{
+  $('updBtn').textContent='Yenileniyor…';
+  try{const reg=await navigator.serviceWorker?.getRegistration();if(reg)await reg.update()}catch(e){}
+  location.reload();
+});
+checkVersion();setInterval(checkVersion,5*60e3);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkVersion()});
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 render();
 }
