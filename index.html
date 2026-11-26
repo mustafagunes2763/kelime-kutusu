@@ -674,8 +674,17 @@ const FB=(()=>{
     }catch(e){status('Başlangıç kelimeleri yüklenemedi ('+(e&&e.code||e.message||'hata')+').')}
   }
   const FIELDS=['en','tr','ex','exTr','hl','note','deck','n','alt'];
+  function parseLoose(txt){
+    let s=String(txt||'').replace(/^\uFEFF/,'').replace(/```(?:json)?/gi,'').trim();
+    const a=s.search(/[\[{]/),b=Math.max(s.lastIndexOf('}'),s.lastIndexOf(']'));
+    if(a<0||b<a)throw new Error('Kodda JSON bulunamadı. Kod bloğunun tamamını kopyaladığından emin ol.');
+    s=s.slice(a,b+1);
+    try{return JSON.parse(s)}catch(e){}
+    const fixed=s.replace(/[\u201C\u201D]/g,'"').replace(/,\s*([}\]])/g,'$1');
+    try{return JSON.parse(fixed)}catch(e){throw new Error('Kod okunamadı: bir yerde virgül ya da tırnak hatası var. Gemini\'den "Give me valid JSON only" diyerek tekrar iste.')}
+  }
   async function importJSON(txt){
-    let obj;try{obj=JSON.parse(txt)}catch(e){throw new Error('Kod okunamadı. Claude\'un verdiği bloğun tamamını kopyaladığından emin ol.')}
+    const obj=parseLoose(txt);
     const list=(Array.isArray(obj)?obj:(obj.cards||[])).filter(c=>c&&c.en&&c.tr).slice(0,400);
     const b=writeBatch(fs);let n=0;
     for(const c of list){
@@ -690,9 +699,16 @@ const FB=(()=>{
       S.lastVideo=null;
       if(obj.video&&obj.video.id&&Array.isArray(obj.video.lines)){
         const v=obj.video,vid=String(v.id).replace(/[^A-Za-z0-9_-]/g,'').slice(0,20);
-        const lines=v.lines.filter(l=>l&&l.en).map(l=>({t:+l.t||0,en:String(l.en),tr:String(l.tr||'')})).sort((a,b)=>a.t-b.t).slice(0,2000);
-        b.set(doc(fs,P('videos/'+vid)),{yt:vid,title:String(v.title||vid).slice(0,140),lines,ts:Date.now()});
-        S.lastVideo={id:vid,title:String(v.title||vid)};
+        const toSec=t=>{if(typeof t==='number')return t;const m=String(t).trim().match(/^(?:(\d+):)?(\d+):(\d+(?:\.\d+)?)$/);return m?(+(m[1]||0))*3600+(+m[2])*60+(+m[3]):(+t||0)};
+        const fresh=v.lines.filter(l=>l&&l.en).map(l=>({t:toSec(l.t),en:String(l.en),tr:String(l.tr||'')}));
+        const cleanTitle=s=>String(s||'').replace(/\s*[\(\[](?:part|bölüm|parça)[^)\]]*[\)\]]/ig,'').trim();
+        const old=S.videos.find(x=>x.id===vid);
+        const seen=new Set(),lines=[];
+        for(const l of [...(old?old.lines:[]),...fresh]){const k=Math.round(l.t)+'|'+l.en.slice(0,40);if(seen.has(k))continue;seen.add(k);lines.push(l)}
+        lines.sort((a,b)=>a.t-b.t);
+        const title=(old&&cleanTitle(old.title))||cleanTitle(v.title)||vid;
+        b.set(doc(fs,P('videos/'+vid)),{yt:vid,title:title.slice(0,140),lines:lines.slice(0,3000),parts:((old&&old.parts)||0)+1,ts:Date.now()});
+        S.lastVideo={id:vid,title,added:fresh.length,merged:!!old};
       }
     }
     await b.commit();return n;
@@ -737,7 +753,7 @@ $('packList').addEventListener('click',async e=>{
 $('impBtn').addEventListener('click',async()=>{
   const t=$('impText').value.trim();if(!t||!db)return;
   $('impBtn').disabled=true;$('impMsg').textContent='Aktarılıyor…';
-  try{const n=await FB.importJSON(t);$('impMsg').textContent=(S.lastVideo?`Video eklendi: ${S.lastVideo.title}. Ana sayfa → Videolar. `:'')+n+' kart eklendi/güncellendi.';$('impText').value=''}
+  try{const n=await FB.importJSON(t);$('impMsg').textContent=(S.lastVideo?(S.lastVideo.merged?`Videoya yeni parça eklendi: ${S.lastVideo.title} (+${S.lastVideo.added} cümle). `:`Video eklendi: ${S.lastVideo.title}. Ana sayfa → Videolar. `):'')+n+' kart eklendi/güncellendi.';$('impText').value=''}
   catch(e){$('impMsg').textContent=e.message||('Hata: '+e.code)}
   $('impBtn').disabled=false;
 });
@@ -830,7 +846,7 @@ function applyTheme(t){
 $('themeBtn').addEventListener('click',()=>{const n=curTheme()==='dark'?'light':'dark';try{localStorage.setItem('kk-theme',n)}catch(e){}applyTheme(n)});
 matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>applyTheme(document.documentElement.dataset.theme||null));
 /* --- yeni sürüm bildirimi --- */
-const APP_VERSION='11';
+const APP_VERSION='12';
 async function checkVersion(){
   try{const r=await fetch('version.json?t='+Date.now(),{cache:'no-store'});const v=await r.json();
     if(v&&v.v&&String(v.v)!==APP_VERSION){$('updTxt').textContent='Yeni sürüm hazır!'+(v.notes?' '+v.notes:'');$('upd').hidden=false}}catch(e){}
