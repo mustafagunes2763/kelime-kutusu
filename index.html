@@ -7,6 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Kelime Kutusu">
+<script>try{var t=localStorage.getItem("kk-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -20,7 +21,7 @@
    PICTURE: the cards themselves: a stack on the home screen, one large ruled card while studying
    COLOUR and TYPE: night navy ground, ruled white cards, index-card red accent; Courier Prime words, Work Sans UI
    LAYOUT: one centred column up to 640px, answer buttons under the card within thumb reach */
-:root{color-scheme:light dark;--bg:light-dark(#1d2d4f,#0e1730);--panel:light-dark(#273a62,#17233f);--ink:#f4f2ec;--muted:light-dark(#c3cce0,#9ba6c0);--card:light-dark(#fdfcf8,#e8e5dc);--cink:#1b2131;--cmuted:#5a6275;--rule:light-dark(#bcd5ee,#a9c2da);--red:#e0483e;--blue:#3d7be0;--teal:#1d9a86;--slate:#5d6d92}
+:root{color-scheme:light dark;--bg:light-dark(#1d2d4f,#0a0b0f);--panel:light-dark(#273a62,#16191f);--line:light-dark(#4a5f8c,#2f3541);--sep:light-dark(#34476f,#22262e);--pill:light-dark(#33476f,#262b34);--ink:#f4f2ec;--muted:light-dark(#c3cce0,#9298a6);--card:light-dark(#fdfcf8,#17191e);--cink:light-dark(#1b2131,#ece8df);--cmuted:light-dark(#5a6275,#979dab);--rule:light-dark(#bcd5ee,#272d39);--trc:light-dark(#14306b,#8fb8ff);--spkbg:light-dark(#e9eef7,#262b35);--markbg:light-dark(#ffe08a,#5c4a0e);--dash:light-dark(#c9cfdb,#363c48);--notebg:light-dark(#fff6d6,#2e2814);--noteink:light-dark(#4a3d10,#f0dca0);--inbg:light-dark(#ffffff,#0f1115);--inbd:light-dark(#9aa6bf,#3a4150);--off:light-dark(#d9d6cc,#262a32);--ok:light-dark(#137a52,#4cc38a);--mid:light-dark(#8a6500,#e0b84a);--no:light-dark(#b3261e,#ff7b70);--wbg:light-dark(#fde3e0,#3a1714);--wink:light-dark(#8a1f17,#ffb3ab);--red:#e0483e;--blue:#3d7be0;--teal:#1d9a86;--slate:#5d6d92}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 html{-webkit-text-size-adjust:100%}
@@ -46,9 +47,9 @@ button:focus-visible,input:focus-visible,.card:focus-visible{outline:3px solid #
 .stk-nums{font:700 clamp(26px,7vw,36px)/1.15 "Courier Prime",monospace}
 .stk-nums i{font-style:normal;color:var(--cmuted)}
 .stk-go{align-self:flex-end;background:var(--red);color:#fff;font-weight:600;padding:10px 18px;border-radius:999px;font-size:16px}
-.stk-go.off{background:#d9d6cc;color:var(--cmuted)}
+.stk-go.off{background:var(--off);color:var(--cmuted)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-.chip{border:1.5px solid #4a5f8c;background:transparent;border-radius:999px;padding:8px 14px;min-height:40px;font-size:15px}
+.chip{border:1.5px solid var(--line);background:transparent;border-radius:999px;padding:8px 14px;min-height:40px;font-size:15px}
 .chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600}
 .chip small{opacity:.7;margin-left:4px}
 .note{background:var(--panel);border-radius:8px;padding:14px 16px;margin-bottom:18px}
@@ -60,7 +61,7 @@ button:focus-visible,input:focus-visible,.card:focus-visible{outline:3px solid #
 .statrow b{display:block;font:700 26px/1.1 "Courier Prime",monospace}
 .statrow span{font-size:13px;color:var(--muted)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.ghost{background:transparent;border:1.5px solid #4a5f8c;border-radius:8px;min-height:46px;padding:10px;font-weight:500}
+.ghost{background:transparent;border:1.5px solid var(--line);border-radius:8px;min-height:46px;padding:10px;font-weight:500}
 .bar{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .icon{width:44px;height:44px;border-radius:50%;border:0;background:var(--panel);display:grid;place-items:center;flex:none}
 .icon svg{width:20px;height:20px}
@@ -74,16 +75,16 @@ button:focus-visible,input:focus-visible,.card:focus-visible{outline:3px solid #
 .tag.new{background:var(--red);color:#fff;padding:1px 8px;border-radius:99px}
 .word-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
 .word{font:700 clamp(28px,8vw,40px)/1.15 "Courier Prime",monospace;margin:4px 0 10px;overflow-wrap:anywhere}
-.spk{width:44px;height:44px;flex:none;border-radius:50%;border:0;background:#e9eef7;color:var(--cink);display:grid;place-items:center}
+.spk{width:44px;height:44px;flex:none;border-radius:50%;border:0;background:var(--spkbg);color:var(--cink);display:grid;place-items:center}
 .spk svg{width:20px;height:20px}
 .spk.sm{width:36px;height:36px;display:inline-grid;vertical-align:middle;margin-left:4px}
 .spk.sm svg{width:16px;height:16px}
 .ex{font-size:18px;line-height:32px;margin:0}
-.ex mark{background:#ffe08a;color:inherit;padding:0 2px;border-radius:2px}
-.back{margin-top:14px;padding-top:12px;border-top:2px dashed #c9cfdb;animation:rise .25s ease-out}
-.tr{font:700 24px/1.25 "Work Sans",sans-serif;margin:0 0 6px;color:#14306b}
+.ex mark{background:var(--markbg);color:inherit;padding:0 2px;border-radius:2px}
+.back{margin-top:14px;padding-top:12px;border-top:2px dashed var(--dash);animation:rise .25s ease-out}
+.tr{font:700 24px/1.25 "Work Sans",sans-serif;margin:0 0 6px;color:var(--trc)}
 .extr{margin:0 0 8px;color:var(--cmuted);font-size:16px}
-.cnote{margin:0;font-size:15px;background:#fff6d6;border-radius:6px;padding:8px 10px;color:#4a3d10}
+.cnote{margin:0;font-size:15px;background:var(--notebg);border-radius:6px;padding:8px 10px;color:var(--noteink)}
 .cnote:empty{display:none}
 @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .show{display:block;width:100%;margin-top:18px;min-height:56px;border:0;border-radius:10px;background:var(--ink);color:var(--bg);font-weight:700;font-size:17px}
@@ -94,37 +95,37 @@ button:focus-visible,input:focus-visible,.card:focus-visible{outline:3px solid #
 .done h2{font:700 28px/1.15 "Courier Prime",monospace;margin:0 0 10px}
 .done p{margin:0 0 10px;font-size:17px;line-height:32px}
 .wrongs{display:flex;flex-wrap:wrap;gap:6px}
-.wrongs span{background:#fde3e0;color:#8a1f17;border-radius:99px;padding:3px 10px;font-size:14px}
+.wrongs span{background:var(--wbg);color:var(--wink);border-radius:99px;padding:3px 10px;font-size:14px}
 .hint{color:var(--muted);font-size:14px;text-align:center;margin:10px 0 18px}
 textarea{width:100%;min-height:120px;font:15px/1.4 "Work Sans",sans-serif;border-radius:8px;padding:10px;margin-bottom:14px}
-input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px;border:1.5px solid #4a5f8c;background:var(--panel);color:var(--ink);margin-bottom:12px}
+input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);margin-bottom:12px}
 .wlist{list-style:none;margin:0;padding:0}
-.wlist li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid #34476f}
+.wlist li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid var(--sep)}
 .wlist .w{font:700 17px "Courier Prime",monospace}
 .wlist .t{display:block;font-size:14px;color:var(--muted)}
-.pill{font-size:12px;padding:3px 9px;border-radius:99px;white-space:nowrap;background:#33476f}
+.pill{font-size:12px;padding:3px 9px;border-radius:99px;white-space:nowrap;background:var(--pill)}
 .pill.k{background:var(--teal)}.pill.n{background:var(--red)}
 .empty{color:var(--muted);text-align:center;padding:24px 8px}
 .lbl{font-size:13px;color:var(--muted);margin:0 0 6px}
 .chip[disabled]{opacity:.4;cursor:not-allowed}
 .prompt{font:700 13px "Courier Prime",monospace;color:var(--cmuted);margin:0 0 6px}
-.trh{font:700 clamp(24px,6.5vw,32px)/1.2 "Work Sans",sans-serif;margin:4px 0 8px;color:#14306b;overflow-wrap:anywhere}
+.trh{font:700 clamp(24px,6.5vw,32px)/1.2 "Work Sans",sans-serif;margin:4px 0 8px;color:var(--trc);overflow-wrap:anywhere}
 .blank{display:inline-block;border-bottom:2px solid var(--cink);line-height:22px;margin:0 2px}
 .ans{display:flex;gap:8px;margin-top:16px}
-.ans input{flex:1;width:100%;font:18px "Courier Prime",monospace;padding:12px;border:2px solid #9aa6bf;border-radius:8px;background:#fff;color:var(--cink)}
-.ans button{border:0;border-radius:8px;background:var(--cink);color:#fff;font-weight:600;padding:0 16px;min-height:48px}
+.ans input{flex:1;width:100%;font:18px "Courier Prime",monospace;padding:12px;border:2px solid var(--inbd);border-radius:8px;background:var(--inbg);color:var(--cink)}
+.ans button{border:0;border-radius:8px;background:var(--cink);color:var(--card);font-weight:600;padding:0 16px;min-height:48px}
 .ans :disabled{opacity:.55}
 .skip{background:none;border:0;color:var(--cmuted);text-decoration:underline;padding:10px 0;font-size:15px;min-height:44px}
-.bigspk{display:flex;align-items:center;gap:12px;border:0;background:var(--cink);color:#fff;border-radius:999px;padding:14px 22px;font-weight:600;font-size:17px;margin:12px 0 4px}
+.bigspk{display:flex;align-items:center;gap:12px;border:0;background:var(--cink);color:var(--card);border-radius:999px;padding:14px 22px;font-weight:600;font-size:17px;margin:12px 0 4px}
 .bigspk svg{width:24px;height:24px}
-.res{font-weight:700;margin:0 0 10px;font-size:17px;line-height:1.4}.res.ok{color:#137a52}.res.mid{color:#8a6500}.res.no{color:#b3261e}
+.res{font-weight:700;margin:0 0 10px;font-size:17px;line-height:1.4}.res.ok{color:var(--ok)}.res.mid{color:var(--mid)}.res.no{color:var(--no)}
 .res s{font-weight:400}
 .wordb{font:700 clamp(26px,7vw,34px)/1.15 "Courier Prime",monospace;margin:0 0 6px;display:flex;align-items:center;gap:10px;justify-content:space-between;overflow-wrap:anywhere}
 .upd{position:sticky;top:8px;z-index:5;display:flex;align-items:center;gap:12px;background:var(--ink);color:var(--bg);border-radius:10px;padding:10px 12px 10px 16px;margin-bottom:14px;box-shadow:0 10px 24px -8px rgba(0,0,0,.6)}
 .upd span{flex:1;font-size:15px;line-height:1.35}.upd button{border:0;border-radius:8px;background:var(--red);color:#fff;font-weight:700;min-height:44px;padding:0 16px;flex:none}
 .addbtn{width:100%;margin-bottom:10px;font-weight:600;border-style:dashed}.addbtn small{color:var(--muted);font-weight:400}
-.addf input{width:100%;font-size:17px;padding:13px 14px;border-radius:8px;border:1.5px solid #4a5f8c;background:var(--panel);color:var(--ink);margin-bottom:12px}
-.del{background:none;border:1.5px solid #4a5f8c;border-radius:8px;min-height:40px;padding:6px 12px;font-size:14px;flex:none}
+.addf input{width:100%;font-size:17px;padding:13px 14px;border-radius:8px;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);margin-bottom:12px}
+.del{background:none;border:1.5px solid var(--line);border-radius:8px;min-height:40px;padding:6px 12px;font-size:14px;flex:none}
 .rate button.sug{box-shadow:0 0 0 3px var(--bg),0 0 0 6px #fff}
 @media(max-width:400px){.rate{grid-template-columns:1fr 1fr}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -132,7 +133,7 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
 </head>
 <body>
 <div class="wrap">
-<header class="top"><h1>Kelime Kutusu</h1><div class="streak" id="streak"></div></header>
+<header class="top"><h1>Kelime Kutusu</h1><div style="display:flex;align-items:center;gap:10px"><div class="streak" id="streak"></div><button class="icon" id="themeBtn" aria-label="Tema değiştir"></button></div></header>
 <div class="upd" id="upd" hidden role="status"><span id="updTxt">Yeni sürüm hazır!</span><button id="updBtn">Yenile</button></div>
 <div class="status" id="status">Yükleniyor…</div>
 
@@ -686,8 +687,20 @@ function report(){
   return L.join('\n');
 }
 FB.start();
+/* --- tema --- */
+const MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>';
+const SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>';
+const curTheme=()=>document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+function applyTheme(t){
+  if(t)document.documentElement.dataset.theme=t;else delete document.documentElement.dataset.theme;
+  const dark=curTheme()==='dark';$('themeBtn').innerHTML=dark?SUN:MOON;$('themeBtn').setAttribute('aria-label',dark?'Açık temaya geç':'Koyu temaya geç');
+  const m=document.querySelector('meta[name=theme-color]');if(m)m.content=getComputedStyle(document.body).backgroundColor;
+}
+{let saved=null;try{saved=localStorage.getItem('kk-theme')}catch(e){}applyTheme(saved)}
+$('themeBtn').addEventListener('click',()=>{const n=curTheme()==='dark'?'light':'dark';try{localStorage.setItem('kk-theme',n)}catch(e){}applyTheme(n)});
+matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>applyTheme(document.documentElement.dataset.theme||null));
 /* --- yeni sürüm bildirimi --- */
-const APP_VERSION='8';
+const APP_VERSION='9';
 async function checkVersion(){
   try{const r=await fetch('version.json?t='+Date.now(),{cache:'no-store'});const v=await r.json();
     if(v&&v.v&&String(v.v)!==APP_VERSION){$('updTxt').textContent='Yeni sürüm hazır!'+(v.notes?' '+v.notes:'');$('upd').hidden=false}}catch(e){}
