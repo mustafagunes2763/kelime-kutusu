@@ -155,7 +155,11 @@
 "ex": "What the f*** just happened?",
 "exTr": "Az önce ne oldu lan?",
 "note": "Seviye: AĞIR. 'F-word' en ağır yaygın küfürdür. Çoğu zaman sadece öfke ya da şaşkınlık vurgusu için söylenir: 'f***ing good' = aşırı iyi. Altyazılarda bu şekilde yıldızlı görebilirsin. Anlaman yeterli, kullanma.",
-"hl": "What the f"
+"hl": "What the f***",
+"alt": [
+"What the fuck",
+"What the f"
+]
 }
 ],
 "note": "Argo & küfür paketi eklendi. Bunlar oyun ve filmlerde anlaman için. Her kartta ne kadar kaba olduğu yazıyor: HAFİF, ORTA, AĞIR. Ağır olanları kullanma, anlaman yeterli."
