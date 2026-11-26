@@ -1,0 +1,173 @@
+{
+"cards": [
+{
+"id": "mm1",
+"n": 181,
+"deck": "Miles Morales",
+"en": "mentor",
+"tr": "akıl hocası, rehber",
+"ex": "Peter is Miles's mentor and teaches him how to be Spider-Man.",
+"exTr": "Peter, Miles'ın akıl hocası; ona nasıl Spider-Man olunacağını öğretiyor."
+},
+{
+"id": "mm2",
+"n": 182,
+"deck": "Miles Morales",
+"en": "rookie",
+"tr": "çaylak, acemi",
+"ex": "He's still a rookie, but he learns fast.",
+"exTr": "Hâlâ çaylak ama hızlı öğreniyor.",
+"note": "Sporda da çok kullanılır: NBA rookie = ilk sezonundaki oyuncu."
+},
+{
+"id": "mm3",
+"n": 183,
+"deck": "Miles Morales",
+"en": "to step up",
+"tr": "sorumluluk almak, öne çıkmak",
+"ex": "With Peter away, Miles has to step up and protect the city.",
+"exTr": "Peter yokken Miles'ın sorumluluk alıp şehri koruması gerekiyor.",
+"hl": "step up"
+},
+{
+"id": "mm4",
+"n": 184,
+"deck": "Miles Morales",
+"en": "to look up to",
+"tr": "örnek almak, hayranlık duymak",
+"ex": "Miles looks up to Peter like a big brother.",
+"exTr": "Miles, Peter'ı bir ağabey gibi örnek alıyor.",
+"hl": "looks up to"
+},
+{
+"id": "mm5",
+"n": 185,
+"deck": "Miles Morales",
+"en": "secret identity",
+"tr": "gizli kimlik",
+"ex": "It's hard to keep a secret identity from your family.",
+"exTr": "Gizli kimliğini ailenden saklamak zor."
+},
+{
+"id": "mm6",
+"n": 186,
+"deck": "Miles Morales",
+"en": "to keep a secret",
+"tr": "sır tutmak",
+"ex": "Can you keep a secret? Don't tell anyone.",
+"exTr": "Sır tutabilir misin? Kimseye söyleme.",
+"hl": "keep a secret"
+},
+{
+"id": "mm7",
+"n": 187,
+"deck": "Miles Morales",
+"en": "invisible",
+"tr": "görünmez",
+"ex": "Miles can turn invisible for a few seconds.",
+"exTr": "Miles birkaç saniyeliğine görünmez olabiliyor.",
+"note": "turn invisible = görünmez olmak"
+},
+{
+"id": "mm8",
+"n": 188,
+"deck": "Miles Morales",
+"en": "to blend in",
+"tr": "ortama karışmak, göze batmamak",
+"ex": "Wear normal clothes so you blend in with the crowd.",
+"exTr": "Kalabalığa karışman için normal kıyafetler giy.",
+"hl": "blend in",
+"note": "stand out = göze batmak (tersi)"
+},
+{
+"id": "mm9",
+"n": 189,
+"deck": "Miles Morales",
+"en": "stealth",
+"tr": "gizlilik, sessizce ilerleme (oyunda)",
+"ex": "This mission is easier if you use stealth.",
+"exTr": "Bu görev gizlilikle oynarsan daha kolay.",
+"note": "stealth mission = gizlilik görevi"
+},
+{
+"id": "mm10",
+"n": 190,
+"deck": "Miles Morales",
+"en": "to recharge",
+"tr": "yeniden dolmak, şarj olmak",
+"ex": "Your power needs a few seconds to recharge.",
+"exTr": "Gücünün yeniden dolması için birkaç saniye gerekiyor.",
+"hl": "recharge"
+},
+{
+"id": "mm11",
+"n": 191,
+"deck": "Miles Morales",
+"en": "power outage",
+"tr": "elektrik kesintisi",
+"ex": "The whole neighborhood was dark because of a power outage.",
+"exTr": "Elektrik kesintisi yüzünden bütün mahalle karanlıktı."
+},
+{
+"id": "mm12",
+"n": 192,
+"deck": "Miles Morales",
+"en": "community",
+"tr": "topluluk, mahalle halkı",
+"ex": "Miles cares a lot about his community in Harlem.",
+"exTr": "Miles, Harlem'deki mahalle halkını çok önemsiyor."
+},
+{
+"id": "mm13",
+"n": 193,
+"deck": "Miles Morales",
+"en": "bodega",
+"tr": "köşe bakkalı (New York)",
+"ex": "I'm going to the bodega to get some snacks.",
+"exTr": "Atıştırmalık almak için köşe bakkalına gidiyorum.",
+"note": "New York'a özgü bir kelime. Oyunda bodega kedisini de unutma!"
+},
+{
+"id": "mm14",
+"n": 194,
+"deck": "Miles Morales",
+"en": "holiday season",
+"tr": "yılbaşı dönemi, tatil sezonu",
+"ex": "New York looks beautiful in the holiday season, with snow everywhere.",
+"exTr": "New York yılbaşı döneminde, her yer karla kaplıyken çok güzel görünüyor."
+},
+{
+"id": "mm15",
+"n": 195,
+"deck": "Miles Morales",
+"en": "to swing by",
+"tr": "(bir yere) uğramak",
+"ex": "Can you swing by the store on your way home?",
+"exTr": "Eve giderken markete uğrayabilir misin?",
+"hl": "swing by",
+"note": "Günlük dilde çok yaygın. Spider-Man için de tam bir kelime oyunu!"
+},
+{
+"id": "mm16",
+"n": 196,
+"deck": "Miles Morales",
+"en": "Hang in there!",
+"tr": "Dayan! / Pes etme!",
+"ex": "Hang in there! Help is on the way!",
+"exTr": "Dayan! Yardım geliyor!",
+"hl": "Hang in there",
+"note": "on the way = yolda"
+},
+{
+"id": "mm17",
+"n": 197,
+"deck": "Miles Morales",
+"en": "Be careful out there.",
+"tr": "Dışarıda dikkatli ol.",
+"ex": "Be careful out there. The city is dangerous tonight.",
+"exTr": "Dışarıda dikkatli ol. Şehir bu gece tehlikeli.",
+"hl": "Be careful out there"
+}
+],
+"note": "Miles Morales paketi eklendi! Remastered'ı bitirdin, şimdi sıra Harlem'de. Altyazılar İngilizce, unutma."
+}

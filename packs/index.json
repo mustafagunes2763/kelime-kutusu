@@ -1,5 +1,12 @@
 [
  {
+  "id": "miles",
+  "title": "Spider-Man: Miles Morales",
+  "desc": "Akıl hocası, gizli kimlik, Harlem ve kış sokak dili",
+  "file": "packs/miles.json",
+  "count": 17
+ },
+ {
   "id": "argo",
   "title": "Argo & küfür (anlamak için)",
   "desc": "Oyun ve filmlerde duyacağın küfürler; her kartta kabalık seviyesi",
