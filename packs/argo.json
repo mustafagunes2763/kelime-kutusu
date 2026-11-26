@@ -1,0 +1,162 @@
+{
+"cards": [
+{
+"id": "a1",
+"n": 166,
+"deck": "Argo & küfür",
+"en": "Damn it!",
+"tr": "Lanet olsun! / Hay aksi!",
+"ex": "Damn it! I missed the train again.",
+"exTr": "Lanet olsun! Treni yine kaçırdım.",
+"note": "Seviye: HAFİF. Arkadaşlar arasında rahat kullanılır, ama öğretmen yanında söyleme. RDR2'de 'Goddamn' hâlini çok duyarsın.",
+"hl": "Damn it"
+},
+{
+"id": "a2",
+"n": 167,
+"deck": "Argo & küfür",
+"en": "What the hell?",
+"tr": "Ne oluyor be? / Bu da ne ya?",
+"ex": "What the hell? Who turned off the lights?",
+"exTr": "Ne oluyor be? Işıkları kim kapattı?",
+"note": "Seviye: HAFİF. 'Go to hell!' = Cehenneme kadar yolun var! (daha kaba)",
+"hl": "What the hell"
+},
+{
+"id": "a3",
+"n": 168,
+"deck": "Argo & küfür",
+"en": "crap",
+"tr": "saçmalık, berbat şey; boş ver",
+"ex": "This movie is crap. Let's watch something else.",
+"exTr": "Bu film berbat. Başka bir şey izleyelim.",
+"note": "Seviye: HAFİF. 'Oh crap!' = Eyvah! / Hay aksi!"
+},
+{
+"id": "a4",
+"n": 169,
+"deck": "Argo & küfür",
+"en": "to screw up",
+"tr": "batırmak, berbat etmek",
+"ex": "Sorry, I totally screwed up the plan.",
+"exTr": "Kusura bakma, planı tamamen batırdım.",
+"note": "Seviye: HAFİF. 'mess up'ın biraz daha kaba hâli. 'Screw you!' ise kaba: Canın cehenneme!",
+"hl": "screwed up"
+},
+{
+"id": "a5",
+"n": 170,
+"deck": "Argo & küfür",
+"en": "Shut up!",
+"tr": "Kapa çeneni! / Sus!",
+"ex": "Shut up and listen to me!",
+"exTr": "Kapa çeneni ve beni dinle!",
+"note": "Seviye: HAFİF. Kaba; ama arkadaşlar arasında şaşkınlıkla 'Shut up! Really?' = Hadi ya! Ciddi misin? anlamında da kullanılır.",
+"hl": "Shut up"
+},
+{
+"id": "a6",
+"n": 171,
+"deck": "Argo & küfür",
+"en": "jerk",
+"tr": "pislik, kendini beğenmiş tip",
+"ex": "Don't be such a jerk. Say sorry.",
+"exTr": "Bu kadar pislik olma. Özür dile.",
+"note": "Seviye: HAFİF. Hakaret ama hafif."
+},
+{
+"id": "a7",
+"n": 172,
+"deck": "Argo & küfür",
+"en": "dumbass",
+"tr": "salak, aptal (kaba)",
+"ex": "Only a dumbass would drive that fast in the rain.",
+"exTr": "Yağmurda o kadar hızlı ancak bir salak sürer.",
+"note": "Seviye: ORTA. 'idiot' ve 'moron' daha hafif hâlleri."
+},
+{
+"id": "a8",
+"n": 173,
+"deck": "Argo & küfür",
+"en": "pissed (off)",
+"tr": "çok sinirli, tepesi atmış",
+"ex": "My dad was really pissed when he saw the broken window.",
+"exTr": "Babam kırık camı görünce çok sinirlendi.",
+"note": "Seviye: ORTA. Dikkat: İngiliz İngilizcesinde 'pissed' = sarhoş. 'Piss off!' = Defol git!",
+"hl": "pissed"
+},
+{
+"id": "a9",
+"n": 174,
+"deck": "Argo & küfür",
+"en": "badass",
+"tr": "havalı, korkusuz, efsane (kaba ama övgü)",
+"ex": "Arthur is such a badass. Nobody can stop him.",
+"exTr": "Arthur tam bir efsane. Kimse onu durduramaz.",
+"note": "Seviye: ORTA. Kaba bir kelime ama övgü olarak kullanılır."
+},
+{
+"id": "a10",
+"n": 175,
+"deck": "Argo & küfür",
+"en": "bastard",
+"tr": "alçak, piç",
+"ex": "That bastard took my money and ran.",
+"exTr": "O alçak paramı alıp kaçtı.",
+"note": "Seviye: AĞIR. Filmlerde ve oyunlarda çok sık. Gerçek hayatta kavgaya sebep olur."
+},
+{
+"id": "a11",
+"n": 176,
+"deck": "Argo & küfür",
+"en": "bullshit",
+"tr": "saçmalık, palavra, yalan",
+"ex": "That's bullshit! I know you're lying.",
+"exTr": "Saçmalık bu! Yalan söylediğini biliyorum.",
+"note": "Seviye: AĞIR. Daha kibar hâli: 'nonsense' ya da 'BS' (bi-es) kısaltması."
+},
+{
+"id": "a12",
+"n": 177,
+"deck": "Argo & küfür",
+"en": "asshole",
+"tr": "pislik, adi herif",
+"ex": "He's an asshole. He treats everyone badly.",
+"exTr": "Adi herifin teki. Herkese kötü davranıyor.",
+"note": "Seviye: AĞIR. Çok kaba bir hakaret."
+},
+{
+"id": "a13",
+"n": 178,
+"deck": "Argo & küfür",
+"en": "Oh shit!",
+"tr": "Kahretsin! / Eyvah! / Siktir!",
+"ex": "Oh shit, the police are here!",
+"exTr": "Kahretsin, polis geldi!",
+"note": "Seviye: AĞIR. Oyunlarda ve dizilerde en sık duyacağın küfürlerden. 'shit' tek başına 'bok, berbat şey' demek.",
+"hl": "Oh shit"
+},
+{
+"id": "a14",
+"n": 179,
+"deck": "Argo & küfür",
+"en": "son of a bitch",
+"tr": "orospu çocuğu",
+"ex": "That son of a bitch shot my horse!",
+"exTr": "O orospu çocuğu atımı vurdu!",
+"note": "Seviye: AĞIR. RDR2'de çok sık geçer. Ağır hakaret; asla kimseye söyleme."
+},
+{
+"id": "a15",
+"n": 180,
+"deck": "Argo & küfür",
+"en": "What the f***?",
+"tr": "Ne oluyor lan? / Bu ne amına koyayım?",
+"ex": "What the f*** just happened?",
+"exTr": "Az önce ne oldu lan?",
+"note": "Seviye: AĞIR. 'F-word' en ağır yaygın küfürdür. Çoğu zaman sadece öfke ya da şaşkınlık vurgusu için söylenir: 'f***ing good' = aşırı iyi. Altyazılarda bu şekilde yıldızlı görebilirsin. Anlaman yeterli, kullanma.",
+"hl": "What the f"
+}
+],
+"note": "Argo & küfür paketi eklendi. Bunlar oyun ve filmlerde anlaman için. Her kartta ne kadar kaba olduğu yazıyor: HAFİF, ORTA, AĞIR. Ağır olanları kullanma, anlaman yeterli."
+}

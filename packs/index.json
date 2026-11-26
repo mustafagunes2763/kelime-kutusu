@@ -1,5 +1,12 @@
 [
  {
+  "id": "argo",
+  "title": "Argo & küfür (anlamak için)",
+  "desc": "Oyun ve filmlerde duyacağın küfürler; her kartta kabalık seviyesi",
+  "file": "packs/argo.json",
+  "count": 15
+ },
+ {
   "id": "senin-1",
   "title": "Senin listen #1",
   "desc": "Senin gönderdiklerin: You nailed it! ve benzerleri",
