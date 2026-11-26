@@ -1,0 +1,38 @@
+{
+"cards": [
+{
+"id": "m1",
+"n": 163,
+"deck": "Senin listen",
+"en": "to nail it",
+"tr": "tam yapmak, kusursuz yapmak, tam isabet",
+"ex": "You nailed it! Your answer was perfect.",
+"exTr": "Tam isabet! Cevabın mükemmeldi.",
+"hl": "nailed it",
+"note": "nail = çivi. Çiviyi tam kafasından vurmak gibi düşün. Çok sık: Nailed it!"
+},
+{
+"id": "m2",
+"n": 164,
+"deck": "Senin listen",
+"en": "to crush it",
+"tr": "döktürmek, harika iş çıkarmak",
+"ex": "You crushed it in the game last night!",
+"exTr": "Dün akşamki maçta döktürdün!",
+"hl": "crushed it",
+"note": "Gençler arasında çok yaygın."
+},
+{
+"id": "m3",
+"n": 165,
+"deck": "Senin listen",
+"en": "Spot on!",
+"tr": "Tam isabet! / Aynen öyle!",
+"ex": "\"Is it about 20 minutes from here?\" \"Spot on!\"",
+"exTr": "\"Buradan yaklaşık 20 dakika mı?\" \"Aynen öyle!\"",
+"hl": "Spot on",
+"note": "Daha çok İngiliz İngilizcesinde."
+}
+],
+"note": "'Senin listen' destesi: senin gönderdiğin kelimeler burada toplanacak. İlki: You nailed it!"
+}

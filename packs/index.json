@@ -1,5 +1,19 @@
 [
  {
+  "id": "senin-1",
+  "title": "Senin listen #1",
+  "desc": "Senin gönderdiklerin: You nailed it! ve benzerleri",
+  "file": "packs/senin-1.json",
+  "count": 3
+ },
+ {
+  "id": "gta6",
+  "title": "GTA 6",
+  "desc": "Soygun, kovalamaca ve Vice City sokak dili",
+  "file": "packs/gta6.json",
+  "count": 18
+ },
+ {
   "id": "basketbol",
   "title": "Basketbol & Alperen Şengün",
   "desc": "Maç kelimeleri ve İngilizce spiker dili",
