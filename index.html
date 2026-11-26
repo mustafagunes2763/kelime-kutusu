@@ -162,6 +162,7 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
   <button class="ghost addbtn" id="toAdd">+ Claude'a iletilecekler <small id="inboxCount"></small></button>
   <div class="row2"><button class="ghost" id="toList">Tüm kelimeler</button><button class="ghost" id="toHist">Geçmiş</button></div>
   <div class="row2" style="margin-top:10px"><button class="ghost" id="toSend">Claude'a gönder</button><button class="ghost" id="toImp">Yeni kelimeler <small id="packBadge" style="color:#ff8a80"></small></button></div>
+  <button class="ghost" id="toFb" style="width:100%;margin-top:10px">Uygulama notları: hata ve istekler <small id="fbCount" style="color:var(--muted)"></small></button>
   <p class="hint"><span id="acct"></span> · <button class="skip" id="logout" style="color:var(--muted);min-height:0;padding:0">Çıkış yap</button></p>
 </section>
 
@@ -233,6 +234,20 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
   <button class="ghost" id="clearAll" hidden style="width:100%;margin-top:16px">Claude'a gönderdim, listeyi temizle</button>
 </section>
 
+<section id="v-fb" hidden>
+  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Uygulama notları</h2></div>
+  <p class="lbl" style="font-size:15px">Uygulamada gördüğün hataları ve eklenmesini istediğin özellikleri buraya yaz. Biriktir, sonra <b>Hepsini kopyala</b>'ya bas ve Claude sohbetine yapıştır.</p>
+  <form id="fbForm" autocomplete="off">
+    <div class="chips" id="fbKinds" role="group" aria-label="Not türü"></div>
+    <textarea id="fbText" placeholder="Örnek: Dinleme modunda ses çıkmıyor" style="min-height:110px"></textarea>
+    <button class="show" type="submit" style="margin-top:0">Notu kaydet</button>
+  </form>
+  <button class="show" id="fbCopy" hidden style="background:var(--red);color:#fff">Hepsini kopyala</button>
+  <p class="hint" id="fbMsg"></p>
+  <ul class="wlist" id="fbList"></ul>
+  <button class="ghost" id="fbClear" hidden style="width:100%;margin-top:16px">Claude'a gönderdim, notları temizle</button>
+</section>
+
 <section id="v-hist" hidden>
   <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Geçmiş</h2></div>
   <ul class="wlist" id="hlist"></ul>
@@ -259,14 +274,15 @@ const MODE_LBL={flip:'EN → TR',rev:'TR → EN',type:'yazarak',cloze:'boşluk',
 const PERDAY=[5,10,15,20,30];
 
 const SRCS=['Dizi/film','Oyun','Kitap','Basketbol','Ippo','Okul','Diğer'];let src='Dizi/film';
-const KINDS=['Kelime','Cümle','Soru'];let kind='Kelime',clearArmed=false;
-const S={packs:[],packsDone:[],inbox:[],cards:[],prog:{},sessions:[],note:null,settings:{newPerDay:10},deck:'Tümü',ready:false};
+const KINDS=['Kelime','Cümle','Soru'];const FBK=['Hata','İstek','Fikir'];let fbKind='Hata',fbArmed=false;
+let kind='Kelime',clearArmed=false;
+const S={feedback:[],packs:[],packsDone:[],inbox:[],cards:[],prog:{},sessions:[],note:null,settings:{newPerDay:10},deck:'Tümü',ready:false};
 let db=null,tts=null,Q=[],cur=null,cm='flip',sess=null,view='home',lastSum='';
 let mode='flip';try{mode=localStorage.getItem('kk-mode')||'flip'}catch(e){}
 const chains={};
 
 function status(t){const el=$('status');el.textContent=t;el.hidden=!t}
-function show(v){view=v;for(const k of ['login','home','study','done','list','hist','add','send','imp'])$('v-'+k).hidden=k!==v;window.scrollTo(0,0);render()}
+function show(v){view=v;for(const k of ['login','home','study','done','list','hist','add','send','imp','fb'])$('v-'+k).hidden=k!==v;window.scrollTo(0,0);render()}
 
 /* --- spaced repetition (SM-2 style) --- */
 function schedule(prev,r){
@@ -346,7 +362,7 @@ function backHTML(c,m,res){
 /* --- render --- */
 function render(){
   const st=streak();$('streak').innerHTML=st?`<b>${st}</b> gün seri`:'';
-  if(view==='home')renderHome();else if(view==='list')renderList();else if(view==='hist')renderHist();else if(view==='add')renderAdd();else if(view==='imp')renderImp();
+  if(view==='home')renderHome();else if(view==='list')renderList();else if(view==='hist')renderHist();else if(view==='add')renderAdd();else if(view==='imp')renderImp();else if(view==='fb')renderFb();
 }
 function renderHome(){
   const due=dueCards().length,nw=newCards().length;
@@ -364,6 +380,7 @@ function renderHome(){
   const nt=S.note;$('note').hidden=!(nt&&nt.text);
   if(nt&&nt.text){$('noteText').textContent=nt.text;$('noteDate').textContent=nt.date||''}
   const np=S.packs.filter(p=>!S.packsDone.includes(p.id)).length;$('packBadge').textContent=np?`(${np} paket)`:'';
+  $('fbCount').textContent=S.feedback.length?`(${S.feedback.length})`:'';
   $('inboxCount').textContent=S.inbox.length?`(${S.inbox.length} bekliyor)`:'';
   const counts={n:0,l:0,k:0};S.cards.forEach(c=>counts[stateOf(c)]++);
   $('sTotal').textContent=S.cards.length;$('sLearn').textContent=counts.l;$('sKnown').textContent=counts.k;
@@ -386,6 +403,11 @@ function renderAdd(){
 function renderImp(){
   $('packList').innerHTML=S.packs.length?S.packs.map(p=>{const done=S.packsDone.includes(p.id);
     return `<li><div><span class="w">${esc(p.title)}</span><span class="t">${esc(p.desc||'')} · ${+p.count||0} kelime</span></div>${done?'<span class="pill k">eklendi</span>':`<button class="del" data-pack="${esc(p.id)}" style="border-color:var(--ink);font-weight:600">Ekle</button>`}</li>`}).join(''):'<li class="empty">Şu an yeni paket yok.</li>';
+}
+function renderFb(){
+  $('fbKinds').innerHTML=FBK.map(s=>`<button type="button" class="chip" data-fbk="${esc(s)}" aria-pressed="${s===fbKind}">${esc(s)}</button>`).join('');
+  const n=S.feedback.length;$('fbCopy').hidden=!n;$('fbClear').hidden=!n;$('fbCopy').textContent=`Hepsini kopyala (${n})`;
+  $('fbList').innerHTML=n?S.feedback.map(f=>{const d=new Date(f.ts||0);return `<li><div><span class="t" style="color:var(--ink);font-size:16px">${esc(f.text)}</span><span class="t">${esc(f.kind||'')} · ${d.getDate()} ${AYLAR[d.getMonth()]}</span></div><button class="del" data-fbdel="${esc(f.id)}">Sil</button></li>`}).join(''):'<li class="empty">Henüz not yok.</li>';
 }
 function renderHist(){
   $('hlist').innerHTML=S.sessions.length?S.sessions.map(s=>{const d=new Date(s.ts||0);
@@ -473,6 +495,8 @@ $('card').addEventListener('click',e=>{
   if(cm==='flip'||cm==='rev'||cm==='listen')reveal();
 });
 document.addEventListener('submit',e=>{
+  if(e.target.id==='fbForm'){e.preventDefault();const ta=$('fbText');const t=ta.value.trim().slice(0,1000);if(!t||!db)return;
+    const ts=Date.now();db.collection('feedback').doc('f'+ts).set({text:t,kind:fbKind,ts,ver:APP_VERSION,ua:navigator.userAgent.slice(0,160)}).then(()=>{ta.value='';$('fbMsg').textContent='Not kaydedildi.'},er=>{$('fbMsg').textContent='Kaydedilemedi ('+(er&&er.code||'hata')+').'});return}
   if(e.target.id==='addForm'){e.preventDefault();const inp=$('addText');const t=inp.value.trim().slice(0,300);if(!t||!db)return;
     const ts=Date.now();db.collection('inbox').doc('i'+ts).set({text:t,kind,src,ts}).then(()=>{inp.value='';inp.focus()},er=>status('Eklenemedi ('+(er&&er.code||'hata')+').'));return}
   if(e.target.id!=='ansForm')return;e.preventDefault();
@@ -500,6 +524,22 @@ $('clearAll').addEventListener('click',async()=>{
   clearArmed=false;b.disabled=true;
   for(const i of S.inbox.slice()){try{await db.doc('inbox/'+i.id).delete()}catch(x){}}
   b.disabled=false;b.textContent="Claude'a gönderdim, listeyi temizle";$('copyAllMsg').textContent='Liste temizlendi.';
+});
+$('toFb').addEventListener('click',()=>{$('fbMsg').textContent='';show('fb')});
+$('fbKinds').addEventListener('click',e=>{const b=e.target.closest('[data-fbk]');if(b){fbKind=b.dataset.fbk;renderFb()}});
+$('fbList').addEventListener('click',e=>{const b=e.target.closest('[data-fbdel]');if(b&&db){b.disabled=true;db.doc('feedback/'+b.dataset.fbdel).delete().catch(()=>{b.disabled=false})}});
+$('fbCopy').addEventListener('click',()=>{
+  const L=[`Kelime Kutusu uygulama notları (sürüm ${APP_VERSION}, ${S.feedback.length} not):`];
+  S.feedback.slice().reverse().forEach(f=>L.push(`- [${f.kind||'Not'}] ${f.text}`));
+  L.push('',`Cihaz: ${navigator.userAgent.slice(0,160)}`);
+  copyText(L.join('\n'),$('fbMsg'));
+});
+$('fbClear').addEventListener('click',async()=>{
+  const b=$('fbClear');
+  if(!fbArmed){fbArmed=true;b.textContent='Emin misin? Silmek için tekrar dokun';setTimeout(()=>{fbArmed=false;b.textContent="Claude'a gönderdim, notları temizle"},4000);return}
+  fbArmed=false;b.disabled=true;
+  for(const f of S.feedback.slice()){try{await db.doc('feedback/'+f.id).delete()}catch(x){}}
+  b.disabled=false;b.textContent="Claude'a gönderdim, notları temizle";$('fbMsg').textContent='Notlar temizlendi.';
 });
 $('srcChips').addEventListener('click',e=>{const b=e.target.closest('[data-src]');if(b){src=b.dataset.src;renderAdd()}});
 $('ilist').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(b&&db){b.disabled=true;db.doc('inbox/'+b.dataset.del).delete().catch(()=>{b.disabled=false;status('Silinemedi, tekrar dene.')})}});
@@ -531,6 +571,7 @@ function initDb(){
   db.collection('progress').onSnapshot(s=>{const o={};s.docs.forEach(d=>{o[d.id]=d.data()});S.prog=o;render()},onErr);
   db.collection('sessions').orderBy('ts','desc').limit(60).onSnapshot(s=>{S.sessions=s.docs.map(d=>d.data());render()},onErr);
   db.collection('inbox').orderBy('ts','desc').onSnapshot(s=>{S.inbox=s.docs.map(d=>({id:d.id,...d.data()}));render()},onErr);
+  db.collection('feedback').orderBy('ts','desc').onSnapshot(s=>{S.feedback=s.docs.map(d=>({id:d.id,...d.data()}));render()},onErr);
   db.doc('meta/packs').onSnapshot(d=>{S.packsDone=d.exists?(d.data().ids||[]):[];render()},onErr);
   fetch('packs/index.json',{cache:'no-store'}).then(r=>r.json()).then(a=>{if(Array.isArray(a)){S.packs=a;render()}}).catch(()=>{});
   db.doc('meta/note').onSnapshot(d=>{S.note=d.exists?d.data():null;render()},onErr);
@@ -646,7 +687,7 @@ function report(){
 }
 FB.start();
 /* --- yeni sürüm bildirimi --- */
-const APP_VERSION='7';
+const APP_VERSION='8';
 async function checkVersion(){
   try{const r=await fetch('version.json?t='+Date.now(),{cache:'no-store'});const v=await r.json();
     if(v&&v.v&&String(v.v)!==APP_VERSION){$('updTxt').textContent='Yeni sürüm hazır!'+(v.notes?' '+v.notes:'');$('upd').hidden=false}}catch(e){}
