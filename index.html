@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#1d2d4f">
+<meta name="theme-color" content="#0e1730">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Kelime Kutusu">
@@ -21,7 +21,7 @@
    PICTURE: the cards themselves: a stack on the home screen, one large ruled card while studying
    COLOUR and TYPE: night navy ground, ruled white cards, index-card red accent; Courier Prime words, Work Sans UI
    LAYOUT: one centred column up to 640px, answer buttons under the card within thumb reach */
-:root{color-scheme:light dark;--bg:light-dark(#1d2d4f,#0a0b0f);--panel:light-dark(#273a62,#16191f);--line:light-dark(#4a5f8c,#2f3541);--sep:light-dark(#34476f,#22262e);--pill:light-dark(#33476f,#262b34);--ink:#f4f2ec;--muted:light-dark(#c3cce0,#9298a6);--card:light-dark(#fdfcf8,#17191e);--cink:light-dark(#1b2131,#ece8df);--cmuted:light-dark(#5a6275,#979dab);--rule:light-dark(#bcd5ee,#272d39);--trc:light-dark(#14306b,#8fb8ff);--spkbg:light-dark(#e9eef7,#262b35);--markbg:light-dark(#ffe08a,#5c4a0e);--dash:light-dark(#c9cfdb,#363c48);--notebg:light-dark(#fff6d6,#2e2814);--noteink:light-dark(#4a3d10,#f0dca0);--inbg:light-dark(#ffffff,#0f1115);--inbd:light-dark(#9aa6bf,#3a4150);--off:light-dark(#d9d6cc,#262a32);--ok:light-dark(#137a52,#4cc38a);--mid:light-dark(#8a6500,#e0b84a);--no:light-dark(#b3261e,#ff7b70);--wbg:light-dark(#fde3e0,#3a1714);--wink:light-dark(#8a1f17,#ffb3ab);--red:#e0483e;--blue:#3d7be0;--teal:#1d9a86;--slate:#5d6d92}
+:root{color-scheme:light dark;--bg:light-dark(#0e1730,#0a0b0f);--panel:light-dark(#17233f,#16191f);--line:light-dark(#3d5080,#2f3541);--sep:light-dark(#26375c,#22262e);--pill:light-dark(#26375c,#262b34);--ink:#f4f2ec;--muted:light-dark(#9ba6c0,#9298a6);--card:light-dark(#e8e5dc,#17191e);--cink:light-dark(#1b2131,#ece8df);--cmuted:light-dark(#5a6275,#979dab);--rule:light-dark(#a9c2da,#272d39);--trc:light-dark(#14306b,#8fb8ff);--spkbg:light-dark(#e9eef7,#262b35);--markbg:light-dark(#ffe08a,#5c4a0e);--dash:light-dark(#c9cfdb,#363c48);--notebg:light-dark(#fff6d6,#2e2814);--noteink:light-dark(#4a3d10,#f0dca0);--inbg:light-dark(#ffffff,#0f1115);--inbd:light-dark(#9aa6bf,#3a4150);--off:light-dark(#d9d6cc,#262a32);--ok:light-dark(#137a52,#4cc38a);--mid:light-dark(#8a6500,#e0b84a);--no:light-dark(#b3261e,#ff7b70);--wbg:light-dark(#fde3e0,#3a1714);--wink:light-dark(#8a1f17,#ffb3ab);--red:#e0483e;--blue:#3d7be0;--teal:#1d9a86;--slate:#5d6d92}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 html{-webkit-text-size-adjust:100%}
@@ -700,7 +700,7 @@ function applyTheme(t){
 $('themeBtn').addEventListener('click',()=>{const n=curTheme()==='dark'?'light':'dark';try{localStorage.setItem('kk-theme',n)}catch(e){}applyTheme(n)});
 matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>applyTheme(document.documentElement.dataset.theme||null));
 /* --- yeni sürüm bildirimi --- */
-const APP_VERSION='9';
+const APP_VERSION='10';
 async function checkVersion(){
   try{const r=await fetch('version.json?t='+Date.now(),{cache:'no-store'});const v=await r.json();
     if(v&&v.v&&String(v.v)!==APP_VERSION){$('updTxt').textContent='Yeni sürüm hazır!'+(v.notes?' '+v.notes:'');$('upd').hidden=false}}catch(e){}
