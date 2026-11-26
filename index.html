@@ -123,6 +123,27 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
 .wordb{font:700 clamp(26px,7vw,34px)/1.15 "Courier Prime",monospace;margin:0 0 6px;display:flex;align-items:center;gap:10px;justify-content:space-between;overflow-wrap:anywhere}
 .upd{position:sticky;top:8px;z-index:5;display:flex;align-items:center;gap:12px;background:var(--ink);color:var(--bg);border-radius:10px;padding:10px 12px 10px 16px;margin-bottom:14px;box-shadow:0 10px 24px -8px rgba(0,0,0,.6)}
 .upd span{flex:1;font-size:15px;line-height:1.35}.upd button{border:0;border-radius:8px;background:var(--red);color:#fff;font-weight:700;min-height:44px;padding:0 16px;flex:none}
+.vbtn{width:100%;margin-bottom:10px;font-weight:600}
+.vwrap{position:sticky;top:0;z-index:4;background:var(--bg);padding-bottom:10px;margin:0 calc(-1*max(4vw,16px));padding-inline:max(4vw,16px)}
+.vbox{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden}
+.vbox iframe,.vbox>div{position:absolute;inset:0;width:100%!important;height:100%!important}
+.vctl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:8px}
+.vctl button{border:1.5px solid var(--line);background:var(--panel);border-radius:8px;min-height:44px;font-size:14px;font-weight:600;padding:4px}
+.vctl button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.lines{display:flex;flex-direction:column;gap:6px;padding-bottom:90px}
+.ln{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:start;padding:10px 8px;border-radius:8px;border:1.5px solid transparent}
+.ln.on{background:var(--panel);border-color:var(--red)}
+.ln .lt{border:0;background:none;color:var(--muted);font:600 13px "Courier Prime",monospace;padding:4px 2px;min-height:36px}
+.ln .len{margin:0;font-size:17px;line-height:1.5}
+.ln .len span{cursor:pointer;border-radius:3px}
+.ln .len span.sel{background:var(--markbg);color:var(--cink)}
+.ln .ltr{grid-column:2/3;margin:4px 0 0;color:var(--muted);font-size:15px}
+.ln .ltb{border:1.5px solid var(--line);background:none;border-radius:6px;font-size:12px;font-weight:700;padding:0 8px;min-height:32px}
+.ln .ltb[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.wbar{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(600px,calc(100% - 24px));z-index:6;display:flex;gap:10px;align-items:center;background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 10px 10px 16px;box-shadow:0 12px 30px -8px rgba(0,0,0,.7)}
+.wbar b{flex:1;font:700 18px "Courier Prime",monospace;overflow-wrap:anywhere}
+.wbar button{border:0;border-radius:8px;min-height:44px;padding:0 12px;font-weight:700}
+.wbar .wadd{background:var(--red);color:#fff}.wbar .wx{background:transparent;color:var(--bg)}
 .addbtn{width:100%;margin-bottom:10px;font-weight:600;border-style:dashed}.addbtn small{color:var(--muted);font-weight:400}
 .addf input{width:100%;font-size:17px;padding:13px 14px;border-radius:8px;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);margin-bottom:12px}
 .del{background:none;border:1.5px solid var(--line);border-radius:8px;min-height:40px;padding:6px 12px;font-size:14px;flex:none}
@@ -162,7 +183,8 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
   </div>
   <button class="ghost addbtn" id="toAdd">+ Claude'a iletilecekler <small id="inboxCount"></small></button>
   <div class="row2"><button class="ghost" id="toList">Tüm kelimeler</button><button class="ghost" id="toHist">Geçmiş</button></div>
-  <div class="row2" style="margin-top:10px"><button class="ghost" id="toSend">Claude'a gönder</button><button class="ghost" id="toImp">Yeni kelimeler <small id="packBadge" style="color:#ff8a80"></small></button></div>
+  <button class="ghost vbtn" id="toVids" style="margin-top:10px">Videolar <small id="vidCount" style="color:var(--muted);font-weight:400"></small></button>
+  <div class="row2"><button class="ghost" id="toSend">Claude'a gönder</button><button class="ghost" id="toImp">Yeni kelimeler <small id="packBadge" style="color:#ff8a80"></small></button></div>
   <button class="ghost" id="toFb" style="width:100%;margin-top:10px">Uygulama notları: hata ve istekler <small id="fbCount" style="color:var(--muted)"></small></button>
   <p class="hint"><span id="acct"></span> · <button class="skip" id="logout" style="color:var(--muted);min-height:0;padding:0">Çıkış yap</button></p>
 </section>
@@ -249,6 +271,29 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
   <button class="ghost" id="fbClear" hidden style="width:100%;margin-top:16px">Claude'a gönderdim, notları temizle</button>
 </section>
 
+<section id="v-vids" hidden>
+  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Videolar</h2></div>
+  <p class="lbl" style="font-size:15px">Claude'a YouTube linkini ve videonun transkriptini gönder. Verdiği kodu <b>Yeni kelimeler</b> sayfasındaki kutuya yapıştır; video, iki dilli altyazısı ve kelime kartlarıyla buraya gelir.</p>
+  <ul class="wlist" id="vlist"></ul>
+</section>
+
+<section id="v-player" hidden>
+  <div class="vwrap">
+    <div class="bar" style="margin-bottom:10px"><button class="icon" id="pBack" aria-label="Videolara dön"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt" id="pTitle" style="font-size:17px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></h2></div>
+    <div class="vbox"><div id="ytp"></div></div>
+    <div class="vctl">
+      <button id="pPrev" aria-label="Önceki cümle">◀</button>
+      <button id="pRep" aria-label="Cümleyi tekrarla">Tekrar</button>
+      <button id="pNext" aria-label="Sonraki cümle">▶</button>
+      <button id="pSpeed" aria-label="Hız">1x</button>
+      <button id="pStop" aria-pressed="false" aria-label="Her cümlede dur">Dur</button>
+    </div>
+  </div>
+  <p class="hint" style="margin:4px 0 10px">Kelimeye dokun: Claude'a iletilecekler'e ekle. TR: Türkçesini göster. Saat: oradan oynat.</p>
+  <div class="lines" id="lines"></div>
+  <div class="wbar" id="wbar" hidden><b id="wsel"></b><button class="wadd" id="wadd">Ekle</button><button class="wx" id="wx" aria-label="Kapat">✕</button></div>
+</section>
+
 <section id="v-hist" hidden>
   <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Geçmiş</h2></div>
   <ul class="wlist" id="hlist"></ul>
@@ -277,13 +322,13 @@ const PERDAY=[5,10,15,20,30];
 const SRCS=['Dizi/film','Oyun','Kitap','Basketbol','Ippo','Okul','Diğer'];let src='Dizi/film';
 const KINDS=['Kelime','Cümle','Soru'];const FBK=['Hata','İstek','Fikir'];let fbKind='Hata',fbArmed=false;
 let kind='Kelime',clearArmed=false;
-const S={feedback:[],packs:[],packsDone:[],inbox:[],cards:[],prog:{},sessions:[],note:null,settings:{newPerDay:10},deck:'Tümü',ready:false};
+const S={videos:[],feedback:[],packs:[],packsDone:[],inbox:[],cards:[],prog:{},sessions:[],note:null,settings:{newPerDay:10},deck:'Tümü',ready:false};
 let db=null,tts=null,Q=[],cur=null,cm='flip',sess=null,view='home',lastSum='';
 let mode='flip';try{mode=localStorage.getItem('kk-mode')||'flip'}catch(e){}
 const chains={};
 
 function status(t){const el=$('status');el.textContent=t;el.hidden=!t}
-function show(v){view=v;for(const k of ['login','home','study','done','list','hist','add','send','imp','fb'])$('v-'+k).hidden=k!==v;window.scrollTo(0,0);render()}
+function show(v){view=v;for(const k of ['login','home','study','done','list','hist','add','send','imp','fb','vids','player'])$('v-'+k).hidden=k!==v;window.scrollTo(0,0);render()}
 
 /* --- spaced repetition (SM-2 style) --- */
 function schedule(prev,r){
@@ -363,7 +408,7 @@ function backHTML(c,m,res){
 /* --- render --- */
 function render(){
   const st=streak();$('streak').innerHTML=st?`<b>${st}</b> gün seri`:'';
-  if(view==='home')renderHome();else if(view==='list')renderList();else if(view==='hist')renderHist();else if(view==='add')renderAdd();else if(view==='imp')renderImp();else if(view==='fb')renderFb();
+  if(view==='home')renderHome();else if(view==='list')renderList();else if(view==='hist')renderHist();else if(view==='add')renderAdd();else if(view==='imp')renderImp();else if(view==='fb')renderFb();else if(view==='vids')renderVids();
 }
 function renderHome(){
   const due=dueCards().length,nw=newCards().length;
@@ -381,6 +426,7 @@ function renderHome(){
   const nt=S.note;$('note').hidden=!(nt&&nt.text);
   if(nt&&nt.text){$('noteText').textContent=nt.text;$('noteDate').textContent=nt.date||''}
   const np=S.packs.filter(p=>!S.packsDone.includes(p.id)).length;$('packBadge').textContent=np?`(${np} paket)`:'';
+  $('vidCount').textContent=S.videos.length?`(${S.videos.length})`:'';
   $('fbCount').textContent=S.feedback.length?`(${S.feedback.length})`:'';
   $('inboxCount').textContent=S.inbox.length?`(${S.inbox.length} bekliyor)`:'';
   const counts={n:0,l:0,k:0};S.cards.forEach(c=>counts[stateOf(c)]++);
@@ -409,6 +455,11 @@ function renderFb(){
   $('fbKinds').innerHTML=FBK.map(s=>`<button type="button" class="chip" data-fbk="${esc(s)}" aria-pressed="${s===fbKind}">${esc(s)}</button>`).join('');
   const n=S.feedback.length;$('fbCopy').hidden=!n;$('fbClear').hidden=!n;$('fbCopy').textContent=`Hepsini kopyala (${n})`;
   $('fbList').innerHTML=n?S.feedback.map(f=>{const d=new Date(f.ts||0);return `<li><div><span class="t" style="color:var(--ink);font-size:16px">${esc(f.text)}</span><span class="t">${esc(f.kind||'')} · ${d.getDate()} ${AYLAR[d.getMonth()]}</span></div><button class="del" data-fbdel="${esc(f.id)}">Sil</button></li>`}).join(''):'<li class="empty">Henüz not yok.</li>';
+}
+const fmtT=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function renderVids(){
+  $('vlist').innerHTML=S.videos.length?S.videos.map(v=>{const d=new Date(v.ts||0);const last=(v.lines||[]).slice(-1)[0];
+    return `<li><button class="ghost" data-vopen="${esc(v.id)}" style="flex:1;text-align:left;border:0;padding:6px 0"><span class="w" style="font-family:inherit">${esc(v.title||v.yt)}</span><span class="t">${(v.lines||[]).length} cümle · ${fmtT(last?last.t:0)} · ${d.getDate()} ${AYLAR[d.getMonth()]}</span></button><button class="del" data-vdel="${esc(v.id)}">Sil</button></li>`}).join(''):'<li class="empty">Henüz video yok.</li>';
 }
 function renderHist(){
   $('hlist').innerHTML=S.sessions.length?S.sessions.map(s=>{const d=new Date(s.ts||0);
@@ -526,6 +577,14 @@ $('clearAll').addEventListener('click',async()=>{
   for(const i of S.inbox.slice()){try{await db.doc('inbox/'+i.id).delete()}catch(x){}}
   b.disabled=false;b.textContent="Claude'a gönderdim, listeyi temizle";$('copyAllMsg').textContent='Liste temizlendi.';
 });
+$('toVids').addEventListener('click',()=>show('vids'));
+let vArmed=null;
+$('vlist').addEventListener('click',e=>{
+  const o=e.target.closest('[data-vopen]');if(o){openVideo(o.dataset.vopen);return}
+  const d=e.target.closest('[data-vdel]');if(!d||!db)return;
+  if(vArmed!==d.dataset.vdel){vArmed=d.dataset.vdel;d.textContent='Emin misin?';setTimeout(()=>{vArmed=null;d.textContent='Sil'},4000);return}
+  db.doc('videos/'+d.dataset.vdel).delete().catch(()=>{});
+});
 $('toFb').addEventListener('click',()=>{$('fbMsg').textContent='';show('fb')});
 $('fbKinds').addEventListener('click',e=>{const b=e.target.closest('[data-fbk]');if(b){fbKind=b.dataset.fbk;renderFb()}});
 $('fbList').addEventListener('click',e=>{const b=e.target.closest('[data-fbdel]');if(b&&db){b.disabled=true;db.doc('feedback/'+b.dataset.fbdel).delete().catch(()=>{b.disabled=false})}});
@@ -572,6 +631,7 @@ function initDb(){
   db.collection('progress').onSnapshot(s=>{const o={};s.docs.forEach(d=>{o[d.id]=d.data()});S.prog=o;render()},onErr);
   db.collection('sessions').orderBy('ts','desc').limit(60).onSnapshot(s=>{S.sessions=s.docs.map(d=>d.data());render()},onErr);
   db.collection('inbox').orderBy('ts','desc').onSnapshot(s=>{S.inbox=s.docs.map(d=>({id:d.id,...d.data()}));render()},onErr);
+  db.collection('videos').orderBy('ts','desc').onSnapshot(s=>{S.videos=s.docs.map(d=>({id:d.id,...d.data()}));render()},onErr);
   db.collection('feedback').orderBy('ts','desc').onSnapshot(s=>{S.feedback=s.docs.map(d=>({id:d.id,...d.data()}));render()},onErr);
   db.doc('meta/packs').onSnapshot(d=>{S.packsDone=d.exists?(d.data().ids||[]):[];render()},onErr);
   fetch('packs/index.json',{cache:'no-store'}).then(r=>r.json()).then(a=>{if(Array.isArray(a)){S.packs=a;render()}}).catch(()=>{});
@@ -627,6 +687,13 @@ const FB=(()=>{
       if(obj.note){const t=new Date();b.set(doc(fs,P('meta/note')),{text:String(obj.note),date:t.getDate()+' '+AYLAR[t.getMonth()]+' '+t.getFullYear()})}
       if(obj.clearInbox)S.inbox.forEach(i=>b.delete(doc(fs,P('inbox/'+i.id))));
       if(obj.deleteCards)obj.deleteCards.forEach(id=>b.delete(doc(fs,P('cards/'+id))));
+      S.lastVideo=null;
+      if(obj.video&&obj.video.id&&Array.isArray(obj.video.lines)){
+        const v=obj.video,vid=String(v.id).replace(/[^A-Za-z0-9_-]/g,'').slice(0,20);
+        const lines=v.lines.filter(l=>l&&l.en).map(l=>({t:+l.t||0,en:String(l.en),tr:String(l.tr||'')})).sort((a,b)=>a.t-b.t).slice(0,2000);
+        b.set(doc(fs,P('videos/'+vid)),{yt:vid,title:String(v.title||vid).slice(0,140),lines,ts:Date.now()});
+        S.lastVideo={id:vid,title:String(v.title||vid)};
+      }
     }
     await b.commit();return n;
   }
@@ -670,7 +737,7 @@ $('packList').addEventListener('click',async e=>{
 $('impBtn').addEventListener('click',async()=>{
   const t=$('impText').value.trim();if(!t||!db)return;
   $('impBtn').disabled=true;$('impMsg').textContent='Aktarılıyor…';
-  try{const n=await FB.importJSON(t);$('impMsg').textContent=n+' kart eklendi/güncellendi.';$('impText').value=''}
+  try{const n=await FB.importJSON(t);$('impMsg').textContent=(S.lastVideo?`Video eklendi: ${S.lastVideo.title}. Ana sayfa → Videolar. `:'')+n+' kart eklendi/güncellendi.';$('impText').value=''}
   catch(e){$('impMsg').textContent=e.message||('Hata: '+e.code)}
   $('impBtn').disabled=false;
 });
@@ -686,6 +753,69 @@ function report(){
   const decks=[...new Set(S.cards.map(x=>x.deck))];L.push('','Desteler: '+decks.join(', '),'Son kart sırası: '+Math.max(0,...S.cards.map(x=>+x.n||0)));
   return L.join('\n');
 }
+/* --- video oynatıcı --- */
+let yt=null,ytReady=null,curVid=null,curLine=-1,stopEach=false,stopAt=null,tick=null,selWord='';
+const SPEEDS=[1,.75,.5];let spIdx=0;
+function loadYT(){
+  if(ytReady)return ytReady;
+  ytReady=new Promise(res=>{window.onYouTubeIframeAPIReady=()=>res();const s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s)});
+  return ytReady;
+}
+function lineAt(t){const L=curVid.lines;let i=-1;for(let k=0;k<L.length;k++){if(L[k].t<=t+0.05)i=k;else break}return i}
+function markLine(i,scroll){
+  if(i===curLine)return;
+  const prev=$('lines').querySelector('.ln.on');if(prev)prev.classList.remove('on');
+  curLine=i;if(i<0)return;
+  const el=$('lines').children[i];if(!el)return;el.classList.add('on');
+  if(scroll){const top=el.getBoundingClientRect().top,vh=window.innerHeight,head=document.querySelector('.vwrap').getBoundingClientRect().bottom;
+    if(top<head+8||top>vh-140)window.scrollBy({top:top-head-60,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
+}
+function seekLine(i,play=true){
+  if(!yt||!curVid)return;const L=curVid.lines;i=Math.max(0,Math.min(L.length-1,i));
+  yt.seekTo(L[i].t,true);stopAt=stopEach&&L[i+1]?L[i+1].t-0.12:null;if(play)yt.playVideo();markLine(i,true);
+}
+async function openVideo(id){
+  curVid=S.videos.find(v=>v.id===id);if(!curVid)return;
+  curLine=-1;selWord='';$('wbar').hidden=true;
+  $('pTitle').textContent=curVid.title||curVid.yt;
+  $('lines').innerHTML=curVid.lines.map((l,i)=>`<div class="ln" data-i="${i}"><button class="lt" data-seek="${i}">${fmtT(l.t)}</button><div><p class="len">${esc(l.en).split(/(\s+)/).map(w=>/\S/.test(w)?`<span>${w}</span>`:w).join('')}</p><p class="ltr" hidden>${esc(l.tr)}</p></div><button class="ltb" data-tr="${i}" aria-pressed="false">TR</button></div>`).join('');
+  show('player');
+  await loadYT();
+  if(yt){try{yt.destroy()}catch(e){}yt=null}
+  document.querySelector('.vbox').innerHTML='<div id="ytp"></div>';
+  yt=new YT.Player('ytp',{videoId:curVid.yt,playerVars:{playsinline:1,rel:0,modestbranding:1,cc_load_policy:0},events:{onReady:()=>{yt.setPlaybackRate(SPEEDS[spIdx])}}});
+  clearInterval(tick);
+  tick=setInterval(()=>{
+    if(view!=='player'||!yt||!yt.getCurrentTime)return;
+    const t=yt.getCurrentTime();
+    if(stopAt!==null&&t>=stopAt&&yt.getPlayerState&&yt.getPlayerState()===1){yt.pauseVideo();stopAt=null}
+    const i=lineAt(t);
+    if(i!==curLine){markLine(i,true);if(stopEach&&curVid.lines[i+1])stopAt=curVid.lines[i+1].t-0.12}
+  },200);
+}
+function closePlayer(){clearInterval(tick);if(yt){try{yt.pauseVideo()}catch(e){}}show('vids')}
+$('pBack').addEventListener('click',closePlayer);
+$('pPrev').addEventListener('click',()=>seekLine(curLine-1));
+$('pNext').addEventListener('click',()=>seekLine(curLine+1));
+$('pRep').addEventListener('click',()=>seekLine(Math.max(0,curLine)));
+$('pSpeed').addEventListener('click',()=>{spIdx=(spIdx+1)%SPEEDS.length;$('pSpeed').textContent=SPEEDS[spIdx]+'x';try{yt&&yt.setPlaybackRate(SPEEDS[spIdx])}catch(e){}});
+$('pStop').addEventListener('click',()=>{stopEach=!stopEach;$('pStop').setAttribute('aria-pressed',stopEach);stopAt=stopEach&&curVid&&curVid.lines[curLine+1]?curVid.lines[curLine+1].t-0.12:null});
+$('lines').addEventListener('click',e=>{
+  const s=e.target.closest('[data-seek]');if(s){seekLine(+s.dataset.seek);return}
+  const tb=e.target.closest('[data-tr]');if(tb){const p=tb.parentElement.querySelector('.ltr');p.hidden=!p.hidden;tb.setAttribute('aria-pressed',!p.hidden);return}
+  const w=e.target.closest('.len span');if(w){
+    $('lines').querySelectorAll('.len span.sel').forEach(x=>x.classList.remove('sel'));
+    w.classList.add('sel');selWord=w.textContent.replace(/^[^A-Za-z0-9']+|[^A-Za-z0-9']+$/g,'');
+    $('wsel').textContent=selWord;$('wbar').hidden=!selWord;$('wadd').textContent='Ekle';$('wadd').disabled=false;
+  }
+});
+$('wx').addEventListener('click',()=>{$('wbar').hidden=true;$('lines').querySelectorAll('.len span.sel').forEach(x=>x.classList.remove('sel'))});
+$('wadd').addEventListener('click',()=>{
+  if(!selWord||!db||!curVid)return;const line=curVid.lines[Math.max(0,curLine)];
+  const sentence=($('lines').querySelector('.len span.sel')?.closest('.len')?.textContent)||(line&&line.en)||'';
+  const ts=Date.now();$('wadd').disabled=true;
+  db.collection('inbox').doc('i'+ts).set({text:`${selWord} — "${sentence}"`.slice(0,300),kind:'Kelime',src:'Video: '+(curVid.title||'').slice(0,40),ts}).then(()=>{$('wadd').textContent='Eklendi ✓'},()=>{$('wadd').disabled=false});
+});
 FB.start();
 /* --- tema --- */
 const MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>';
@@ -700,7 +830,7 @@ function applyTheme(t){
 $('themeBtn').addEventListener('click',()=>{const n=curTheme()==='dark'?'light':'dark';try{localStorage.setItem('kk-theme',n)}catch(e){}applyTheme(n)});
 matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>applyTheme(document.documentElement.dataset.theme||null));
 /* --- yeni sürüm bildirimi --- */
-const APP_VERSION='10';
+const APP_VERSION='11';
 async function checkVersion(){
   try{const r=await fetch('version.json?t='+Date.now(),{cache:'no-store'});const v=await r.json();
     if(v&&v.v&&String(v.v)!==APP_VERSION){$('updTxt').textContent='Yeni sürüm hazır!'+(v.notes?' '+v.notes:'');$('upd').hidden=false}}catch(e){}
