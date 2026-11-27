@@ -150,11 +150,43 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
 .rate button.sug{box-shadow:0 0 0 3px var(--bg),0 0 0 6px #fff}
 @media(max-width:400px){.rate{grid-template-columns:1fr 1fr}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* --- v14: sekmeler, sayfa, cümleler --- */
+:root{--navbg:light-dark(#0b1328,#08090c)}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:7;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:var(--navbg);border-top:1px solid var(--sep);padding:6px 4px calc(8px + env(safe-area-inset-bottom))}
+.tabbar button{border:0;background:none;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;min-height:48px;position:relative}
+.tabbar button[aria-current=page]{color:var(--ink);font-weight:600}
+.tabbar svg{width:22px;height:22px}
+.tabbar .dot{position:absolute;top:2px;left:calc(50% + 8px);min-width:16px;height:16px;border-radius:99px;background:var(--red);color:#fff;font-size:10px;line-height:16px;font-weight:700;padding:0 4px}
+body.navon .wrap{padding-bottom:100px}
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--panel);border-radius:10px;padding:4px;gap:4px;margin-bottom:16px}
+.seg button{border:0;border-radius:8px;background:transparent;min-height:42px;font-size:14px}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg);font-weight:600}
+.sheet{position:fixed;inset:0;z-index:9;background:rgba(0,0,0,.55);display:flex;align-items:flex-end}
+.sheet>div{background:var(--bg);width:100%;max-width:640px;margin:0 auto;border-radius:16px 16px 0 0;padding:18px max(4vw,16px) calc(20px + env(safe-area-inset-bottom));max-height:80vh;overflow:auto}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 2px;border-bottom:1px solid var(--sep);min-height:44px}
+.row select,.row .del{font-size:16px}
+.row select{background:var(--panel);color:var(--ink);border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;min-height:42px;max-width:55%}
+.sect{font:700 13px "Courier Prime",monospace;color:#ff8a80;margin:20px 0 2px}
+.btn2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:-8px 0 16px}
+.goal{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--panel);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+.goal b{display:block}.goal .t{font-size:14px;color:var(--muted)}
+.pkbanner{display:flex;width:100%;justify-content:space-between;align-items:center;gap:10px;text-align:left;background:var(--panel);border:1.5px solid var(--red);border-radius:10px;padding:12px 14px;margin-bottom:12px;min-height:56px}
+.pkbanner span.go{font-weight:600;color:#ff8a80;white-space:nowrap}
+.hrow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+.hrow h2{font:700 22px "Courier Prime",monospace;margin:0}.hrow span{font-size:14px;color:var(--muted)}
+.slist{list-style:none;margin:0;padding:0}
+.slist li{padding:12px 2px;border-bottom:1px solid var(--sep)}
+.slist .orig{color:var(--muted);font-size:15px}.slist .fix{font-size:16px;margin-top:2px}.slist .why{font-size:13px;color:#f0dca0;margin-top:3px}
+.slist .meta{font-size:12px;color:var(--muted);margin-top:3px}
+.sent-ta{width:100%;min-height:96px;font:17px/1.45 "Work Sans",sans-serif;padding:10px;border-radius:8px;border:2px solid var(--inbd);background:var(--inbg);color:var(--cink);margin:8px 0 10px;resize:vertical}
+.cardbtn{border:0;border-radius:10px;background:var(--cink);color:var(--card);font-weight:600;font-size:16px;min-height:48px;width:100%}
+.linkbtn{background:none;border:0;color:var(--cmuted);text-decoration:underline;font-size:15px;min-height:44px;width:100%}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header class="top"><h1>Kelime Kutusu</h1><div style="display:flex;align-items:center;gap:10px"><div class="streak" id="streak"></div><button class="icon" id="themeBtn" aria-label="Tema değiştir"></button></div></header>
+<header class="top"><h1>Kelime Kutusu</h1><div class="streak" id="streak"></div></header>
 <div class="upd" id="upd" hidden role="status"><span id="updTxt">Yeni sürüm hazır!</span><button id="updBtn">Yenile</button></div>
 <div class="status" id="status">Yükleniyor…</div>
 
@@ -164,50 +196,38 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
   <p class="hint" id="loginMsg"></p>
 </section>
 
+<!-- ÇALIŞ -->
 <section id="v-home" hidden>
   <button class="stack" id="stack" aria-label="Çalışmaya başla">
     <span class="sc s3"></span><span class="sc s2"></span>
-    <span class="sc s1"><span class="redline"></span><span class="stk-label" id="stkLabel">Bugün</span>
+    <span class="sc s1"><span class="redline"></span><span class="stk-label">Bugün</span>
       <span class="stk-nums"><b id="nDue">0</b> tekrar <i>·</i> <b id="nNew">0</b> yeni</span>
       <span class="stk-go" id="goLabel">Başla →</span>
     </span>
   </button>
-  <button class="ghost" id="practiceBtn" style="width:100%;margin:-8px 0 18px;font-weight:600">Gördüğüm tüm kelimeleri tekrar et <small id="seenCount" style="color:var(--muted);font-weight:400"></small></button>
-  <p class="lbl">Çalışma modu</p><div class="chips" id="modes" role="group" aria-label="Çalışma modu"></div>
-  <p class="lbl">Deste</p><div class="chips" id="decks" role="group" aria-label="Deste seç"></div>
-  <p class="lbl">Günde yeni kelime</p><div class="chips" id="perday" role="group" aria-label="Günde yeni kelime"></div>
+  <div class="btn2">
+    <button class="ghost" id="practiceBtn">Tümünü tekrar et <small id="seenCount" style="color:var(--muted)"></small></button>
+    <button class="ghost" id="modeBtn">Mod: <span id="modeLbl"></span></button>
+  </div>
+  <div class="goal"><div><b>Bugünün cümleleri</b><span class="t" id="goalTxt">0 / 3</span></div><button class="del" id="toSent" style="border-color:var(--ink);font-weight:600">Yaz</button></div>
   <article class="note" id="note" hidden><h2>Claude'dan not</h2><p id="noteText"></p><small id="noteDate"></small></article>
   <div class="statrow">
     <div><b id="sTotal">0</b><span>kelime</span></div>
     <div><b id="sLearn">0</b><span>öğreniliyor</span></div>
     <div><b id="sKnown">0</b><span>oturdu</span></div>
   </div>
-  <button class="ghost addbtn" id="toAdd">+ Claude'a iletilecekler <small id="inboxCount"></small></button>
-  <div class="row2"><button class="ghost" id="toList">Tüm kelimeler</button><button class="ghost" id="toHist">Geçmiş</button></div>
-  <button class="ghost vbtn" id="toVids" style="margin-top:10px">Videolar <small id="vidCount" style="color:var(--muted);font-weight:400"></small></button>
-  <div class="row2"><button class="ghost" id="toSend">Claude'a gönder</button><button class="ghost" id="toImp">Yeni kelimeler <small id="packBadge" style="color:#ff8a80"></small></button></div>
-  <button class="ghost" id="toFb" style="width:100%;margin-top:10px">Uygulama notları: hata ve istekler <small id="fbCount" style="color:var(--muted)"></small></button>
-  <p class="hint"><span id="acct"></span> · <button class="skip" id="logout" style="color:var(--muted);min-height:0;padding:0">Çıkış yap</button></p>
 </section>
 
-<section id="v-send" hidden>
-  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Claude'a gönder</h2></div>
-  <p class="lbl" style="font-size:15px">Bu raporu kopyala ve Claude sohbetine yapıştır. İçinde son çalışmaların, zorlandığın kelimeler ve eklenecek kelimelerin var.</p>
-  <textarea id="sendText" readonly style="min-height:260px"></textarea>
-  <button class="show" id="sendCopy" style="margin-top:0">Kopyala</button>
-  <p class="hint" id="sendMsg"></p>
-</section>
+<div class="sheet" id="modeSheet" hidden>
+  <div role="dialog" aria-label="Çalışma ayarı">
+    <div class="hrow"><h2>Çalışma ayarı</h2></div>
+    <p class="lbl">Mod</p><div class="chips" id="modes" role="group" aria-label="Çalışma modu"></div>
+    <p class="lbl">Deste</p><div class="chips" id="decks" role="group" aria-label="Deste seç"></div>
+    <button class="show" id="sheetClose">Tamam</button>
+  </div>
+</div>
 
-<section id="v-imp" hidden>
-  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Yeni kelimeler</h2></div>
-  <p class="lbl">Hazır paketler</p>
-  <ul class="wlist" id="packList" style="margin-bottom:22px"></ul>
-  <p class="lbl" style="font-size:15px">Ya da Claude'un verdiği kod bloğunun tamamını kopyala, buraya yapıştır ve "İçe aktar"a bas.</p>
-  <textarea id="impText" placeholder='{"cards":[ ... ]}' autocapitalize="none" spellcheck="false" style="min-height:200px"></textarea>
-  <button class="show" id="impBtn" style="margin-top:0">İçe aktar</button>
-  <p class="hint" id="impMsg"></p>
-</section>
-
+<!-- ÇALIŞMA -->
 <section id="v-study" hidden>
   <div class="bar">
     <button class="icon" id="quit" aria-label="Çık"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
@@ -230,52 +250,52 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
 
 <section id="v-done" hidden>
   <div class="card done"><span class="redline"></span><h2 id="doneTitle">Bugünlük bu kadar!</h2><p id="doneTxt"></p><div class="wrongs" id="doneWrong"></div></div>
-  <button class="show" id="copyBtn">Sonucu kopyala</button>
-  <p class="hint" id="copyMsg">Ya da ana sayfadaki "Claude'a gönder" ile tüm raporu yolla.</p>
-  <textarea id="copyArea" readonly hidden></textarea>
-  <button class="ghost" style="width:100%" id="doneHome">Ana sayfa</button>
+  <button class="show" id="doneSent">Bugünün cümlelerini yaz</button>
+  <button class="ghost" style="width:100%;margin-top:12px" id="doneHome">Ana sayfa</button>
 </section>
 
+<!-- CÜMLELER -->
+<section id="v-sent" hidden>
+  <div class="bar"><button class="icon" data-back="home" aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt" style="flex:1">Bugünün cümleleri</h2><span id="sentProg" style="color:var(--muted);font-size:14px"></span></div>
+  <div class="card" id="sentCard" style="min-height:0">
+    <span class="redline"></span>
+    <div class="ctop"><span class="tag" id="sWhy"></span></div>
+    <div id="sBox">
+      <h2 class="word" id="sWord" style="margin-bottom:4px"></h2>
+      <p class="extr" id="sTr" style="margin:0 0 6px"></p>
+      <p class="extr" style="margin:0;font-size:14px">İpucu: kendi hayatından yaz: okul, yüzme, oyun, basketbol. Sözlüğe bakma, hata serbest.</p>
+      <label><span style="position:absolute;left:-9999px">Cümlen</span><textarea class="sent-ta" id="sText" autocapitalize="sentences" spellcheck="false" placeholder="Write your sentence in English…"></textarea></label>
+      <button class="cardbtn" id="sSave">Kaydet, sonrakine geç</button>
+      <button class="linkbtn" id="sSkip">Başka kelime ver</button>
+    </div>
+    <div id="sDone" hidden><h2 style="font:700 26px 'Courier Prime',monospace;margin:0 0 8px">Bugünlük tamam!</h2><p style="margin:0 0 12px;line-height:1.5">Cümlelerin Claude sekmesinde bekliyor. Birikince "Hepsini kopyala" ile gönder; ben düzeltip kod veririm.</p><button class="cardbtn" id="sMore">Bir cümle daha yaz</button></div>
+  </div>
+  <p class="sect">Son cümlelerin</p>
+  <ul class="slist" id="sList"></ul>
+</section>
+
+<!-- KELİMELER -->
 <section id="v-list" hidden>
-  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Tüm kelimeler</h2></div>
-  <input id="q" type="search" placeholder="Ara (İngilizce ya da Türkçe)" autocomplete="off">
+  <div class="hrow"><h2>Kelimeler</h2><span id="listCount"></span></div>
+  <button class="pkbanner" id="packBanner" hidden><span><b id="pkTitle" style="display:block"></b><span id="pkSub" style="font-size:13px;color:var(--muted)"></span></span><span class="go" id="pkGo">Göster</span></button>
+  <div id="packWrap" hidden><ul class="wlist" id="packList" style="margin-bottom:14px"></ul></div>
+  <p class="hint" id="packMsg" style="margin:0 0 10px"></p>
+  <input id="q" type="search" placeholder="Ara (İngilizce ya da Türkçe)" autocomplete="off" aria-label="Kelime ara">
+  <div class="chips" id="stChips" role="group" aria-label="Duruma göre süz"></div>
   <ul class="wlist" id="wlist"></ul>
+  <button class="ghost" style="width:100%;margin-top:16px" id="toHist">Çalışma geçmişi</button>
 </section>
 
-<section id="v-add" hidden>
-  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Claude'a iletilecekler</h2></div>
-  <p class="lbl" style="font-size:15px">Bilmediğin kelimeyi, anlamadığın cümleyi ya da aklına takılan soruyu yaz. Biriktir, sonra <b>Hepsini kopyala</b>'ya bas ve Claude sohbetine yapıştır.</p>
-  <form class="addf" id="addForm" autocomplete="off">
-    <input id="addText" type="text" placeholder="Kelime, cümle ya da soru" autocapitalize="none" spellcheck="false" enterkeyhint="done" aria-label="Kelime ya da cümle">
-    <div class="chips" id="kindChips" role="group" aria-label="Ne ekliyorsun"></div>
-    <p class="lbl">Nerede gördün?</p>
-    <div class="chips" id="srcChips" role="group" aria-label="Nerede gördün"></div>
-    <button class="show" type="submit" style="margin-top:4px">Listeye ekle</button>
-  </form>
-  <button class="show" id="copyAll" hidden style="background:var(--red);color:#fff">Hepsini kopyala</button>
-  <p class="hint" id="copyAllMsg"></p>
-  <ul class="wlist" id="ilist"></ul>
-  <button class="ghost" id="clearAll" hidden style="width:100%;margin-top:16px">Claude'a gönderdim, listeyi temizle</button>
+<section id="v-hist" hidden>
+  <div class="bar"><button class="icon" data-back="list" aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Çalışma geçmişi</h2></div>
+  <ul class="wlist" id="hlist"></ul>
 </section>
 
-<section id="v-fb" hidden>
-  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Uygulama notları</h2></div>
-  <p class="lbl" style="font-size:15px">Uygulamada gördüğün hataları ve eklenmesini istediğin özellikleri buraya yaz. Biriktir, sonra <b>Hepsini kopyala</b>'ya bas ve Claude sohbetine yapıştır.</p>
-  <form id="fbForm" autocomplete="off">
-    <div class="chips" id="fbKinds" role="group" aria-label="Not türü"></div>
-    <textarea id="fbText" placeholder="Örnek: Dinleme modunda ses çıkmıyor" style="min-height:110px"></textarea>
-    <button class="show" type="submit" style="margin-top:0">Notu kaydet</button>
-  </form>
-  <button class="show" id="fbCopy" hidden style="background:var(--red);color:#fff">Hepsini kopyala</button>
-  <p class="hint" id="fbMsg"></p>
-  <ul class="wlist" id="fbList"></ul>
-  <button class="ghost" id="fbClear" hidden style="width:100%;margin-top:16px">Claude'a gönderdim, notları temizle</button>
-</section>
-
+<!-- VİDEOLAR -->
 <section id="v-vids" hidden>
-  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Videolar</h2></div>
-  <p class="lbl" style="font-size:15px">Claude'a YouTube linkini ve videonun transkriptini gönder. Verdiği kodu <b>Yeni kelimeler</b> sayfasındaki kutuya yapıştır; video, iki dilli altyazısı ve kelime kartlarıyla buraya gelir.</p>
+  <div class="hrow"><h2>Videolar</h2><span id="vidCount"></span></div>
   <ul class="wlist" id="vlist"></ul>
+  <button class="ghost" id="addVid" style="width:100%;margin-top:16px;border-style:dashed;text-align:left;padding:12px 14px"><b>+ Video ekle</b><br><span style="font-size:13px;color:var(--muted)">Gemini'den gelen kodu yapıştır</span></button>
 </section>
 
 <section id="v-player" hidden>
@@ -290,23 +310,88 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
       <button id="pStop" aria-pressed="false" aria-label="Her cümlede dur">Dur</button>
     </div>
   </div>
-  <p class="hint" style="margin:4px 0 10px">Kelimeye dokun: Claude'a iletilecekler'e ekle. TR: Türkçesini göster. Saat: oradan oynat.</p>
+  <p class="hint" style="margin:4px 0 10px">Kelimeye dokun: Claude'a gönderilecekler listesine ekle. TR: Türkçesi. Saat: oradan oynat.</p>
   <div class="lines" id="lines"></div>
   <div class="wbar" id="wbar" hidden><b id="wsel"></b><button class="wadd" id="wadd">Ekle</button><button class="wx" id="wx" aria-label="Kapat">✕</button></div>
 </section>
 
-<section id="v-hist" hidden>
-  <div class="bar"><button class="icon" data-home aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="vt">Geçmiş</h2></div>
-  <ul class="wlist" id="hlist"></ul>
+<!-- CLAUDE -->
+<section id="v-claude" hidden>
+  <div class="hrow"><h2>Claude</h2></div>
+  <div class="seg" role="group" aria-label="Bölüm">
+    <button data-seg="out" aria-pressed="true">Gönderilecek</button>
+    <button data-seg="in" aria-pressed="false">Gelen kod</button>
+    <button data-seg="fb" aria-pressed="false">Uygulama notu</button>
+  </div>
+  <div id="segOut">
+    <p class="lbl" style="font-size:15px;line-height:1.5">Kelime, cümle, soru, yazdığın cümleler ve istersen çalışma raporun tek mesajda. Kopyala, Claude'a yapıştır.</p>
+    <form class="addf" id="addForm" autocomplete="off">
+      <div class="chips" id="kindChips" role="group" aria-label="Ne ekliyorsun"></div>
+      <input id="addText" type="text" placeholder="Kelime, cümle ya da soru" autocapitalize="none" spellcheck="false" enterkeyhint="done" aria-label="Kelime, cümle ya da soru">
+      <p class="lbl">Nerede gördün?</p>
+      <div class="chips" id="srcChips" role="group" aria-label="Nerede gördün"></div>
+      <button class="ghost" type="submit" style="width:100%">Listeye ekle</button>
+    </form>
+    <ul class="wlist" id="ilist" style="margin-top:10px"></ul>
+    <p class="hint" id="pendSent" style="text-align:left"></p>
+    <label class="row" style="justify-content:flex-start;border:0"><input type="checkbox" id="incReport" checked style="width:20px;height:20px"> Bugünkü çalışma raporunu da ekle</label>
+    <button class="show" id="copyAll" style="background:var(--red);color:#fff">Hepsini kopyala</button>
+    <p class="hint" id="copyAllMsg"></p>
+    <button class="ghost" id="clearAll" style="width:100%">Claude'a gönderdim, listeyi temizle</button>
+  </div>
+  <div id="segIn" hidden>
+    <p class="lbl" style="font-size:15px;line-height:1.5">Claude'un ya da Gemini'nin verdiği kodu buraya yapıştır: kelime kartları, video, cümle düzeltmeleri.</p>
+    <textarea id="impText" placeholder='{"cards":[ ... ]}' autocapitalize="none" spellcheck="false" style="min-height:200px"></textarea>
+    <button class="show" id="impBtn" style="margin-top:0">İçe aktar</button>
+    <p class="hint" id="impMsg"></p>
+  </div>
+  <div id="segFb" hidden>
+    <p class="lbl" style="font-size:15px;line-height:1.5">Uygulamada gördüğün hataları ve istediğin özellikleri yaz. Biriktir, sonra kopyala.</p>
+    <form id="fbForm" autocomplete="off">
+      <div class="chips" id="fbKinds" role="group" aria-label="Not türü"></div>
+      <textarea id="fbText" placeholder="Örnek: Dinleme modunda ses çıkmıyor" style="min-height:110px"></textarea>
+      <button class="ghost" type="submit" style="width:100%">Notu kaydet</button>
+    </form>
+    <button class="show" id="fbCopy" hidden style="background:var(--red);color:#fff">Hepsini kopyala</button>
+    <p class="hint" id="fbMsg"></p>
+    <ul class="wlist" id="fbList"></ul>
+    <button class="ghost" id="fbClear" hidden style="width:100%;margin-top:16px">Claude'a gönderdim, notları temizle</button>
+  </div>
+</section>
+
+<!-- AYARLAR -->
+<section id="v-set" hidden>
+  <div class="hrow"><h2>Ayarlar</h2></div>
+  <p class="sect">ÇALIŞMA</p>
+  <label class="row"><span>Günde yeni kelime</span><select id="setPer"><option>5</option><option>10</option><option>15</option><option>20</option><option>30</option></select></label>
+  <label class="row"><span>Varsayılan mod</span><select id="setMode"></select></label>
+  <label class="row"><span>Günlük cümle hedefi</span><select id="setGoal"><option>2</option><option>3</option><option>5</option></select></label>
+  <p class="sect">GÖRÜNÜM</p>
+  <label class="row"><span>Tema</span><select id="setTheme"><option value="auto">Otomatik</option><option value="light">Açık (lacivert)</option><option value="dark">Koyu (siyah)</option></select></label>
+  <p class="sect">HESAP VE VERİ</p>
+  <div class="row"><span>Hesap</span><span id="acct" style="color:var(--muted);font-size:14px;overflow-wrap:anywhere;text-align:right"></span></div>
+  <div class="row"><span>Yedek indir</span><button class="del" id="backupBtn">İndir</button></div>
+  <div class="row"><span>Yedekten geri yükle</span><label class="del" style="display:inline-grid;place-items:center;cursor:pointer">Dosya seç<input type="file" id="restoreFile" accept="application/json,.json" style="position:absolute;left:-9999px"></label></div>
+  <p class="hint" id="setMsg" style="text-align:left"></p>
+  <div class="row"><span>Çıkış yap</span><button class="del" id="logout">Çıkış</button></div>
+  <p class="hint" id="verLbl"></p>
 </section>
 </div>
 
+<nav class="tabbar" id="tabbar" hidden aria-label="Ana menü">
+  <button data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 9h16"/></svg>Çalış</button>
+  <button data-tab="list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Kelimeler<span class="dot" id="dotList" hidden></span></button>
+  <button data-tab="vids"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>Videolar</button>
+  <button data-tab="claude"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg>Claude<span class="dot" id="dotClaude" hidden></span></button>
+  <button data-tab="set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>Ayarlar</button>
+</nav>
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import {getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import {initializeFirestore,getFirestore,persistentLocalCache,persistentMultipleTabManager,collection,doc,setDoc,deleteDoc,onSnapshot,query,orderBy as fsOrderBy,limit as fsLimit,writeBatch,getDocFromServer} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 const firebaseConfig={apiKey:"AIzaSyD6qa_2d6x9d670KUIGalp8iiJHkBFup18",authDomain:"kelimecim-59671.firebaseapp.com",projectId:"kelimecim-59671",storageBucket:"kelimecim-59671.firebasestorage.app",messagingSenderId:"687418566304",appId:"1:687418566304:web:06cd6c3ddb35a4bac00bc5"};
 {
+const APP_VERSION='14';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const reEsc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
@@ -317,21 +402,30 @@ const eod=()=>sod()+DAY-1;
 const AYLAR=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
 const SPK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>';
 const MODES=[['flip','Kart'],['rev','Ters'],['type','Yazarak'],['cloze','Boşluk'],['listen','Dinleme'],['mix','Karışık']];
+const MODE_NAME=Object.fromEntries(MODES);
 const MODE_LBL={flip:'EN → TR',rev:'TR → EN',type:'yazarak',cloze:'boşluk',listen:'dinleme'};
-const PERDAY=[5,10,15,20,30];
-
-const SRCS=['Dizi/film','Oyun','Kitap','Basketbol','Ippo','Okul','Diğer'];let src='Dizi/film';
-const KINDS=['Kelime','Cümle','Soru'];const FBK=['Hata','İstek','Fikir'];let fbKind='Hata',fbArmed=false;
-let kind='Kelime',clearArmed=false;
-const S={videos:[],feedback:[],packs:[],packsDone:[],inbox:[],cards:[],prog:{},sessions:[],note:null,settings:{newPerDay:10},deck:'Tümü',ready:false};
-let db=null,tts=null,Q=[],cur=null,cm='flip',sess=null,view='home',lastSum='';
-let mode='flip';try{mode=localStorage.getItem('kk-mode')||'flip'}catch(e){}
+const TABS=['home','list','vids','claude','set'];
+const SRCS=['Dizi/film','Oyun','Kitap','Basketbol','Video','Okul','Diğer'];let src='Dizi/film';
+const KINDS=['Kelime','Cümle','Soru'];let kind='Kelime',clearArmed=false;
+const FBK=['Hata','İstek','Fikir'];let fbKind='Hata',fbArmed=false;
+const ST=[['all','Tümü'],['n','Yeni'],['l','Öğreniliyor'],['k','Oturdu']];let stF='all';
+const S={sent:[],videos:[],feedback:[],packs:[],packsDone:[],inbox:[],cards:[],prog:{},sessions:[],note:null,settings:{newPerDay:10,sentGoal:3},deck:'Tümü',ready:false};
+let db=null,Q=[],cur=null,cm='flip',sess=null,view='home',seg='out';
+let mode='mix';try{mode=localStorage.getItem('kk-mode')||'mix'}catch(e){}
 const chains={};
 
 function status(t){const el=$('status');el.textContent=t;el.hidden=!t}
-function show(v){view=v;for(const k of ['login','home','study','done','list','hist','add','send','imp','fb','vids','player'])$('v-'+k).hidden=k!==v;window.scrollTo(0,0);render()}
+function show(v){
+  view=v;
+  for(const k of ['login','home','study','done','list','hist','vids','player','claude','set','sent'])$('v-'+k).hidden=k!==v;
+  const nav=TABS.includes(v)||v==='hist';
+  $('tabbar').hidden=!nav;document.body.classList.toggle('navon',nav);
+  const tab=v==='hist'?'list':v;
+  document.querySelectorAll('#tabbar [data-tab]').forEach(b=>{if(b.dataset.tab===tab)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+  window.scrollTo(0,0);render();
+}
 
-/* --- spaced repetition (SM-2 style) --- */
+/* --- aralıklı tekrar (SM-2 tarzı) --- */
 function schedule(prev,r){
   const p=Object.assign({ease:2.5,ivl:0,reps:0,lapses:0},prev||{});
   if(r===0){p.reps=0;p.lapses+=1;p.ease=Math.max(1.3,+(p.ease-.2).toFixed(2));p.ivl=0;p.due=Date.now()+6e5}
@@ -351,6 +445,7 @@ const fmtIvl=d=>d<1?'10 dk':d<30?d+' gün':Math.round(d/30)+' ay';
 const stateOf=c=>{const p=S.prog[c.id];return !p?'n':p.ivl>=21?'k':'l'};
 const inDeck=c=>S.deck==='Tümü'||c.deck===S.deck;
 const perDay=()=>+S.settings.newPerDay||10;
+const sentGoal=()=>+S.settings.sentGoal||3;
 function dueCards(){const e=eod();return S.cards.filter(c=>inDeck(c)&&S.prog[c.id]&&(S.prog[c.id].due||0)<=e).sort((a,b)=>S.prog[a.id].due-S.prog[b.id].due)}
 function newCards(){
   const t=dstr(),seenToday=Object.values(S.prog).filter(p=>p.seen===t).length;
@@ -362,8 +457,9 @@ function streak(){
   while(days.has(dstr(d))){n++;d.setDate(d.getDate()-1)}
   return n;
 }
+const sentToday=()=>S.sent.filter(s=>s.date===dstr()).length;
 
-/* --- answer checking --- */
+/* --- cevap kontrolü --- */
 const norm=s=>String(s||'').toLowerCase().replace(/[’‘`]/g,"'").replace(/\(.*?\)/g,' ').replace(/…|\.\.\./g,' ').replace(/[?!.,;:"]/g,' ').replace(/\s+/g,' ').trim().replace(/^to /,'');
 function lev(a,b){let p=Array.from({length:b.length+1},(_,j)=>j);for(let i=1;i<=a.length;i++){const q=[i];for(let j=1;j<=b.length;j++)q[j]=Math.min(p[j]+1,q[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=q}return p[b.length]}
 function check(input,list){
@@ -375,7 +471,7 @@ function check(input,list){
 const keyOf=c=>(c.hl||String(c.en).replace(/^to /i,'').replace(/\s*\(.*?\)\s*/g,' ')).replace(/…/g,'').trim();
 function clozeMatch(c){const k=keyOf(c);return k&&c.ex?c.ex.match(new RegExp(reEsc(k),'i')):null}
 
-/* --- card faces --- */
+/* --- kart yüzleri --- */
 const canSpeak=()=>('speechSynthesis' in window);
 const spk=(w,sm)=>canSpeak()?`<button class="spk${sm?' sm':''}" data-say="${w}" aria-label="Dinle">${SPK}</button>`:'';
 function highlight(c){const ex=esc(c.ex||''),k=keyOf(c);if(!k)return ex;return ex.replace(new RegExp('('+reEsc(esc(k))+')','i'),'<mark>$1</mark>')}
@@ -397,69 +493,64 @@ function frontHTML(c,m){
 }
 function backHTML(c,m,res){
   let h='';
-  if(res){
-    h+=res.r===2?'<p class="res ok">✓ Doğru!</p>':res.r===1?`<p class="res mid">Neredeyse! Doğru yazımı: ${esc(res.right)}</p>`:`<p class="res no">${res.input?`Senin cevabın: <s>${esc(res.input)}</s><br>`:''}Doğrusu: ${esc(res.right)}</p>`;
-  }
+  if(res)h+=res.r===2?'<p class="res ok">✓ Doğru!</p>':res.r===1?`<p class="res mid">Neredeyse! Doğru yazımı: ${esc(res.right)}</p>`:`<p class="res no">${res.input?`Senin cevabın: <s>${esc(res.input)}</s><br>`:''}Doğrusu: ${esc(res.right)}</p>`;
   if(m!=='flip'){h+=`<div class="wordb"><span>${esc(c.en)}</span>${spk('w')}</div>`;if(c.ex)h+=`<p class="ex">${highlight(c)}${spk('ex',1)}</p>`}
   if(m!=='rev'&&m!=='type'){h+=`<p class="tr">${esc(c.tr)}</p>`;if(c.exTr)h+=`<p class="extr">${esc(c.exTr)}</p>`}
   if(c.note)h+=`<p class="cnote">${esc(c.note)}</p>`;
   return h;
 }
 
-/* --- render --- */
+/* --- çizim --- */
+const newPacks=()=>S.packs.filter(p=>!S.packsDone.includes(p.id));
+const pendingSent=()=>S.sent.filter(s=>s.status!=='corrected');
 function render(){
   const st=streak();$('streak').innerHTML=st?`<b>${st}</b> gün seri`:'';
-  if(view==='home')renderHome();else if(view==='list')renderList();else if(view==='hist')renderHist();else if(view==='add')renderAdd();else if(view==='imp')renderImp();else if(view==='fb')renderFb();else if(view==='vids')renderVids();
+  const np=newPacks().length;$('dotList').hidden=!np;$('dotList').textContent=np;
+  const nc=S.inbox.length+pendingSent().length;$('dotClaude').hidden=!nc;$('dotClaude').textContent=nc;
+  ({home:renderHome,list:renderList,hist:renderHist,vids:renderVids,claude:renderClaude,set:renderSet,sent:renderSent})[view]?.();
 }
 function renderHome(){
   const due=dueCards().length,nw=newCards().length;
-  const seenN=S.cards.filter(c=>inDeck(c)&&S.prog[c.id]).length;$('seenCount').textContent=`(${seenN})`;$('practiceBtn').hidden=!seenN;
+  const seenN=S.cards.filter(c=>inDeck(c)&&S.prog[c.id]).length;$('seenCount').textContent=`(${seenN})`;$('practiceBtn').disabled=!seenN;
   $('nDue').textContent=due;$('nNew').textContent=nw;
   const go=$('goLabel');
   if(!S.ready){go.textContent='Yükleniyor…';go.className='stk-go off'}
   else if(!S.cards.length){go.textContent='Kart yok';go.className='stk-go off'}
   else if(due+nw===0){go.textContent='Bugünlük tamam';go.className='stk-go off'}
   else{go.textContent='Başla →';go.className='stk-go'}
+  $('modeLbl').textContent=(MODE_NAME[mode]||'Kart')+(S.deck!=='Tümü'?' · '+S.deck:'');
+  const n=sentToday(),g=sentGoal();$('goalTxt').textContent=n>=g?`${n} / ${g} · tamam!`:`${n} / ${g} cümle`;$('toSent').textContent=n>=g?'Bir tane daha':'Yaz';
+  const nt=S.note;$('note').hidden=!(nt&&nt.text);
+  if(nt&&nt.text){$('noteText').textContent=nt.text;$('noteDate').textContent=nt.date||''}
+  const counts={n:0,l:0,k:0};S.cards.forEach(c=>counts[stateOf(c)]++);
+  $('sTotal').textContent=S.cards.length;$('sLearn').textContent=counts.l;$('sKnown').textContent=counts.k;
+}
+function renderSheet(){
   $('modes').innerHTML=MODES.map(([k,l])=>`<button class="chip" data-mode="${k}" aria-pressed="${k===mode}"${k==='listen'&&!canSpeak()?' disabled':''}>${l}</button>`).join('');
   const decks=[...new Set(S.cards.map(c=>c.deck).filter(Boolean))];
   if(!decks.includes(S.deck))S.deck='Tümü';
   $('decks').innerHTML=['Tümü',...decks].map(d=>{const n=d==='Tümü'?S.cards.length:S.cards.filter(c=>c.deck===d).length;return `<button class="chip" data-deck="${esc(d)}" aria-pressed="${d===S.deck}">${esc(d)}<small>${n}</small></button>`}).join('');
-  $('perday').innerHTML=PERDAY.map(n=>`<button class="chip" data-per="${n}" aria-pressed="${n===perDay()}">${n}</button>`).join('');
-  const nt=S.note;$('note').hidden=!(nt&&nt.text);
-  if(nt&&nt.text){$('noteText').textContent=nt.text;$('noteDate').textContent=nt.date||''}
-  const np=S.packs.filter(p=>!S.packsDone.includes(p.id)).length;$('packBadge').textContent=np?`(${np} paket)`:'';
-  $('vidCount').textContent=S.videos.length?`(${S.videos.length})`:'';
-  $('fbCount').textContent=S.feedback.length?`(${S.feedback.length})`:'';
-  $('inboxCount').textContent=S.inbox.length?`(${S.inbox.length} bekliyor)`:'';
-  const counts={n:0,l:0,k:0};S.cards.forEach(c=>counts[stateOf(c)]++);
-  $('sTotal').textContent=S.cards.length;$('sLearn').textContent=counts.l;$('sKnown').textContent=counts.k;
 }
 function renderList(){
+  $('listCount').textContent=S.cards.length+' kelime';
+  const np=newPacks();$('packBanner').hidden=!S.packs.length;
+  $('pkTitle').textContent=np.length?`${np.length} yeni paket hazır`:'Paketler';
+  $('pkSub').textContent=np.length?np.slice(0,3).map(p=>p.title).join(' · '):'Hepsi eklendi';
+  $('pkGo').textContent=$('packWrap').hidden?(np.length?'Ekle →':'Göster'):'Gizle';
+  $('packBanner').style.borderColor=np.length?'':'var(--line)';
+  if(!$('packWrap').hidden)$('packList').innerHTML=S.packs.map(p=>{const done=S.packsDone.includes(p.id);
+    return `<li><div><span class="w">${esc(p.title)}</span><span class="t">${esc(p.desc||'')} · ${+p.count||0} kelime</span></div>${done?'<span class="pill k">eklendi</span>':`<button class="del" data-pack="${esc(p.id)}" style="border-color:var(--ink);font-weight:600">Ekle</button>`}</li>`}).join('');
+  $('stChips').innerHTML=ST.map(([k,l])=>`<button class="chip" data-st="${k}" aria-pressed="${k===stF}">${l}</button>`).join('');
   const q=$('q').value.trim().toLocaleLowerCase('tr');
-  const rows=S.cards.filter(c=>!q||(c.en+' '+c.tr+' '+(c.deck||'')).toLocaleLowerCase('tr').includes(q));
+  const rows=S.cards.filter(c=>(stF==='all'||stateOf(c)===stF)&&(!q||(c.en+' '+c.tr+' '+(c.deck||'')).toLocaleLowerCase('tr').includes(q)));
   const lab={n:'yeni',l:'öğreniliyor',k:'oturdu'};
-  $('wlist').innerHTML=rows.length?rows.map(c=>{const s=stateOf(c),p=S.prog[c.id];let when='';
+  $('wlist').innerHTML=rows.length?rows.slice(0,400).map(c=>{const s=stateOf(c),p=S.prog[c.id];let when='';
     if(p){const d=Math.round((p.due-sod())/DAY);when=d<=0?' · bugün':` · ${d} gün sonra`}
     return `<li><div><span class="w">${esc(c.en)}</span><span class="t">${esc(c.tr)} · ${esc(c.deck||'')}${when}</span></div><span class="pill ${s}">${lab[s]}</span></li>`}).join(''):'<li class="empty">Kelime bulunamadı.</li>';
 }
-function renderAdd(){
-  $('srcChips').innerHTML=SRCS.map(s=>`<button type="button" class="chip" data-src="${esc(s)}" aria-pressed="${s===src}">${esc(s)}</button>`).join('');
-  $('kindChips').innerHTML=KINDS.map(s=>`<button type="button" class="chip" data-kind="${esc(s)}" aria-pressed="${s===kind}">${esc(s)}</button>`).join('');
-  $('copyAll').hidden=!S.inbox.length;$('clearAll').hidden=!S.inbox.length;
-  $('copyAll').textContent=`Hepsini kopyala (${S.inbox.length})`;
-  $('ilist').innerHTML=S.inbox.length?S.inbox.map(i=>`<li><div><span class="w">${esc(i.text)}</span><span class="t">${esc(i.kind||'Kelime')} · ${esc(i.src||'')}</span></div><button class="del" data-del="${esc(i.id)}">Sil</button></li>`).join(''):'<li class="empty">Liste boş. Yeni bir kelime gördüğünde buraya yaz.</li>';
-}
-function renderImp(){
-  $('packList').innerHTML=S.packs.length?S.packs.map(p=>{const done=S.packsDone.includes(p.id);
-    return `<li><div><span class="w">${esc(p.title)}</span><span class="t">${esc(p.desc||'')} · ${+p.count||0} kelime</span></div>${done?'<span class="pill k">eklendi</span>':`<button class="del" data-pack="${esc(p.id)}" style="border-color:var(--ink);font-weight:600">Ekle</button>`}</li>`}).join(''):'<li class="empty">Şu an yeni paket yok.</li>';
-}
-function renderFb(){
-  $('fbKinds').innerHTML=FBK.map(s=>`<button type="button" class="chip" data-fbk="${esc(s)}" aria-pressed="${s===fbKind}">${esc(s)}</button>`).join('');
-  const n=S.feedback.length;$('fbCopy').hidden=!n;$('fbClear').hidden=!n;$('fbCopy').textContent=`Hepsini kopyala (${n})`;
-  $('fbList').innerHTML=n?S.feedback.map(f=>{const d=new Date(f.ts||0);return `<li><div><span class="t" style="color:var(--ink);font-size:16px">${esc(f.text)}</span><span class="t">${esc(f.kind||'')} · ${d.getDate()} ${AYLAR[d.getMonth()]}</span></div><button class="del" data-fbdel="${esc(f.id)}">Sil</button></li>`}).join(''):'<li class="empty">Henüz not yok.</li>';
-}
 const fmtT=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
 function renderVids(){
+  $('vidCount').textContent=S.videos.length?S.videos.length+' video':'';
   $('vlist').innerHTML=S.videos.length?S.videos.map(v=>{const d=new Date(v.ts||0);const last=(v.lines||[]).slice(-1)[0];
     return `<li><button class="ghost" data-vopen="${esc(v.id)}" style="flex:1;text-align:left;border:0;padding:6px 0"><span class="w" style="font-family:inherit">${esc(v.title||v.yt)}</span><span class="t">${(v.lines||[]).length} cümle · ${fmtT(last?last.t:0)} · ${d.getDate()} ${AYLAR[d.getMonth()]}</span></button><button class="del" data-vdel="${esc(v.id)}">Sil</button></li>`}).join(''):'<li class="empty">Henüz video yok.</li>';
 }
@@ -468,8 +559,63 @@ function renderHist(){
     const w=(s.wrong||[]).length?`Zorlandıkların: ${esc(s.wrong.join(', '))}`:'Hepsini bildin';
     return `<li><div><span class="w">${d.getDate()} ${AYLAR[d.getMonth()]} · ${s.cards||0} kart</span><span class="t">${w}</span></div><span class="pill">${s.newCount||0} yeni</span></li>`}).join(''):'<li class="empty">Henüz çalışma yok.</li>';
 }
+function renderClaude(){
+  document.querySelectorAll('[data-seg]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.seg===seg));
+  $('segOut').hidden=seg!=='out';$('segIn').hidden=seg!=='in';$('segFb').hidden=seg!=='fb';
+  if(seg==='out'){
+    $('kindChips').innerHTML=KINDS.map(s=>`<button type="button" class="chip" data-kind="${esc(s)}" aria-pressed="${s===kind}">${esc(s)}</button>`).join('');
+    $('srcChips').innerHTML=SRCS.map(s=>`<button type="button" class="chip" data-src="${esc(s)}" aria-pressed="${s===src}">${esc(s)}</button>`).join('');
+    $('ilist').innerHTML=S.inbox.length?S.inbox.map(i=>`<li><div><span class="w" style="font-family:inherit;font-weight:600">${esc(i.text)}</span><span class="t">${esc(i.kind||'Kelime')} · ${esc(i.src||'')}</span></div><button class="del" data-del="${esc(i.id)}">Sil</button></li>`).join(''):'<li class="empty">Liste boş.</li>';
+    const ps=pendingSent().length;$('pendSent').textContent=ps?`Ayrıca düzeltilmeyi bekleyen ${ps} cümlen var; onlar da kopyalanacak.`:'';
+    $('copyAll').textContent=`Hepsini kopyala (${S.inbox.length+ps})`;$('clearAll').hidden=!S.inbox.length;
+  }
+  if(seg==='fb'){
+    $('fbKinds').innerHTML=FBK.map(s=>`<button type="button" class="chip" data-fbk="${esc(s)}" aria-pressed="${s===fbKind}">${esc(s)}</button>`).join('');
+    const n=S.feedback.length;$('fbCopy').hidden=!n;$('fbClear').hidden=!n;$('fbCopy').textContent=`Hepsini kopyala (${n})`;
+    $('fbList').innerHTML=n?S.feedback.map(f=>{const d=new Date(f.ts||0);return `<li><div><span class="t" style="color:var(--ink);font-size:16px">${esc(f.text)}</span><span class="t">${esc(f.kind||'')} · ${d.getDate()} ${AYLAR[d.getMonth()]}</span></div><button class="del" data-fbdel="${esc(f.id)}">Sil</button></li>`}).join(''):'<li class="empty">Henüz not yok.</li>';
+  }
+}
+function renderSet(){
+  $('setPer').value=String(perDay());$('setGoal').value=String(sentGoal());
+  $('setMode').innerHTML=MODES.map(([k,l])=>`<option value="${k}"${k===mode?' selected':''}>${l}</option>`).join('');
+  let t='auto';try{t=localStorage.getItem('kk-theme')||'auto'}catch(e){}$('setTheme').value=t;
+  $('verLbl').textContent='Sürüm '+APP_VERSION;
+}
 
-/* --- study --- */
+/* --- cümleler --- */
+let sWord=null,sSkip=new Set();
+function sentCandidates(){
+  const today=dstr(),usedToday=new Set(S.sent.filter(s=>s.date===today).map(s=>s.cardId));
+  const seen=S.cards.filter(c=>S.prog[c.id]&&!usedToday.has(c.id)&&!sSkip.has(c.id));
+  const isToday=p=>p.last&&p.last>=sod();
+  const hard=seen.filter(c=>isToday(S.prog[c.id])&&(S.prog[c.id].lastR??3)<=1);
+  const todayAll=seen.filter(c=>isToday(S.prog[c.id])&&!hard.includes(c));
+  const rest=seen.filter(c=>!hard.includes(c)&&!todayAll.includes(c)).sort(()=>Math.random()-.5);
+  return [...hard.map(c=>[c,'Bugün zorlandığın kelime']),...todayAll.map(c=>[c,'Bugün çalıştığın kelime']),...rest.map(c=>[c,'Daha önce gördüğün kelime'])];
+}
+function nextSentWord(){const c=sentCandidates()[0];sWord=c?c[0]:null;$('sWhy').textContent=c?c[1]:''}
+function renderSent(){
+  const n=sentToday(),g=sentGoal();$('sentProg').textContent=`${Math.min(n,g)}/${g}`;
+  const doneGoal=n>=g&&!sWord;
+  $('sDone').hidden=!doneGoal;$('sBox').hidden=doneGoal;
+  if(!doneGoal){
+    if(!sWord)nextSentWord();
+    if(sWord){$('sWord').textContent=sWord.en;$('sTr').textContent=sWord.tr}
+    else{$('sWord').textContent='Önce birkaç kart çalış';$('sTr').textContent='Cümle için gördüğün kelimelerden seçiyorum.'}
+    $('sSave').disabled=!sWord;
+  }
+  $('sList').innerHTML=S.sent.length?S.sent.slice(0,30).map(s=>{
+    const d=new Date(s.ts||0),meta=`${esc(s.word||'')} · ${d.getDate()} ${AYLAR[d.getMonth()]}`;
+    if(s.status==='corrected'){
+      if(s.ok)return `<li><div class="fix">✓ ${esc(s.text)}</div><div class="why">${esc(s.explanation||'Doğru, aynen böyle!')}</div><div class="meta">${meta}</div></li>`;
+      return `<li><div class="orig"><s>${esc(s.text)}</s></div><div class="fix">${esc(s.corrected||'')}</div>${s.explanation?`<div class="why">${esc(s.explanation)}</div>`:''}<div class="meta">${meta}</div></li>`;
+    }
+    return `<li><div class="fix">${esc(s.text)}</div><div class="meta">${meta} · Claude bekliyor</div></li>`;
+  }).join(''):'<li class="empty">Henüz cümle yok.</li>';
+}
+function openSent(){sWord=null;sSkip=new Set();show('sent');setTimeout(()=>$('sText')&&!$('sBox').hidden&&$('sText').focus({preventScroll:true}),50)}
+
+/* --- çalışma --- */
 function start(){
   if(!S.ready||!db)return;
   Q=[...dueCards(),...newCards()];
@@ -525,32 +671,73 @@ function record(){
   const s={date:dstr(),ts:Date.now(),mode,practice:!!sess.practice,cards:sess.seen.size,newCount:sess.newCount,again:sess.ans[0],hard:sess.ans[1],good:sess.ans[2],easy:sess.ans[3],wrong:[...sess.wrong],minutes:Math.max(1,Math.round((Date.now()-sess.start)/6e4))};
   save('sessions/s'+s.ts,s);return s;
 }
-function summary(s){
-  return `Kelime Kutusu, ${s.date} (${s.mode} modu${s.practice?', serbest tekrar':''}): ${s.cards} kart çalıştım (${s.newCount} yeni), ${s.minutes} dk.\nBildim: ${s.good}, Çok kolay: ${s.easy}, Zor: ${s.hard}, Bilmedim: ${s.again}.`+(s.wrong.length?`\nZorlandıklarım: ${s.wrong.join(', ')}`:'');
-}
 function finish(){
   const s=record();sess=null;cur=null;
   show('done');
+  $('doneSent').hidden=sentToday()>=sentGoal();
   if(!s){$('doneTxt').textContent='Bugün çalışılacak kart kalmadı.';$('doneWrong').innerHTML='';return}
   $('doneTitle').textContent=s.wrong.length?'Bugünlük bu kadar!':'Harika, hepsini bildin!';
   $('doneTxt').textContent=`${s.cards} kart, ${s.minutes} dakika. ${s.newCount} yeni kelime gördün.`;
   $('doneWrong').innerHTML=s.wrong.length?'<p style="margin:6px 0 4px;font-size:15px;line-height:1.4">Yarın tekrar gelecekler:</p>'+s.wrong.map(w=>`<span>${esc(w)}</span>`).join(''):'';
-  lastSum=summary(s);$('copyArea').hidden=true;
 }
 
-/* --- speech --- */
+/* --- ses --- */
 function speak(text){
   text=String(text||'').replace(/…/g,'').trim();if(!text)return;
-  const web=()=>{try{const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}};
-  web();
+  try{const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}
 }
 
-/* --- events --- */
+/* --- kopyalama ve rapor --- */
+function copyText(t,msgEl){
+  const ok=()=>{msgEl.textContent='Kopyalandı! Şimdi Claude sohbetine yapıştır.'};
+  const fb=()=>{const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();let done=false;try{done=document.execCommand('copy')}catch(x){}a.remove();msgEl.textContent=done?'Kopyalandı! Şimdi Claude sohbetine yapıştır.':'Kopyalanamadı.'};
+  try{navigator.clipboard.writeText(t).then(ok,fb)}catch(x){fb()}
+}
+function report(){
+  const c={n:0,l:0,k:0};S.cards.forEach(x=>c[stateOf(x)]++);
+  const L=['RAPOR',`Toplam ${S.cards.length} kelime · yeni ${c.n} · öğreniliyor ${c.l} · oturdu ${c.k} · seri ${streak()} gün · günde ${perDay()} yeni`];
+  const rec=S.sessions.slice(0,7);
+  if(rec.length){L.push('Son çalışmalar:');rec.forEach(s=>L.push(`- ${s.date}: ${s.cards} kart (${s.newCount} yeni, ${s.mode||'flip'}${s.practice?', serbest':''}, ${s.minutes} dk) · bildim ${s.good}, kolay ${s.easy}, zor ${s.hard}, bilmedim ${s.again}`+((s.wrong||[]).length?` · zorlandıkların: ${s.wrong.join(', ')}`:'')))}
+  const hard=S.cards.filter(x=>(S.prog[x.id]||{}).lapses>=2).map(x=>x.en);
+  if(hard.length)L.push('En çok unuttukların: '+hard.join(', '));
+  L.push('Desteler: '+[...new Set(S.cards.map(x=>x.deck))].join(', ')+' · son kart sırası: '+Math.max(0,...S.cards.map(x=>+x.n||0)));
+  return L.join('\n');
+}
+function outText(){
+  const L=[`KELİME KUTUSU → Claude · ${dstr()} · sürüm ${APP_VERSION}`];
+  const ps=pendingSent();
+  if(ps.length){L.push('','CÜMLELERİM (lütfen düzelt):');ps.slice().reverse().forEach(s=>L.push(`- [${s.id}] (${s.word}) ${s.text}`))}
+  if(S.inbox.length){L.push('','İLETİLECEKLER:');S.inbox.slice().reverse().forEach(i=>L.push(`- [${i.kind||'Kelime'}] ${i.text}${i.src?' ('+i.src+')':''}`))}
+  if($('incReport').checked){L.push('',report())}
+  if(ps.length)L.push('','Düzeltme kodu biçimi: {"corrections":[{"id":"…","ok":false,"corrected":"…","explanation":"kısa Türkçe açıklama"}],"cards":[… "deck":"Hatalarım" …]}');
+  return L.join('\n');
+}
+
+/* --- olaylar --- */
+$('tabbar').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)show(b.dataset.tab)});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-back]');if(b)show(b.dataset.back)});
 $('stack').addEventListener('click',start);
 $('practiceBtn').addEventListener('click',startPractice);
-$('modes').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(b&&!b.disabled){mode=b.dataset.mode;try{localStorage.setItem('kk-mode',mode)}catch(x){}render()}});
-$('decks').addEventListener('click',e=>{const b=e.target.closest('[data-deck]');if(b){S.deck=b.dataset.deck;render()}});
-$('perday').addEventListener('click',e=>{const b=e.target.closest('[data-per]');if(!b||!db)return;const n=+b.dataset.per;if(n===perDay())return;S.settings={...S.settings,newPerDay:n};save('meta/settings',{...S.settings});render()});
+$('modeBtn').addEventListener('click',()=>{renderSheet();$('modeSheet').hidden=false});
+$('sheetClose').addEventListener('click',()=>{$('modeSheet').hidden=true;render()});
+$('modeSheet').addEventListener('click',e=>{
+  if(e.target===$('modeSheet')){$('modeSheet').hidden=true;render();return}
+  const m=e.target.closest('[data-mode]');if(m&&!m.disabled){mode=m.dataset.mode;try{localStorage.setItem('kk-mode',mode)}catch(x){}renderSheet();return}
+  const d=e.target.closest('[data-deck]');if(d){S.deck=d.dataset.deck;renderSheet()}
+});
+$('toSent').addEventListener('click',openSent);
+$('doneSent').addEventListener('click',openSent);
+$('doneHome').addEventListener('click',()=>show('home'));
+$('sSkip').addEventListener('click',()=>{if(sWord)sSkip.add(sWord.id);sWord=null;renderSent()});
+$('sMore').addEventListener('click',()=>{nextSentWord();if(!sWord){$('sMore').textContent='Uygun kelime kalmadı';return}renderSent();$('sDone').hidden=true;$('sBox').hidden=false});
+$('sSave').addEventListener('click',()=>{
+  const t=$('sText').value.trim().slice(0,400);if(!t||!sWord||!db)return;
+  const ts=Date.now(),id='s'+ts;
+  db.doc('sentences/'+id).set({word:sWord.en,tr:sWord.tr,cardId:sWord.id,text:t,date:dstr(),ts,status:'pending'}).catch(er=>status('Kaydedilemedi ('+(er&&er.code||'hata')+').'));
+  sSkip.add(sWord.id);$('sText').value='';sWord=null;
+  if(sentToday()+1<sentGoal())nextSentWord();
+  setTimeout(renderSent,0);
+});
 $('showBtn').addEventListener('click',()=>reveal());
 $('card').addEventListener('click',e=>{
   const s=e.target.closest('[data-say]');
@@ -571,26 +758,21 @@ document.addEventListener('submit',e=>{
 });
 $('rate').addEventListener('click',e=>{const b=e.target.closest('[data-r]');if(b)rate(+b.dataset.r)});
 $('quit').addEventListener('click',()=>{if(sess&&sess.seen.size)finish();else{sess=null;show('home')}});
-$('doneHome').addEventListener('click',()=>show('home'));
-$('toList').addEventListener('click',()=>show('list'));
 $('toHist').addEventListener('click',()=>show('hist'));
-$('toAdd').addEventListener('click',()=>show('add'));
-$('kindChips').addEventListener('click',e=>{const b=e.target.closest('[data-kind]');if(b){kind=b.dataset.kind;renderAdd()}});
-function inboxText(){const L=[`Claude'a iletilecekler (${S.inbox.length}):`];S.inbox.slice().reverse().forEach(i=>L.push(`- [${i.kind||'Kelime'}] ${i.text}${i.src?' ('+i.src+')':''}`));return L.join('\n')}
-function copyText(t,msgEl){
-  const ok=()=>{msgEl.textContent='Kopyalandı! Şimdi Claude sohbetine yapıştır.'};
-  const fb=()=>{const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();let done=false;try{done=document.execCommand('copy')}catch(x){}a.remove();msgEl.textContent=done?'Kopyalandı! Şimdi Claude sohbetine yapıştır.':'Kopyalanamadı. Ana sayfadaki "Claude\'a gönder"i dene.'};
-  try{navigator.clipboard.writeText(t).then(ok,fb)}catch(x){fb()}
-}
-$('copyAll').addEventListener('click',()=>copyText(inboxText(),$('copyAllMsg')));
-$('clearAll').addEventListener('click',async()=>{
-  const b=$('clearAll');
-  if(!clearArmed){clearArmed=true;b.textContent='Emin misin? Silmek için tekrar dokun';setTimeout(()=>{clearArmed=false;b.textContent="Claude'a gönderdim, listeyi temizle"},4000);return}
-  clearArmed=false;b.disabled=true;
-  for(const i of S.inbox.slice()){try{await db.doc('inbox/'+i.id).delete()}catch(x){}}
-  b.disabled=false;b.textContent="Claude'a gönderdim, listeyi temizle";$('copyAllMsg').textContent='Liste temizlendi.';
+$('q').addEventListener('input',renderList);
+$('stChips').addEventListener('click',e=>{const b=e.target.closest('[data-st]');if(b){stF=b.dataset.st;renderList()}});
+$('packBanner').addEventListener('click',()=>{$('packWrap').hidden=!$('packWrap').hidden;renderList()});
+$('packList').addEventListener('click',async e=>{
+  const b=e.target.closest('[data-pack]');if(!b||!db)return;
+  const p=S.packs.find(x=>x.id===b.dataset.pack);if(!p)return;
+  b.disabled=true;b.textContent='Ekleniyor…';
+  try{
+    const t=await (await fetch(p.file,{cache:'no-store'})).text();
+    const n=await FB.importJSON(t);
+    await db.doc('meta/packs').set({ids:[...new Set([...S.packsDone,p.id])]});
+    $('packMsg').textContent=`${p.title}: ${n} kelime eklendi.`;
+  }catch(x){b.disabled=false;b.textContent='Ekle';$('packMsg').textContent='Eklenemedi: '+(x.message||x.code||'hata')}
 });
-$('toVids').addEventListener('click',()=>show('vids'));
 let vArmed=null;
 $('vlist').addEventListener('click',e=>{
   const o=e.target.closest('[data-vopen]');if(o){openVideo(o.dataset.vopen);return}
@@ -598,8 +780,32 @@ $('vlist').addEventListener('click',e=>{
   if(vArmed!==d.dataset.vdel){vArmed=d.dataset.vdel;d.textContent='Emin misin?';setTimeout(()=>{vArmed=null;d.textContent='Sil'},4000);return}
   db.doc('videos/'+d.dataset.vdel).delete().catch(()=>{});
 });
-$('toFb').addEventListener('click',()=>{$('fbMsg').textContent='';show('fb')});
-$('fbKinds').addEventListener('click',e=>{const b=e.target.closest('[data-fbk]');if(b){fbKind=b.dataset.fbk;renderFb()}});
+$('addVid').addEventListener('click',()=>{seg='in';show('claude')});
+document.querySelector('.seg').addEventListener('click',e=>{const b=e.target.closest('[data-seg]');if(b){seg=b.dataset.seg;renderClaude()}});
+$('kindChips').addEventListener('click',e=>{const b=e.target.closest('[data-kind]');if(b){kind=b.dataset.kind;renderClaude()}});
+$('srcChips').addEventListener('click',e=>{const b=e.target.closest('[data-src]');if(b){src=b.dataset.src;renderClaude()}});
+$('ilist').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(b&&db){b.disabled=true;db.doc('inbox/'+b.dataset.del).delete().catch(()=>{b.disabled=false})}});
+$('copyAll').addEventListener('click',()=>copyText(outText(),$('copyAllMsg')));
+$('clearAll').addEventListener('click',async()=>{
+  const b=$('clearAll');
+  if(!clearArmed){clearArmed=true;b.textContent='Emin misin? Silmek için tekrar dokun';setTimeout(()=>{clearArmed=false;b.textContent="Claude'a gönderdim, listeyi temizle"},4000);return}
+  clearArmed=false;b.disabled=true;
+  for(const i of S.inbox.slice()){try{await db.doc('inbox/'+i.id).delete()}catch(x){}}
+  b.disabled=false;b.textContent="Claude'a gönderdim, listeyi temizle";$('copyAllMsg').textContent='Liste temizlendi. Cümlelerin düzeltme gelene kadar bekler.';
+});
+$('impBtn').addEventListener('click',async()=>{
+  const t=$('impText').value.trim();if(!t||!db)return;
+  $('impBtn').disabled=true;$('impMsg').textContent='Aktarılıyor…';
+  try{
+    const n=await FB.importJSON(t);const parts=[];
+    if(S.lastVideo)parts.push(S.lastVideo.merged?`Videoya yeni parça eklendi: ${S.lastVideo.title} (+${S.lastVideo.added} cümle).`:`Video eklendi: ${S.lastVideo.title}.`);
+    if(S.lastCorr)parts.push(`${S.lastCorr} cümle düzeltmesi geldi (Çalış → Bugünün cümleleri).`);
+    if(n)parts.push(n+' kart eklendi/güncellendi.');
+    $('impMsg').textContent=parts.join(' ')||'Kodda eklenecek bir şey bulunamadı.';$('impText').value='';
+  }catch(e){$('impMsg').textContent=e.message||('Hata: '+e.code)}
+  $('impBtn').disabled=false;
+});
+$('fbKinds').addEventListener('click',e=>{const b=e.target.closest('[data-fbk]');if(b){fbKind=b.dataset.fbk;renderClaude()}});
 $('fbList').addEventListener('click',e=>{const b=e.target.closest('[data-fbdel]');if(b&&db){b.disabled=true;db.doc('feedback/'+b.dataset.fbdel).delete().catch(()=>{b.disabled=false})}});
 $('fbCopy').addEventListener('click',()=>{
   const L=[`Kelime Kutusu uygulama notları (sürüm ${APP_VERSION}, ${S.feedback.length} not):`];
@@ -614,38 +820,45 @@ $('fbClear').addEventListener('click',async()=>{
   for(const f of S.feedback.slice()){try{await db.doc('feedback/'+f.id).delete()}catch(x){}}
   b.disabled=false;b.textContent="Claude'a gönderdim, notları temizle";$('fbMsg').textContent='Notlar temizlendi.';
 });
-$('srcChips').addEventListener('click',e=>{const b=e.target.closest('[data-src]');if(b){src=b.dataset.src;renderAdd()}});
-$('ilist').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(b&&db){b.disabled=true;db.doc('inbox/'+b.dataset.del).delete().catch(()=>{b.disabled=false;status('Silinemedi, tekrar dene.')})}});
-document.querySelectorAll('[data-home]').forEach(b=>b.addEventListener('click',()=>show('home')));
-$('q').addEventListener('input',renderList);
-$('copyBtn').addEventListener('click',()=>{
-  const a=$('copyArea');a.value=lastSum;
-  const fail=()=>{a.hidden=false;a.select();$('copyMsg').textContent='Metni seçip kopyala.'};
-  try{navigator.clipboard.writeText(lastSum).then(()=>{$('copyMsg').textContent='Kopyalandı. Sohbete yapıştırabilirsin.'},fail)}catch(x){fail()}
+$('setPer').addEventListener('change',()=>{const n=+$('setPer').value;if(!db||n===perDay())return;S.settings={...S.settings,newPerDay:n};save('meta/settings',{...S.settings})});
+$('setGoal').addEventListener('change',()=>{const n=+$('setGoal').value;if(!db)return;S.settings={...S.settings,sentGoal:n};save('meta/settings',{...S.settings})});
+$('setMode').addEventListener('change',()=>{mode=$('setMode').value;try{localStorage.setItem('kk-mode',mode)}catch(x){}});
+$('setTheme').addEventListener('change',()=>{const t=$('setTheme').value;try{if(t==='auto')localStorage.removeItem('kk-theme');else localStorage.setItem('kk-theme',t)}catch(x){}applyTheme(t==='auto'?null:t)});
+$('backupBtn').addEventListener('click',()=>{
+  const data={app:'kelime-kutusu',v:APP_VERSION,date:new Date().toISOString(),cards:S.cards,progress:S.prog,sessions:S.sessions,inbox:S.inbox,feedback:S.feedback,videos:S.videos,sentences:S.sent,settings:S.settings,note:S.note,packsDone:S.packsDone};
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data)],{type:'application/json'}));a.download='kelime-kutusu-yedek-'+dstr()+'.json';
+  document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},2000);
+  $('setMsg').textContent=`Yedek indirildi: ${S.cards.length} kelime, ${Object.keys(S.prog).length} ilerleme kaydı.`;
+});
+$('restoreFile').addEventListener('change',async e=>{
+  const f=e.target.files&&e.target.files[0];e.target.value='';if(!f||!db)return;
+  $('setMsg').textContent='Yedek okunuyor…';
+  try{const obj=JSON.parse(await f.text());if(obj.app!=='kelime-kutusu')throw new Error('Bu dosya bir Kelime Kutusu yedeği değil.');
+    const n=await FB.restore(obj);$('setMsg').textContent=`Yedek geri yüklendi (${n} kayıt).`;
+  }catch(x){$('setMsg').textContent='Geri yüklenemedi: '+(x.message||x.code||'hata')}
 });
 document.addEventListener('keydown',e=>{
-  if(view!=='study'||e.target.tagName==='INPUT')return;
+  if(view!=='study'||e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
   if((e.key===' '||e.key==='Enter')&&(cm==='flip'||cm==='rev'||cm==='listen')){e.preventDefault();reveal()}
   else if(['1','2','3','4'].includes(e.key))rate(+e.key-1);
   else if(e.key==='Escape')$('quit').click();
 });
 
-/* --- data --- */
+/* --- veri --- */
 function initDb(){
   let gotCards=false;
   const timer=setTimeout(()=>{if(!gotCards)status('Veriler henüz yüklenemedi. İnternet bağlantını kontrol et; sayfa açık kalırsa kendiliğinden yüklenir.')},10000);
   const onErr=e=>{clearTimeout(timer);status('Bağlantı kesildi ('+(e&&e.code||'hata')+'). Sayfayı kapatıp yeniden aç.')};
   db.collection('cards').onSnapshot(s=>{
     S.cards=s.docs.map(d=>({id:d.id,...d.data()})).filter(c=>c.en&&c.tr).sort((a,b)=>(a.n??1e9)-(b.n??1e9)||String(a.en).localeCompare(String(b.en)));
-    gotCards=true;S.ready=true;
-    clearTimeout(timer);status(S.cards.length?'':'Henüz kart yok. "Yeni kelimeler" ile kart ekle.');
-    render();
+    gotCards=true;S.ready=true;clearTimeout(timer);status(S.cards.length?'':'Henüz kart yok. Kelimeler sekmesinden paket ekle.');render();
   },onErr);
   db.collection('progress').onSnapshot(s=>{const o={};s.docs.forEach(d=>{o[d.id]=d.data()});S.prog=o;render()},onErr);
-  db.collection('sessions').orderBy('ts','desc').limit(60).onSnapshot(s=>{S.sessions=s.docs.map(d=>d.data());render()},onErr);
+  db.collection('sessions').orderBy('ts','desc').limit(400).onSnapshot(s=>{S.sessions=s.docs.map(d=>({id:d.id,...d.data()}));render()},onErr);
   db.collection('inbox').orderBy('ts','desc').onSnapshot(s=>{S.inbox=s.docs.map(d=>({id:d.id,...d.data()}));render()},onErr);
   db.collection('videos').orderBy('ts','desc').onSnapshot(s=>{S.videos=s.docs.map(d=>({id:d.id,...d.data()}));render()},onErr);
   db.collection('feedback').orderBy('ts','desc').onSnapshot(s=>{S.feedback=s.docs.map(d=>({id:d.id,...d.data()}));render()},onErr);
+  db.collection('sentences').orderBy('ts','desc').limit(300).onSnapshot(s=>{S.sent=s.docs.map(d=>({id:d.id,...d.data()}));if(view==='sent'||view==='home'||view==='claude')render();else render()},onErr);
   db.doc('meta/packs').onSnapshot(d=>{S.packsDone=d.exists?(d.data().ids||[]):[];render()},onErr);
   fetch('packs/index.json',{cache:'no-store'}).then(r=>r.json()).then(a=>{if(Array.isArray(a)){S.packs=a;render()}}).catch(()=>{});
   db.doc('meta/note').onSnapshot(d=>{S.note=d.exists?d.data():null;render()},onErr);
@@ -688,14 +901,15 @@ const FB=(()=>{
   }
   const FIELDS=['en','tr','ex','exTr','hl','note','deck','n','alt'];
   function parseLoose(txt){
-    let s=String(txt||'').replace(/^\uFEFF/,'').replace(/```(?:json)?/gi,'').trim();
+    let s=String(txt||'').replace(/^﻿/,'').replace(/```(?:json)?/gi,'').trim();
     const a=s.search(/[\[{]/),b=Math.max(s.lastIndexOf('}'),s.lastIndexOf(']'));
     if(a<0||b<a)throw new Error('Kodda JSON bulunamadı. Kod bloğunun tamamını kopyaladığından emin ol.');
     s=s.slice(a,b+1);
     try{return JSON.parse(s)}catch(e){}
-    const fixed=s.replace(/[\u201C\u201D]/g,'"').replace(/,\s*([}\]])/g,'$1');
-    try{return JSON.parse(fixed)}catch(e){throw new Error('Kod okunamadı: bir yerde virgül ya da tırnak hatası var. Gemini\'den "Give me valid JSON only" diyerek tekrar iste.')}
+    const fixed=s.replace(/[“”]/g,'"').replace(/,\s*([}\]])/g,'$1');
+    try{return JSON.parse(fixed)}catch(e){throw new Error('Kod okunamadı: bir yerde virgül ya da tırnak hatası var. "Give me valid JSON only" diyerek tekrar iste.')}
   }
+  const clean=o=>JSON.parse(JSON.stringify(o));
   async function importJSON(txt){
     const obj=parseLoose(txt);
     const list=(Array.isArray(obj)?obj:(obj.cards||[])).filter(c=>c&&c.en&&c.tr).slice(0,400);
@@ -705,11 +919,15 @@ const FB=(()=>{
       const d={};FIELDS.forEach(f=>{if(c[f]!==undefined&&c[f]!==null)d[f]=c[f]});
       b.set(doc(fs,P('cards/'+id)),d);n++;
     }
+    S.lastVideo=null;S.lastCorr=0;
     if(!Array.isArray(obj)){
       if(obj.note){const t=new Date();b.set(doc(fs,P('meta/note')),{text:String(obj.note),date:t.getDate()+' '+AYLAR[t.getMonth()]+' '+t.getFullYear()})}
       if(obj.clearInbox)S.inbox.forEach(i=>b.delete(doc(fs,P('inbox/'+i.id))));
       if(obj.deleteCards)obj.deleteCards.forEach(id=>b.delete(doc(fs,P('cards/'+id))));
-      S.lastVideo=null;
+      if(Array.isArray(obj.corrections))for(const c of obj.corrections.slice(0,200)){
+        if(!c||!c.id)continue;const id=String(c.id).replace(/[\/\[\]]/g,'').slice(0,60);
+        b.set(doc(fs,P('sentences/'+id)),{status:'corrected',ok:!!c.ok,corrected:String(c.corrected||''),explanation:String(c.explanation||'')},{merge:true});S.lastCorr++;
+      }
       if(obj.video&&obj.video.id&&Array.isArray(obj.video.lines)){
         const v=obj.video,vid=String(v.id).replace(/[^A-Za-z0-9_-]/g,'').slice(0,20);
         const toSec=t=>{if(typeof t==='number')return t;const m=String(t).trim().match(/^(?:(\d+):)?(\d+):(\d+(?:\.\d+)?)$/);return m?(+(m[1]||0))*3600+(+m[2])*60+(+m[3]):(+t||0)};
@@ -725,6 +943,17 @@ const FB=(()=>{
       }
     }
     await b.commit();return n;
+  }
+  async function restore(o){
+    const ops=[];const put=(path,data)=>ops.push([path,clean(data)]);
+    (o.cards||[]).forEach(c=>{const {id,...r}=c;if(id)put('cards/'+id,r)});
+    Object.entries(o.progress||{}).forEach(([k,v])=>put('progress/'+k,v));
+    (o.sessions||[]).forEach(s=>{const {id,...r}=s;put('sessions/'+(id||('s'+r.ts)),r)});
+    for(const [col,arr] of [['inbox',o.inbox],['feedback',o.feedback],['videos',o.videos],['sentences',o.sentences]])(arr||[]).forEach(x=>{const {id,...r}=x;if(id)put(col+'/'+id,r)});
+    if(o.settings)put('meta/settings',o.settings);if(o.note)put('meta/note',o.note);if(o.packsDone)put('meta/packs',{ids:o.packsDone});
+    put('meta/seeded',{ts:Date.now()});
+    for(let i=0;i<ops.length;i+=400){const b=writeBatch(fs);ops.slice(i,i+400).forEach(([p,d])=>b.set(doc(fs,P(p)),d));await b.commit()}
+    return ops.length;
   }
   function start(){
     $('loginBtn').addEventListener('click',()=>{
@@ -745,45 +974,9 @@ const FB=(()=>{
       if(!done)seed().then(ok=>{if(ok){try{localStorage.setItem(sk,'1')}catch(e){}}});
     });
   }
-  return {start,importJSON};
+  return {start,importJSON,restore};
 })();
-$('toSend').addEventListener('click',()=>{$('sendText').value=report();$('sendMsg').textContent='';show('send')});
-$('toImp').addEventListener('click',()=>{$('impMsg').textContent='';show('imp')});
-$('sendCopy').addEventListener('click',()=>{
-  const a=$('sendText');const ok=()=>{$('sendMsg').textContent='Kopyalandı! Şimdi Claude sohbetine yapıştır.'};
-  const fb=()=>{a.focus();a.select();try{document.execCommand('copy');ok()}catch(x){$('sendMsg').textContent='Metni seçip kopyala.'}};
-  try{navigator.clipboard.writeText(a.value).then(ok,fb)}catch(x){fb()}
-});
-$('packList').addEventListener('click',async e=>{
-  const b=e.target.closest('[data-pack]');if(!b||!db)return;
-  const p=S.packs.find(x=>x.id===b.dataset.pack);if(!p)return;
-  b.disabled=true;b.textContent='Ekleniyor…';
-  try{
-    const t=await (await fetch(p.file,{cache:'no-store'})).text();
-    const n=await FB.importJSON(t);
-    await db.doc('meta/packs').set({ids:[...new Set([...S.packsDone,p.id])]});
-    $('impMsg').textContent=`${p.title}: ${n} kelime eklendi.`;
-  }catch(x){b.disabled=false;b.textContent='Ekle';$('impMsg').textContent='Eklenemedi: '+(x.message||x.code||'hata')}
-});
-$('impBtn').addEventListener('click',async()=>{
-  const t=$('impText').value.trim();if(!t||!db)return;
-  $('impBtn').disabled=true;$('impMsg').textContent='Aktarılıyor…';
-  try{const n=await FB.importJSON(t);$('impMsg').textContent=(S.lastVideo?(S.lastVideo.merged?`Videoya yeni parça eklendi: ${S.lastVideo.title} (+${S.lastVideo.added} cümle). `:`Video eklendi: ${S.lastVideo.title}. Ana sayfa → Videolar. `):'')+n+' kart eklendi/güncellendi.';$('impText').value=''}
-  catch(e){$('impMsg').textContent=e.message||('Hata: '+e.code)}
-  $('impBtn').disabled=false;
-});
-function report(){
-  const c={n:0,l:0,k:0};S.cards.forEach(x=>c[stateOf(x)]++);
-  const L=['KELİME KUTUSU RAPORU · '+dstr(),`Toplam ${S.cards.length} kelime · yeni ${c.n} · öğreniliyor ${c.l} · oturdu ${c.k} · seri ${streak()} gün · günde ${perDay()} yeni`];
-  const rec=S.sessions.slice(0,7);
-  if(rec.length){L.push('','Son çalışmalar:');rec.forEach(s=>L.push(`- ${s.date}: ${s.cards} kart (${s.newCount} yeni, ${s.mode||'flip'}, ${s.minutes} dk) · bildim ${s.good}, kolay ${s.easy}, zor ${s.hard}, bilmedim ${s.again}`+((s.wrong||[]).length?` · zorlandıkların: ${s.wrong.join(', ')}`:'')))}
-  else L.push('','Henüz çalışma yok.');
-  const hard=S.cards.filter(x=>(S.prog[x.id]||{}).lapses>=2).map(x=>x.en);
-  if(hard.length)L.push('','En çok unuttukların: '+hard.join(', '));
-  if(S.inbox.length){L.push('','Claude\'a iletilecekler:');S.inbox.slice().reverse().forEach(i=>L.push(`- [${i.kind||'Kelime'}] ${i.text}${i.src?' ('+i.src+')':''}`))}
-  const decks=[...new Set(S.cards.map(x=>x.deck))];L.push('','Desteler: '+decks.join(', '),'Son kart sırası: '+Math.max(0,...S.cards.map(x=>+x.n||0)));
-  return L.join('\n');
-}
+
 /* --- video oynatıcı --- */
 let yt=null,ytReady=null,curVid=null,curLine=-1,stopEach=false,stopAt=null,tick=null,selWord='';
 const SPEEDS=[1,.75,.5];let spIdx=0;
@@ -847,21 +1040,17 @@ $('wadd').addEventListener('click',()=>{
   const ts=Date.now();$('wadd').disabled=true;
   db.collection('inbox').doc('i'+ts).set({text:`${selWord} — "${sentence}"`.slice(0,300),kind:'Kelime',src:'Video: '+(curVid.title||'').slice(0,40),ts}).then(()=>{$('wadd').textContent='Eklendi ✓'},()=>{$('wadd').disabled=false});
 });
-FB.start();
+
 /* --- tema --- */
-const MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>';
-const SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>';
 const curTheme=()=>document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
 function applyTheme(t){
   if(t)document.documentElement.dataset.theme=t;else delete document.documentElement.dataset.theme;
-  const dark=curTheme()==='dark';$('themeBtn').innerHTML=dark?SUN:MOON;$('themeBtn').setAttribute('aria-label',dark?'Açık temaya geç':'Koyu temaya geç');
   const m=document.querySelector('meta[name=theme-color]');if(m)m.content=getComputedStyle(document.body).backgroundColor;
 }
 {let saved=null;try{saved=localStorage.getItem('kk-theme')}catch(e){}applyTheme(saved)}
-$('themeBtn').addEventListener('click',()=>{const n=curTheme()==='dark'?'light':'dark';try{localStorage.setItem('kk-theme',n)}catch(e){}applyTheme(n)});
 matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>applyTheme(document.documentElement.dataset.theme||null));
+
 /* --- yeni sürüm bildirimi --- */
-const APP_VERSION='13';
 async function checkVersion(){
   try{const r=await fetch('version.json?t='+Date.now(),{cache:'no-store'});const v=await r.json();
     if(v&&v.v&&String(v.v)!==APP_VERSION){$('updTxt').textContent='Yeni sürüm hazır!'+(v.notes?' '+v.notes:'');$('upd').hidden=false}}catch(e){}
@@ -872,6 +1061,7 @@ $('updBtn').addEventListener('click',async()=>{
   try{const reg=await navigator.serviceWorker?.getRegistration();if(reg)await reg.update()}catch(e){}
   location.reload();
 });
+FB.start();
 checkVersion();setInterval(checkVersion,5*60e3);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkVersion()});
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
