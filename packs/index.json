@@ -1,5 +1,19 @@
 [
  {
+  "id": "rdr2-2",
+  "title": "Red Dead Redemption 2 #2",
+  "desc": "Oyundaki konuşmalarda sık geçen kalıplar: Howdy, posse, Hold your fire…",
+  "file": "packs/rdr2-2.json",
+  "count": 20
+ },
+ {
+  "id": "miles-2",
+  "title": "Spider-Man: Miles Morales #2",
+  "desc": "Miles, Ganke ve Harlem'in konuşma dili: I got this, dude, glitch…",
+  "file": "packs/miles-2.json",
+  "count": 20
+ },
+ {
   "id": "senin-2",
   "title": "Senin listen #2",
   "desc": "sat quietly, exhausted, gate, treat ve It's my treat!",

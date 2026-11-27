@@ -1,0 +1,209 @@
+{
+"cards": [
+{
+"id": "mm2-1",
+"n": 265,
+"deck": "Miles Morales",
+"en": "friendly neighborhood",
+"tr": "mahallenin dost canlısı (Spider-Man'in lakabı)",
+"ex": "Don't worry, ma'am. Your friendly neighborhood Spider-Man is here!",
+"exTr": "Merak etmeyin hanımefendi. Mahallenizin dost canlısı Örümcek Adam burada!"
+},
+{
+"id": "mm2-2",
+"n": 266,
+"deck": "Miles Morales",
+"en": "to move in",
+"tr": "(yeni eve) taşınmak",
+"ex": "We just moved in, so I don't know anyone in Harlem yet.",
+"exTr": "Daha yeni taşındık, Harlem'de henüz kimseyi tanımıyorum.",
+"hl": "moved in",
+"note": "move out = (evden) taşınıp çıkmak"
+},
+{
+"id": "mm2-3",
+"n": 267,
+"deck": "Miles Morales",
+"en": "request",
+"tr": "istek, rica",
+"ex": "I got another help request on the app.",
+"exTr": "Uygulamaya yeni bir yardım isteği geldi.",
+"note": "to request = rica etmek, talep etmek"
+},
+{
+"id": "mm2-4",
+"n": 268,
+"deck": "Miles Morales",
+"en": "to hack",
+"tr": "(bilgisayar) hacklemek, sızmak",
+"ex": "Give me a second. I can hack into their system.",
+"exTr": "Bir saniye ver. Sistemlerine sızabilirim.",
+"hl": "hack"
+},
+{
+"id": "mm2-5",
+"n": 269,
+"deck": "Miles Morales",
+"en": "to show off",
+"tr": "hava atmak, gösteriş yapmak",
+"ex": "Stop showing off and just catch the bad guys!",
+"exTr": "Hava atmayı bırak da kötü adamları yakala!",
+"hl": "showing off",
+"note": "show-off = hava atan kişi"
+},
+{
+"id": "mm2-6",
+"n": 270,
+"deck": "Miles Morales",
+"en": "dude",
+"tr": "kanka, dostum (gayriresmî)",
+"ex": "Dude, you have to see this!",
+"exTr": "Kanka, bunu görmen lazım!",
+"note": "Arkadaşlar arasında. Öğretmene söyleme 😄"
+},
+{
+"id": "mm2-7",
+"n": 271,
+"deck": "Miles Morales",
+"en": "Freeze!",
+"tr": "Kıpırdama! / Olduğun yerde kal!",
+"ex": "Police! Freeze! Put your hands up!",
+"exTr": "Polis! Kıpırdama! Ellerini kaldır!",
+"hl": "Freeze",
+"note": "freeze = donmak. It's freezing! = Hava buz gibi!"
+},
+{
+"id": "mm2-8",
+"n": 272,
+"deck": "Miles Morales",
+"en": "glitch",
+"tr": "(teknik) arıza, aksaklık, hata",
+"ex": "My powers keep glitching. I can't control them yet.",
+"exTr": "Güçlerim sürekli arıza yapıyor. Henüz kontrol edemiyorum.",
+"note": "Oyunlarda da çok kullanılır: a glitch in the game."
+},
+{
+"id": "mm2-9",
+"n": 273,
+"deck": "Miles Morales",
+"en": "to get the hang of",
+"tr": "alışmak, işin püf noktasını kapmak",
+"ex": "Web-swinging is hard, but you'll get the hang of it.",
+"exTr": "Ağla salınmak zor ama alışırsın.",
+"hl": "get the hang of"
+},
+{
+"id": "mm2-10",
+"n": 274,
+"deck": "Miles Morales",
+"en": "to keep it together",
+"tr": "kendini toparlamak, sakin kalmak",
+"ex": "Breathe, Miles. Keep it together.",
+"exTr": "Nefes al Miles. Sakin ol, kendini topla.",
+"hl": "keep it together"
+},
+{
+"id": "mm2-11",
+"n": 275,
+"deck": "Miles Morales",
+"en": "to be proud of",
+"tr": "…ile gurur duymak",
+"ex": "Your mom is so proud of you.",
+"exTr": "Annen seninle çok gurur duyuyor.",
+"hl": "proud of"
+},
+{
+"id": "mm2-12",
+"n": 276,
+"deck": "Miles Morales",
+"en": "to mess with",
+"tr": "bulaşmak, uğraşmak",
+"ex": "Nobody messes with Harlem!",
+"exTr": "Kimse Harlem'e bulaşamaz!",
+"hl": "messes with",
+"note": "Don't mess with me! = Benimle uğraşma!"
+},
+{
+"id": "mm2-13",
+"n": 277,
+"deck": "Miles Morales",
+"en": "to shut down",
+"tr": "kapatmak, durdurmak",
+"ex": "We have to shut down the reactor before it explodes.",
+"exTr": "Reaktör patlamadan önce onu kapatmalıyız.",
+"hl": "shut down"
+},
+{
+"id": "mm2-14",
+"n": 278,
+"deck": "Miles Morales",
+"en": "to look out for",
+"tr": "kollamak, göz kulak olmak",
+"ex": "In this neighborhood, we look out for each other.",
+"exTr": "Bu mahallede birbirimizi kollarız.",
+"hl": "look out for",
+"note": "Look out! = Dikkat et!"
+},
+{
+"id": "mm2-15",
+"n": 279,
+"deck": "Miles Morales",
+"en": "Wish me luck.",
+"tr": "Bana şans dile.",
+"ex": "Okay, here I go. Wish me luck.",
+"exTr": "Tamam, gidiyorum. Bana şans dile.",
+"hl": "Wish me luck"
+},
+{
+"id": "mm2-16",
+"n": 280,
+"deck": "Miles Morales",
+"en": "I got this!",
+"tr": "Ben hallederim! / Bende!",
+"ex": "Don't worry about me. I got this!",
+"exTr": "Beni merak etme. Ben hallederim!",
+"hl": "I got this",
+"note": "Doğrusu 'I've got this' ama konuşmada hep böyle söylenir."
+},
+{
+"id": "mm2-17",
+"n": 281,
+"deck": "Miles Morales",
+"en": "power plant",
+"tr": "enerji santrali",
+"ex": "The new power plant is supposed to give energy to the whole city.",
+"exTr": "Yeni santralin bütün şehre enerji vermesi gerekiyor."
+},
+{
+"id": "mm2-18",
+"n": 282,
+"deck": "Miles Morales",
+"en": "to hold back",
+"tr": "kendini tutmak, gücünü frenlemek",
+"ex": "Stop holding back. Show them what you can do!",
+"exTr": "Kendini tutmayı bırak. Neler yapabildiğini göster!",
+"hl": "holding back"
+},
+{
+"id": "mm2-19",
+"n": 283,
+"deck": "Miles Morales",
+"en": "to run late",
+"tr": "gecikmek, geç kalmak",
+"ex": "Sorry, I'm running late. Something came up.",
+"exTr": "Kusura bakma, geciktim. Bir şey çıktı.",
+"hl": "running late",
+"note": "Something came up = Bir iş çıktı (Spider-Man'in en sık bahanesi!)"
+},
+{
+"id": "mm2-20",
+"n": 284,
+"deck": "Miles Morales",
+"en": "snowstorm",
+"tr": "kar fırtınası",
+"ex": "The whole city stopped because of the snowstorm.",
+"exTr": "Kar fırtınası yüzünden bütün şehir durdu."
+}
+],
+"note": "Miles Morales paketi #2: I got this!, to get the hang of, Something came up… Spider-Man'in en sevdiği bahane!"
+}

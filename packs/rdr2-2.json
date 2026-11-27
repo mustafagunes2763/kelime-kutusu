@@ -1,0 +1,209 @@
+{
+"cards": [
+{
+"id": "r2-1",
+"n": 245,
+"deck": "RDR2",
+"en": "Howdy!",
+"tr": "Selam! / Merhaba! (western, kırsal)",
+"ex": "Howdy, mister. Nice horse you got there.",
+"exTr": "Selam bayım. Güzel bir atın var.",
+"hl": "Howdy",
+"note": "'How do you do?'nun kısaltması. Kasabalarda insanlar seni böyle selamlar."
+},
+{
+"id": "r2-2",
+"n": 246,
+"deck": "RDR2",
+"en": "posse",
+"tr": "silahlı takip ekibi",
+"ex": "A posse is coming after us. Ride, now!",
+"exTr": "Peşimizden silahlı bir ekip geliyor. Hemen sür!"
+},
+{
+"id": "r2-3",
+"n": 247,
+"deck": "RDR2",
+"en": "the law",
+"tr": "kanun; polis, şerifler (topluca)",
+"ex": "The law is everywhere in this town. We need to be careful.",
+"exTr": "Bu kasabada her yer kanun adamı dolu. Dikkatli olmalıyız.",
+"note": "'The law is after us' = Kanun peşimizde."
+},
+{
+"id": "r2-4",
+"n": 248,
+"deck": "RDR2",
+"en": "Let's ride!",
+"tr": "Hadi gidelim! (atla)",
+"ex": "Get on your horse, boys. Let's ride!",
+"exTr": "Atlarınıza binin çocuklar. Hadi gidelim!",
+"hl": "Let's ride",
+"note": "ride = ata binmek, atla gitmek"
+},
+{
+"id": "r2-5",
+"n": 249,
+"deck": "RDR2",
+"en": "saddle",
+"tr": "eyer",
+"ex": "Put the saddle on your horse before we leave.",
+"exTr": "Gitmeden önce atına eyeri tak.",
+"note": "saddle up = eyerlemek, yola hazırlanmak"
+},
+{
+"id": "r2-6",
+"n": 250,
+"deck": "RDR2",
+"en": "to get away with",
+"tr": "(yaptığının) yanına kâr kalmak",
+"ex": "You think you can rob us and get away with it?",
+"exTr": "Bizi soyup yanına kâr kalacağını mı sanıyorsun?",
+"hl": "get away with"
+},
+{
+"id": "r2-7",
+"n": 251,
+"deck": "RDR2",
+"en": "to take care of",
+"tr": "halletmek; ilgilenmek, bakmak",
+"ex": "Don't worry about the sheriff. I'll take care of him.",
+"exTr": "Şerifi dert etme. Ben hallederim.",
+"hl": "take care of",
+"note": "Take care! = Kendine iyi bak!"
+},
+{
+"id": "r2-8",
+"n": 252,
+"deck": "RDR2",
+"en": "civilized",
+"tr": "medeni, uygar",
+"ex": "They call it a civilized world, but it's full of thieves in nice suits.",
+"exTr": "Buna medeni dünya diyorlar ama şık takım elbiseli hırsızlarla dolu.",
+"note": "civilization = medeniyet"
+},
+{
+"id": "r2-9",
+"n": 253,
+"deck": "RDR2",
+"en": "to collect (a debt)",
+"tr": "(borç) tahsil etmek",
+"ex": "I'm here to collect the money you owe us.",
+"exTr": "Bize olan borcunu tahsil etmeye geldim.",
+"hl": "collect"
+},
+{
+"id": "r2-10",
+"n": 254,
+"deck": "RDR2",
+"en": "to make a living",
+"tr": "geçimini sağlamak",
+"ex": "It's hard to make a living out here without breaking the law.",
+"exTr": "Burada kanunu çiğnemeden geçimini sağlamak zor.",
+"hl": "make a living"
+},
+{
+"id": "r2-11",
+"n": 255,
+"deck": "RDR2",
+"en": "saloon",
+"tr": "salon, western barı",
+"ex": "Let's get a drink at the saloon before we head back.",
+"exTr": "Dönmeden önce barda bir şey içelim."
+},
+{
+"id": "r2-12",
+"n": 256,
+"deck": "RDR2",
+"en": "to settle down",
+"tr": "yerleşmek, durulup düzen kurmak",
+"ex": "One day I want to buy some land and settle down.",
+"exTr": "Bir gün biraz arazi alıp yerleşmek istiyorum.",
+"hl": "settle down"
+},
+{
+"id": "r2-13",
+"n": 257,
+"deck": "RDR2",
+"en": "honest work",
+"tr": "namuslu iş, dürüst kazanç",
+"ex": "Maybe it's time we tried some honest work.",
+"exTr": "Belki de artık namuslu bir iş denemenin zamanı gelmiştir."
+},
+{
+"id": "r2-14",
+"n": 258,
+"deck": "RDR2",
+"en": "Hold your fire!",
+"tr": "Ateşi kesin! / Ateş etmeyin!",
+"ex": "Hold your fire! There are people in that wagon!",
+"exTr": "Ateş etmeyin! O arabada insanlar var!",
+"hl": "Hold your fire",
+"note": "wagon = at arabası, yük arabası"
+},
+{
+"id": "r2-15",
+"n": 259,
+"deck": "RDR2",
+"en": "Stay close.",
+"tr": "Yakınımda kal.",
+"ex": "It's dark out here. Stay close.",
+"exTr": "Burası karanlık. Yakınımda kal.",
+"hl": "Stay close"
+},
+{
+"id": "r2-16",
+"n": 260,
+"deck": "RDR2",
+"en": "Keep your head down.",
+"tr": "Dikkat çekme. / Başını eğik tut.",
+"ex": "Keep your head down in town. Everybody's looking for us.",
+"exTr": "Kasabada dikkat çekme. Herkes bizi arıyor.",
+"hl": "Keep your head down",
+"note": "Silahlı çatışmada gerçek anlamda: eğil, siper al."
+},
+{
+"id": "r2-17",
+"n": 261,
+"deck": "RDR2",
+"en": "Have a little faith.",
+"tr": "Biraz güven. / İnan bana.",
+"ex": "Have a little faith, son. I have a plan.",
+"exTr": "Biraz güven evlat. Bir planım var.",
+"hl": "Have a little faith",
+"note": "faith = inanç, güven"
+},
+{
+"id": "r2-18",
+"n": 262,
+"deck": "RDR2",
+"en": "to spook",
+"tr": "ürkütmek, korkutmak",
+"ex": "Stop shooting! You spooked my horse!",
+"exTr": "Ateş etmeyi kes! Atımı ürküttün!",
+"hl": "spooked",
+"note": "spooky = ürkütücü"
+},
+{
+"id": "r2-19",
+"n": 263,
+"deck": "RDR2",
+"en": "stranger",
+"tr": "yabancı",
+"ex": "A stranger in town asked me for help.",
+"exTr": "Kasabadaki bir yabancı benden yardım istedi.",
+"note": "Haritadaki '?' işaretleri: Stranger görevleri."
+},
+{
+"id": "r2-20",
+"n": 264,
+"deck": "RDR2",
+"en": "folks",
+"tr": "insanlar, ahali, millet",
+"ex": "Folks around here don't like outlaws.",
+"exTr": "Buralardaki insanlar kanun kaçaklarını sevmez.",
+"note": "my folks = ailem, annemle babam"
+}
+],
+"note": "RDR2 paketi #2: Howdy!, posse, Hold your fire!, Have a little faith… Oyunda karakterlerden bu kalıpları çok duyacaksın."
+}
