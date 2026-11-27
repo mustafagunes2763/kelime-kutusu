@@ -1,0 +1,58 @@
+{
+"cards": [
+{
+"id": "m4",
+"n": 240,
+"deck": "Senin listen",
+"en": "to sit quietly",
+"tr": "sessizce oturmak",
+"ex": "He sat quietly in his cell all day.",
+"exTr": "Bütün gün hücresinde sessizce oturdu.",
+"note": "sit – sat – sat (düzensiz fiil). quiet = sessiz (sıfat) → quietly = sessizce (zarf).",
+"hl": "sat quietly"
+},
+{
+"id": "m5",
+"n": 241,
+"deck": "Senin listen",
+"en": "exhausted",
+"tr": "bitkin, çok yorgun",
+"ex": "After swimming for two hours, I was exhausted.",
+"exTr": "İki saat yüzdükten sonra bitkindim.",
+"note": "'very tired'dan daha güçlü. exhausting = yorucu: The training was exhausting."
+},
+{
+"id": "m6",
+"n": 242,
+"deck": "Senin listen",
+"en": "gate",
+"tr": "(dış) kapı; havalimanında biniş kapısı",
+"ex": "Our flight leaves from gate 12.",
+"exTr": "Uçağımız 12 numaralı kapıdan kalkıyor.",
+"note": "door = bina ya da oda kapısı. gate = bahçe kapısı, dış kapı, havalimanı kapısı."
+},
+{
+"id": "m7",
+"n": 243,
+"deck": "Senin listen",
+"en": "to treat",
+"tr": "davranmak; tedavi etmek",
+"ex": "The guards tried to treat the prisoners with respect.",
+"exTr": "Gardiyanlar mahkumlara saygıyla davranmaya çalıştı.",
+"note": "Diğer anlamı: tedavi etmek → treatment = tedavi. 'treat someone badly' = birine kötü davranmak.",
+"hl": "treat"
+},
+{
+"id": "m8",
+"n": 244,
+"deck": "Senin listen",
+"en": "It's my treat!",
+"tr": "Benden! (ben ısmarlıyorum)",
+"ex": "Put your wallet away, it's my treat!",
+"exTr": "Cüzdanını kaldır, benden!",
+"note": "treat'in üçüncü anlamı: ikram, ısmarlama. Trick or treat! = Şaka mı şeker mi!",
+"hl": "my treat"
+}
+],
+"note": "Senin listen #2 eklendi: sat quietly, exhausted, gate, treat. 'treat'in 3 anlamına dikkat!"
+}

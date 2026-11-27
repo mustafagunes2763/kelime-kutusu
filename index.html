@@ -172,6 +172,7 @@ input[type=search]{width:100%;font-size:16px;padding:12px 14px;border-radius:8px
       <span class="stk-go" id="goLabel">Başla →</span>
     </span>
   </button>
+  <button class="ghost" id="practiceBtn" style="width:100%;margin:-8px 0 18px;font-weight:600">Gördüğüm tüm kelimeleri tekrar et <small id="seenCount" style="color:var(--muted);font-weight:400"></small></button>
   <p class="lbl">Çalışma modu</p><div class="chips" id="modes" role="group" aria-label="Çalışma modu"></div>
   <p class="lbl">Deste</p><div class="chips" id="decks" role="group" aria-label="Deste seç"></div>
   <p class="lbl">Günde yeni kelime</p><div class="chips" id="perday" role="group" aria-label="Günde yeni kelime"></div>
@@ -412,6 +413,7 @@ function render(){
 }
 function renderHome(){
   const due=dueCards().length,nw=newCards().length;
+  const seenN=S.cards.filter(c=>inDeck(c)&&S.prog[c.id]).length;$('seenCount').textContent=`(${seenN})`;$('practiceBtn').hidden=!seenN;
   $('nDue').textContent=due;$('nNew').textContent=nw;
   const go=$('goLabel');
   if(!S.ready){go.textContent='Yükleniyor…';go.className='stk-go off'}
@@ -475,10 +477,17 @@ function start(){
   sess={start:Date.now(),ans:[0,0,0,0],seen:new Set(),wrong:new Set(),newCount:0,done:0};
   show('study');next();
 }
+function startPractice(){
+  if(!S.ready||!db)return;
+  const list=S.cards.filter(c=>inDeck(c)&&S.prog[c.id]);if(!list.length)return;
+  for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]]}
+  Q=list;sess={start:Date.now(),ans:[0,0,0,0],seen:new Set(),wrong:new Set(),newCount:0,done:0,practice:true};
+  show('study');next();
+}
 function next(){
   if(!Q.length){finish();return}
   cur=Q[0];cm=pickMode(cur);
-  $('cDeck').textContent=cur.deck||'';$('cNew').hidden=!!S.prog[cur.id];$('cMode').textContent=MODE_LBL[cm];
+  $('cDeck').textContent=cur.deck||'';$('cNew').hidden=!!S.prog[cur.id];$('cMode').textContent=(sess.practice?'serbest · ':'')+MODE_LBL[cm];
   $('front').innerHTML=frontHTML(cur,cm);$('back').innerHTML='';$('back').hidden=true;
   $('rate').hidden=true;$('rate').querySelectorAll('button').forEach(b=>b.classList.remove('sug'));
   $('showBtn').hidden=cm==='type'||cm==='cloze';
@@ -492,7 +501,7 @@ function reveal(res){
   $('back').innerHTML=backHTML(cur,cm,res);$('back').hidden=false;$('showBtn').hidden=true;$('rate').hidden=false;
   const f=$('ansForm');if(f)f.querySelectorAll('input,button').forEach(x=>{x.disabled=true});
   const sk=$('skipBtn');if(sk)sk.hidden=true;
-  for(const b of $('rate').querySelectorAll('button')){const r=+b.dataset.r;b.querySelector('small').textContent=fmtIvl(schedule(S.prog[cur.id],r).ivl);b.classList.toggle('sug',!!res&&res.r===r)}
+  for(const b of $('rate').querySelectorAll('button')){const r=+b.dataset.r;b.querySelector('small').textContent=sess&&sess.practice?(r===0?'tekrara ekle':'aynı kalır'):fmtIvl(schedule(S.prog[cur.id],r).ivl);b.classList.toggle('sug',!!res&&res.r===r)}
 }
 function save(path,data){
   const p=(chains[path]||Promise.resolve()).then(()=>db.doc(path).set(data)).catch(e=>{status('Kaydedilemedi ('+(e&&e.code||'hata')+'). Bağlantını kontrol et.')});
@@ -500,9 +509,12 @@ function save(path,data){
 }
 function rate(r){
   if(!cur||$('back').hidden)return;
-  const prev=S.prog[cur.id];const p=schedule(prev,r);
-  p.seen=prev&&prev.seen?prev.seen:dstr();if(!prev)sess.newCount++;
-  S.prog={...S.prog,[cur.id]:p};save('progress/'+cur.id,p);
+  const prev=S.prog[cur.id];
+  if(!sess.practice||r===0){
+    const p=schedule(prev,r);
+    p.seen=prev&&prev.seen?prev.seen:dstr();if(!prev)sess.newCount++;
+    S.prog={...S.prog,[cur.id]:p};save('progress/'+cur.id,p);
+  }
   sess.ans[r]++;sess.seen.add(cur.en);
   Q.shift();
   if(r===0){sess.wrong.add(cur.en);Q.splice(Math.min(3,Q.length),0,cur)}else sess.done++;
@@ -510,11 +522,11 @@ function rate(r){
 }
 function record(){
   if(!sess||!sess.seen.size)return null;
-  const s={date:dstr(),ts:Date.now(),mode,cards:sess.seen.size,newCount:sess.newCount,again:sess.ans[0],hard:sess.ans[1],good:sess.ans[2],easy:sess.ans[3],wrong:[...sess.wrong],minutes:Math.max(1,Math.round((Date.now()-sess.start)/6e4))};
+  const s={date:dstr(),ts:Date.now(),mode,practice:!!sess.practice,cards:sess.seen.size,newCount:sess.newCount,again:sess.ans[0],hard:sess.ans[1],good:sess.ans[2],easy:sess.ans[3],wrong:[...sess.wrong],minutes:Math.max(1,Math.round((Date.now()-sess.start)/6e4))};
   save('sessions/s'+s.ts,s);return s;
 }
 function summary(s){
-  return `Kelime Kutusu, ${s.date} (${s.mode} modu): ${s.cards} kart çalıştım (${s.newCount} yeni), ${s.minutes} dk.\nBildim: ${s.good}, Çok kolay: ${s.easy}, Zor: ${s.hard}, Bilmedim: ${s.again}.`+(s.wrong.length?`\nZorlandıklarım: ${s.wrong.join(', ')}`:'');
+  return `Kelime Kutusu, ${s.date} (${s.mode} modu${s.practice?', serbest tekrar':''}): ${s.cards} kart çalıştım (${s.newCount} yeni), ${s.minutes} dk.\nBildim: ${s.good}, Çok kolay: ${s.easy}, Zor: ${s.hard}, Bilmedim: ${s.again}.`+(s.wrong.length?`\nZorlandıklarım: ${s.wrong.join(', ')}`:'');
 }
 function finish(){
   const s=record();sess=null;cur=null;
@@ -535,6 +547,7 @@ function speak(text){
 
 /* --- events --- */
 $('stack').addEventListener('click',start);
+$('practiceBtn').addEventListener('click',startPractice);
 $('modes').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(b&&!b.disabled){mode=b.dataset.mode;try{localStorage.setItem('kk-mode',mode)}catch(x){}render()}});
 $('decks').addEventListener('click',e=>{const b=e.target.closest('[data-deck]');if(b){S.deck=b.dataset.deck;render()}});
 $('perday').addEventListener('click',e=>{const b=e.target.closest('[data-per]');if(!b||!db)return;const n=+b.dataset.per;if(n===perDay())return;S.settings={...S.settings,newPerDay:n};save('meta/settings',{...S.settings});render()});
@@ -659,8 +672,8 @@ const FB=(()=>{
   const api={collection:p=>Q(p),doc:p=>D(p)};
   async function seed(){
     let seeded;
-    try{seeded=(await getDocFromServer(doc(fs,P('meta/seeded')))).exists()}catch(e){return}
-    if(seeded)return;
+    try{seeded=(await getDocFromServer(doc(fs,P('meta/seeded')))).exists()}catch(e){return false}
+    if(seeded)return true;
     try{
       const r=await fetch('seed.json',{cache:'no-store'});const s=await r.json();
       const b=writeBatch(fs);
@@ -670,8 +683,8 @@ const FB=(()=>{
       if(s.settings)b.set(doc(fs,P('meta/settings')),s.settings);
       if(s.note)b.set(doc(fs,P('meta/note')),s.note);
       b.set(doc(fs,P('meta/seeded')),{ts:Date.now()});
-      await b.commit();
-    }catch(e){status('Başlangıç kelimeleri yüklenemedi ('+(e&&e.code||e.message||'hata')+').')}
+      await b.commit();return true;
+    }catch(e){status('Başlangıç kelimeleri yüklenemedi ('+(e&&e.code||e.message||'hata')+').');return false}
   }
   const FIELDS=['en','tr','ex','exTr','hl','note','deck','n','alt'];
   function parseLoose(txt){
@@ -727,7 +740,9 @@ const FB=(()=>{
       if(db)return;
       base='users/'+u.uid+'/';$('acct').textContent=u.email||'';
       status('Yükleniyor…');show('home');
-      await seed();db=api;initDb();
+      db=api;initDb();
+      const sk='kk-seeded-'+u.uid;let done=false;try{done=localStorage.getItem(sk)==='1'}catch(e){}
+      if(!done)seed().then(ok=>{if(ok){try{localStorage.setItem(sk,'1')}catch(e){}}});
     });
   }
   return {start,importJSON};
@@ -846,13 +861,14 @@ function applyTheme(t){
 $('themeBtn').addEventListener('click',()=>{const n=curTheme()==='dark'?'light':'dark';try{localStorage.setItem('kk-theme',n)}catch(e){}applyTheme(n)});
 matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>applyTheme(document.documentElement.dataset.theme||null));
 /* --- yeni sürüm bildirimi --- */
-const APP_VERSION='12';
+const APP_VERSION='13';
 async function checkVersion(){
   try{const r=await fetch('version.json?t='+Date.now(),{cache:'no-store'});const v=await r.json();
     if(v&&v.v&&String(v.v)!==APP_VERSION){$('updTxt').textContent='Yeni sürüm hazır!'+(v.notes?' '+v.notes:'');$('upd').hidden=false}}catch(e){}
 }
 $('updBtn').addEventListener('click',async()=>{
   $('updBtn').textContent='Yenileniyor…';
+  try{if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}}catch(e){}
   try{const reg=await navigator.serviceWorker?.getRegistration();if(reg)await reg.update()}catch(e){}
   location.reload();
 });
