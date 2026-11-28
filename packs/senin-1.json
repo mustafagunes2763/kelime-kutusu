@@ -9,7 +9,8 @@
 "ex": "You nailed it! Your answer was perfect.",
 "exTr": "Tam isabet! Cevabın mükemmeldi.",
 "hl": "nailed it",
-"note": "nail = çivi. Çiviyi tam kafasından vurmak gibi düşün. Çok sık: Nailed it!"
+"note": "nail = çivi. Çiviyi tam kafasından vurmak gibi düşün. Çok sık: Nailed it!",
+"pos": "fiil"
 },
 {
 "id": "m2",
@@ -20,7 +21,8 @@
 "ex": "You crushed it in the game last night!",
 "exTr": "Dün akşamki maçta döktürdün!",
 "hl": "crushed it",
-"note": "Gençler arasında çok yaygın."
+"note": "Gençler arasında çok yaygın.",
+"pos": "fiil"
 },
 {
 "id": "m3",
@@ -31,7 +33,8 @@
 "ex": "\"Is it about 20 minutes from here?\" \"Spot on!\"",
 "exTr": "\"Buradan yaklaşık 20 dakika mı?\" \"Aynen öyle!\"",
 "hl": "Spot on",
-"note": "Daha çok İngiliz İngilizcesinde."
+"note": "Daha çok İngiliz İngilizcesinde.",
+"pos": "kalıp"
 }
 ],
 "note": "'Senin listen' destesi: senin gönderdiğin kelimeler burada toplanacak. İlki: You nailed it!"

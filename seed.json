@@ -7,7 +7,8 @@
 "en": "creepy",
 "tr": "ürkütücü, tüyler ürpertici",
 "ex": "The old house at the end of the street looks really creepy at night.",
-"exTr": "Sokağın sonundaki eski ev geceleri gerçekten ürkütücü görünüyor."
+"exTr": "Sokağın sonundaki eski ev geceleri gerçekten ürkütücü görünüyor.",
+"pos": "sıfat"
 },
 {
 "id": "i1",
@@ -16,7 +17,8 @@
 "en": "opponent",
 "tr": "rakip",
 "ex": "His opponent was taller and much stronger.",
-"exTr": "Rakibi daha uzun ve çok daha güçlüydü."
+"exTr": "Rakibi daha uzun ve çok daha güçlüydü.",
+"pos": "isim"
 },
 {
 "id": "g1",
@@ -26,7 +28,8 @@
 "tr": "görev (oyunda)",
 "ex": "I finished the main quest, but there are still many side quests.",
 "exTr": "Ana görevi bitirdim ama hâlâ birçok yan görev var.",
-"note": "side quest = yan görev"
+"note": "side quest = yan görev",
+"pos": "isim"
 },
 {
 "id": "d1",
@@ -36,7 +39,8 @@
 "tr": "aslında",
 "ex": "I thought the film would be boring, but it was actually great.",
 "exTr": "Filmin sıkıcı olacağını düşünmüştüm ama aslında harikaydı.",
-"note": "Tuzak: 'actually' = aslında. 'Şu anda' demek istiyorsan: currently / right now."
+"note": "Tuzak: 'actually' = aslında. 'Şu anda' demek istiyorsan: currently / right now.",
+"pos": "zarf"
 },
 {
 "id": "k2",
@@ -46,7 +50,8 @@
 "tr": "dik dik bakmak",
 "ex": "The dog stared at me without moving.",
 "exTr": "Köpek kıpırdamadan bana dik dik baktı.",
-"hl": "stared"
+"hl": "stared",
+"pos": "fiil"
 },
 {
 "id": "i2",
@@ -56,7 +61,8 @@
 "tr": "pes etmek, vazgeçmek",
 "ex": "No matter how many times he fell, he didn't give up.",
 "exTr": "Kaç kez düşerse düşsün pes etmedi.",
-"hl": "give up"
+"hl": "give up",
+"pos": "phrasal verb"
 },
 {
 "id": "g2",
@@ -66,7 +72,8 @@
 "tr": "kilidini açmak",
 "ex": "You unlock a new weapon when you reach level ten.",
 "exTr": "Onuncu seviyeye ulaşınca yeni bir silahın kilidini açarsın.",
-"hl": "unlock"
+"hl": "unlock",
+"pos": "fiil"
 },
 {
 "id": "d2",
@@ -77,7 +84,8 @@
 "ex": "Could I have the bill, please?",
 "exTr": "Hesabı alabilir miyim, lütfen?",
 "hl": "Could I have",
-"note": "Restoranda ve kafede 'Give me…' yerine bunu kullan; çok daha kibar."
+"note": "Restoranda ve kafede 'Give me…' yerine bunu kullan; çok daha kibar.",
+"pos": "kalıp"
 },
 {
 "id": "k3",
@@ -86,7 +94,8 @@
 "en": "scared to death",
 "tr": "ödü kopmak, çok korkmak",
 "ex": "I was scared to death when the lights suddenly went out.",
-"exTr": "Işıklar aniden sönünce ödüm koptu."
+"exTr": "Işıklar aniden sönünce ödüm koptu.",
+"pos": "kalıp"
 },
 {
 "id": "i3",
@@ -95,7 +104,8 @@
 "en": "stamina",
 "tr": "dayanıklılık, kondisyon",
 "ex": "Swimming every day really improves your stamina.",
-"exTr": "Her gün yüzmek kondisyonunu gerçekten geliştirir."
+"exTr": "Her gün yüzmek kondisyonunu gerçekten geliştirir.",
+"pos": "isim"
 },
 {
 "id": "g3",
@@ -105,7 +115,8 @@
 "tr": "envanter, eşya çantası",
 "ex": "My inventory is full, so I can't pick up anything else.",
 "exTr": "Envanterim dolu, o yüzden başka bir şey alamıyorum.",
-"note": "pick up = yerden almak"
+"note": "pick up = yerden almak",
+"pos": "isim"
 },
 {
 "id": "d3",
@@ -115,7 +126,8 @@
 "tr": "çözmek, anlamak, kafasında çözmek",
 "ex": "I can't figure out how to solve this puzzle.",
 "exTr": "Bu bulmacayı nasıl çözeceğimi bir türlü anlayamıyorum.",
-"hl": "figure out"
+"hl": "figure out",
+"pos": "phrasal verb"
 },
 {
 "id": "k4",
@@ -125,7 +137,8 @@
 "tr": "suçlu",
 "ex": "The jury decided he was guilty, but he wasn't.",
 "exTr": "Jüri onun suçlu olduğuna karar verdi ama değildi.",
-"note": "feel guilty = suçluluk duymak"
+"note": "feel guilty = suçluluk duymak",
+"pos": "sıfat"
 },
 {
 "id": "i4",
@@ -136,7 +149,8 @@
 "ex": "He knocked down his opponent in the second round.",
 "exTr": "İkinci rauntta rakibini yere serdi.",
 "hl": "knocked down",
-"note": "knockout (KO) = maçı bitiren nakavt"
+"note": "knockout (KO) = maçı bitiren nakavt",
+"pos": "phrasal verb"
 },
 {
 "id": "g4",
@@ -146,7 +160,8 @@
 "tr": "gizlice ilerlemek, sızmak",
 "ex": "You have to sneak past the guards without being seen.",
 "exTr": "Görülmeden muhafızların yanından gizlice geçmen gerekiyor.",
-"hl": "sneak"
+"hl": "sneak",
+"pos": "fiil"
 },
 {
 "id": "d4",
@@ -157,7 +172,8 @@
 "ex": "I'm really looking forward to the weekend.",
 "exTr": "Hafta sonunu dört gözle bekliyorum.",
 "hl": "looking forward to",
-"note": "'to'dan sonra fiil gelirse -ing alır: I'm looking forward to seeing you."
+"note": "'to'dan sonra fiil gelirse -ing alır: I'm looking forward to seeing you.",
+"pos": "phrasal verb"
 },
 {
 "id": "k5",
@@ -166,7 +182,8 @@
 "en": "innocent",
 "tr": "masum, suçsuz",
 "ex": "He spent years in prison, even though he was innocent.",
-"exTr": "Masum olmasına rağmen yıllarını hapiste geçirdi."
+"exTr": "Masum olmasına rağmen yıllarını hapiste geçirdi.",
+"pos": "sıfat"
 },
 {
 "id": "i5",
@@ -175,7 +192,8 @@
 "en": "determined",
 "tr": "kararlı, azimli",
 "ex": "She was determined to win the race.",
-"exTr": "Yarışı kazanmaya kararlıydı."
+"exTr": "Yarışı kazanmaya kararlıydı.",
+"pos": "sıfat"
 },
 {
 "id": "g5",
@@ -185,7 +203,8 @@
 "tr": "zorluk (seviyesi)",
 "ex": "I always play on the hardest difficulty.",
 "exTr": "Her zaman en zor seviyede oynarım.",
-"note": "difficult = zor (sıfat), difficulty = zorluk (isim)"
+"note": "difficult = zor (sıfat), difficulty = zorluk (isim)",
+"pos": "isim"
 },
 {
 "id": "d5",
@@ -195,7 +214,8 @@
 "tr": "sonunda, en sonunda",
 "ex": "It took hours, but eventually we found the hotel.",
 "exTr": "Saatler sürdü ama sonunda oteli bulduk.",
-"note": "'Muhtemelen' anlamına gelmez; anlamı 'bir süre sonra, en sonunda'."
+"note": "'Muhtemelen' anlamına gelmez; anlamı 'bir süre sonra, en sonunda'.",
+"pos": "zarf"
 },
 {
 "id": "k6",
@@ -206,7 +226,8 @@
 "ex": "They buried the cat behind the house.",
 "exTr": "Kediyi evin arkasına gömdüler.",
 "hl": "buried",
-"note": "Telaffuz: 'beri' gibi okunur."
+"note": "Telaffuz: 'beri' gibi okunur.",
+"pos": "fiil"
 },
 {
 "id": "i6",
@@ -216,7 +237,8 @@
 "tr": "(darbeden) sıyrılmak, kaçmak",
 "ex": "He dodged the punch at the last second.",
 "exTr": "Yumruktan son saniyede sıyrıldı.",
-"hl": "dodged"
+"hl": "dodged",
+"pos": "fiil"
 },
 {
 "id": "g6",
@@ -227,7 +249,8 @@
 "ex": "If you die, you respawn at the last checkpoint.",
 "exTr": "Ölürsen son kayıt noktasında yeniden doğarsın.",
 "hl": "respawn",
-"note": "checkpoint = kayıt noktası"
+"note": "checkpoint = kayıt noktası",
+"pos": "fiil"
 },
 {
 "id": "d6",
@@ -238,7 +261,8 @@
 "ex": "Excuse me, is the train station far from here?",
 "exTr": "Affedersiniz, tren istasyonu buradan uzak mı?",
 "hl": "far from here",
-"note": "Cevapta sık duyacağın: It's within walking distance. = Yürüme mesafesinde."
+"note": "Cevapta sık duyacağın: It's within walking distance. = Yürüme mesafesinde.",
+"pos": "kalıp"
 },
 {
 "id": "k7",
@@ -248,7 +272,8 @@
 "tr": "mezar",
 "ex": "There were fresh flowers on every grave in the cemetery.",
 "exTr": "Mezarlıktaki her mezarda taze çiçekler vardı.",
-"note": "cemetery = mezarlık"
+"note": "cemetery = mezarlık",
+"pos": "isim"
 },
 {
 "id": "i7",
@@ -259,7 +284,8 @@
 "ex": "I was exhausted, but I kept going until the end.",
 "exTr": "Bitkindim ama sonuna kadar devam ettim.",
 "hl": "kept going",
-"note": "exhausted = bitkin, çok yorgun"
+"note": "exhausted = bitkin, çok yorgun",
+"pos": "kalıp"
 },
 {
 "id": "f1",
@@ -269,7 +295,8 @@
 "tr": "Neler oluyor?",
 "ex": "Why is everyone shouting? What's going on?",
 "exTr": "Neden herkes bağırıyor? Neler oluyor?",
-"hl": "What's going on"
+"hl": "What's going on",
+"pos": "kalıp"
 },
 {
 "id": "t1",
@@ -279,7 +306,8 @@
 "tr": "biniş kartı",
 "ex": "Please show your boarding pass at the gate.",
 "exTr": "Lütfen kapıda biniş kartınızı gösterin.",
-"note": "gate = (havalimanında) kapı"
+"note": "gate = (havalimanında) kapı",
+"pos": "isim"
 },
 {
 "id": "o1",
@@ -288,7 +316,8 @@
 "en": "deadline",
 "tr": "son teslim tarihi",
 "ex": "The deadline for the project is next Friday.",
-"exTr": "Projenin son teslim tarihi gelecek cuma."
+"exTr": "Projenin son teslim tarihi gelecek cuma.",
+"pos": "isim"
 },
 {
 "id": "y1",
@@ -297,7 +326,8 @@
 "en": "death row",
 "tr": "idam koğuşu",
 "ex": "The story takes place on death row in a prison in the 1930s.",
-"exTr": "Hikâye 1930'larda bir hapishanenin idam koğuşunda geçer."
+"exTr": "Hikâye 1930'larda bir hapishanenin idam koğuşunda geçer.",
+"pos": "isim"
 },
 {
 "id": "f2",
@@ -308,7 +338,8 @@
 "ex": "You won the tournament? No way!",
 "exTr": "Turnuvayı sen mi kazandın? Yok artık!",
 "hl": "No way",
-"note": "'Asla' anlamında da kullanılır: No way I'm going in there. = Oraya asla girmem."
+"note": "'Asla' anlamında da kullanılır: No way I'm going in there. = Oraya asla girmem.",
+"pos": "kalıp"
 },
 {
 "id": "t2",
@@ -318,7 +349,8 @@
 "tr": "(otele/uçağa) giriş yapmak",
 "ex": "We can check in at the hotel after 2 p.m.",
 "exTr": "Otele saat 14'ten sonra giriş yapabiliriz.",
-"hl": "check in"
+"hl": "check in",
+"pos": "phrasal verb"
 },
 {
 "id": "o2",
@@ -327,7 +359,8 @@
 "en": "assignment",
 "tr": "ödev, görev",
 "ex": "I still have two assignments to finish tonight.",
-"exTr": "Bu gece bitirmem gereken iki ödevim daha var."
+"exTr": "Bu gece bitirmem gereken iki ödevim daha var.",
+"pos": "isim"
 },
 {
 "id": "y2",
@@ -337,7 +370,8 @@
 "tr": "gardiyan, bekçi",
 "ex": "The guards tried to treat the prisoners with respect.",
 "exTr": "Gardiyanlar mahkumlara saygıyla davranmaya çalıştı.",
-"note": "Hapishanede: prison guard"
+"note": "Hapishanede: prison guard",
+"pos": "isim"
 },
 {
 "id": "f3",
@@ -347,7 +381,8 @@
 "tr": "Boş ver, önemli değil.",
 "ex": "\"Sorry, what did you say?\" \"Never mind, it's not important.\"",
 "exTr": "\"Pardon, ne dedin?\" \"Boş ver, önemli değil.\"",
-"hl": "Never mind"
+"hl": "Never mind",
+"pos": "kalıp"
 },
 {
 "id": "t3",
@@ -357,7 +392,8 @@
 "tr": "bagaj, valiz",
 "ex": "How much luggage can I take on the plane?",
 "exTr": "Uçağa ne kadar bagaj alabilirim?",
-"note": "Sayılamaz: 'a luggage' denmez. Tek valiz için: a suitcase."
+"note": "Sayılamaz: 'a luggage' denmez. Tek valiz için: a suitcase.",
+"pos": "isim"
 },
 {
 "id": "o3",
@@ -368,7 +404,8 @@
 "ex": "I studied hard and passed the exam.",
 "exTr": "Sıkı çalıştım ve sınavı geçtim.",
 "hl": "passed",
-"note": "Tuzak: sınava girmek = take an exam; sınavı geçmek = pass an exam."
+"note": "Tuzak: sınava girmek = take an exam; sınavı geçmek = pass an exam.",
+"pos": "fiil"
 },
 {
 "id": "y3",
@@ -378,7 +415,8 @@
 "tr": "mahkum",
 "ex": "Every inmate on the block had a different story.",
 "exTr": "Koğuştaki her mahkumun farklı bir hikâyesi vardı.",
-"note": "prisoner ile aynı anlamda"
+"note": "prisoner ile aynı anlamda",
+"pos": "isim"
 },
 {
 "id": "f4",
@@ -389,7 +427,8 @@
 "ex": "Hold on, I need to find my keys.",
 "exTr": "Bekle, anahtarlarımı bulmam lazım.",
 "hl": "Hold on",
-"note": "Telefonda: Hold on a second. = Bir saniye bekler misiniz?"
+"note": "Telefonda: Hold on a second. = Bir saniye bekler misiniz?",
+"pos": "kalıp"
 },
 {
 "id": "t4",
@@ -398,7 +437,8 @@
 "en": "delayed",
 "tr": "rötarlı, gecikmeli",
 "ex": "Our flight was delayed for three hours.",
-"exTr": "Uçuşumuz üç saat rötar yaptı."
+"exTr": "Uçuşumuz üç saat rötar yaptı.",
+"pos": "sıfat"
 },
 {
 "id": "o4",
@@ -408,7 +448,8 @@
 "tr": "(sınavdan) kalmak, başaramamak",
 "ex": "He failed the test because he didn't study.",
 "exTr": "Çalışmadığı için sınavdan kaldı.",
-"hl": "failed"
+"hl": "failed",
+"pos": "fiil"
 },
 {
 "id": "y4",
@@ -418,7 +459,8 @@
 "tr": "hücre (hapishane)",
 "ex": "He sat quietly in his cell all day.",
 "exTr": "Bütün gün hücresinde sessizce oturdu.",
-"note": "cell phone = cep telefonu (Amerikan İngilizcesi)"
+"note": "cell phone = cep telefonu (Amerikan İngilizcesi)",
+"pos": "isim"
 },
 {
 "id": "f5",
@@ -428,7 +470,8 @@
 "tr": "Büyütülecek bir şey değil.",
 "ex": "Don't worry about the mistake. It's not a big deal.",
 "exTr": "Hata için endişelenme. Büyütülecek bir şey değil.",
-"hl": "not a big deal"
+"hl": "not a big deal",
+"pos": "kalıp"
 },
 {
 "id": "t5",
@@ -438,7 +481,8 @@
 "tr": "koridor tarafı koltuk",
 "ex": "Could I have an aisle seat, please?",
 "exTr": "Koridor tarafında bir koltuk alabilir miyim, lütfen?",
-"note": "window seat = cam kenarı. 'aisle' okunuşu 'ayl', s okunmaz."
+"note": "window seat = cam kenarı. 'aisle' okunuşu 'ayl', s okunmaz.",
+"pos": "isim"
 },
 {
 "id": "o5",
@@ -448,7 +492,8 @@
 "tr": "not (sınav/ders notu)",
 "ex": "I got a good grade in English this term.",
 "exTr": "Bu dönem İngilizceden iyi bir not aldım.",
-"note": "İngiliz İngilizcesinde 'mark' da denir."
+"note": "İngiliz İngilizcesinde 'mark' da denir.",
+"pos": "isim"
 },
 {
 "id": "y5",
@@ -457,7 +502,8 @@
 "en": "warden",
 "tr": "cezaevi müdürü",
 "ex": "The warden was worried about his sick wife.",
-"exTr": "Cezaevi müdürü hasta karısı için endişeliydi."
+"exTr": "Cezaevi müdürü hasta karısı için endişeliydi.",
+"pos": "isim"
 },
 {
 "id": "f6",
@@ -467,7 +513,8 @@
 "tr": "Dikkat et!",
 "ex": "Watch out! There's a car coming!",
 "exTr": "Dikkat et! Araba geliyor!",
-"hl": "Watch out"
+"hl": "Watch out",
+"pos": "kalıp"
 },
 {
 "id": "t6",
@@ -477,7 +524,8 @@
 "tr": "gidiş-dönüş bilet",
 "ex": "A round-trip ticket is cheaper than two one-way tickets.",
 "exTr": "Gidiş-dönüş bilet, iki tek yön biletten daha ucuz.",
-"note": "one-way = tek yön"
+"note": "one-way = tek yön",
+"pos": "isim"
 },
 {
 "id": "o6",
@@ -487,7 +535,8 @@
 "tr": "not almak",
 "ex": "I always take notes during the lesson.",
 "exTr": "Derste her zaman not alırım.",
-"hl": "take notes"
+"hl": "take notes",
+"pos": "kalıp"
 },
 {
 "id": "y6",
@@ -497,7 +546,8 @@
 "tr": "duruşma, yargılama",
 "ex": "The trial lasted only a few days.",
 "exTr": "Duruşma sadece birkaç gün sürdü.",
-"note": "Oyunlarda: free trial = ücretsiz deneme sürümü"
+"note": "Oyunlarda: free trial = ücretsiz deneme sürümü",
+"pos": "isim"
 },
 {
 "id": "f7",
@@ -507,7 +557,8 @@
 "tr": "Hallediyorum, ilgileniyorum.",
 "ex": "\"Can you call the doctor?\" \"I'm on it.\"",
 "exTr": "\"Doktoru arayabilir misin?\" \"Hallediyorum.\"",
-"hl": "I'm on it"
+"hl": "I'm on it",
+"pos": "kalıp"
 },
 {
 "id": "t7",
@@ -517,7 +568,8 @@
 "tr": "rezervasyon",
 "ex": "I have a booking under the name Demir.",
 "exTr": "Demir adına bir rezervasyonum var.",
-"note": "Aynı anlamda: reservation"
+"note": "Aynı anlamda: reservation",
+"pos": "isim"
 },
 {
 "id": "o7",
@@ -527,7 +579,8 @@
 "tr": "... için çalışmak",
 "ex": "I need to study for my math exam.",
 "exTr": "Matematik sınavım için çalışmam lazım.",
-"hl": "study for"
+"hl": "study for",
+"pos": "fiil"
 },
 {
 "id": "y7",
@@ -538,7 +591,8 @@
 "ex": "The judge sentenced him to death.",
 "exTr": "Hakim onu ölüm cezasına çarptırdı.",
 "hl": "sentenced",
-"note": "'sentence' aynı zamanda 'cümle' demek!"
+"note": "'sentence' aynı zamanda 'cümle' demek!",
+"pos": "fiil"
 },
 {
 "id": "f8",
@@ -548,7 +602,8 @@
 "tr": "takılmak, vakit geçirmek",
 "ex": "We usually hang out at the mall after school.",
 "exTr": "Okuldan sonra genelde AVM'de takılıyoruz.",
-"hl": "hang out"
+"hl": "hang out",
+"pos": "phrasal verb"
 },
 {
 "id": "t8",
@@ -559,7 +614,8 @@
 "ex": "We have to check out of the room by 11 a.m.",
 "exTr": "Odadan saat 11'e kadar çıkış yapmamız gerekiyor.",
 "hl": "check out",
-"note": "Günlük dilde: Check it out! = Şuna bir bak!"
+"note": "Günlük dilde: Check it out! = Şuna bir bak!",
+"pos": "phrasal verb"
 },
 {
 "id": "o8",
@@ -569,7 +625,8 @@
 "tr": "ders programı, tarife",
 "ex": "According to my timetable, I have biology after lunch.",
 "exTr": "Ders programıma göre öğle yemeğinden sonra biyoloji var.",
-"note": "Amerikan İngilizcesi: schedule"
+"note": "Amerikan İngilizcesi: schedule",
+"pos": "isim"
 },
 {
 "id": "y8",
@@ -578,7 +635,8 @@
 "en": "witness",
 "tr": "tanık; tanık olmak",
 "ex": "Nobody was a witness to what really happened.",
-"exTr": "Gerçekte ne olduğuna kimse tanık olmadı."
+"exTr": "Gerçekte ne olduğuna kimse tanık olmadı.",
+"pos": "isim"
 },
 {
 "id": "f9",
@@ -588,7 +646,8 @@
 "tr": "panik yapmak, çıldırmak",
 "ex": "She freaked out when she saw the spider.",
 "exTr": "Örümceği görünce panik yaptı.",
-"hl": "freaked out"
+"hl": "freaked out",
+"pos": "phrasal verb"
 },
 {
 "id": "t9",
@@ -598,7 +657,8 @@
 "tr": "Kahvaltı dahil mi?",
 "ex": "Is breakfast included in the price?",
 "exTr": "Kahvaltı fiyata dahil mi?",
-"hl": "Is breakfast included"
+"hl": "Is breakfast included",
+"pos": "kalıp"
 },
 {
 "id": "o9",
@@ -608,7 +668,8 @@
 "tr": "(havuzda) bir boy; (pistte) tur",
 "ex": "I swam twenty laps this morning.",
 "exTr": "Bu sabah yirmi boy yüzdüm.",
-"hl": "laps"
+"hl": "laps",
+"pos": "isim"
 },
 {
 "id": "y9",
@@ -617,7 +678,8 @@
 "en": "execution",
 "tr": "idam",
 "ex": "The guards hated the night before an execution.",
-"exTr": "Gardiyanlar idamdan önceki geceden nefret ederdi."
+"exTr": "Gardiyanlar idamdan önceki geceden nefret ederdi.",
+"pos": "isim"
 },
 {
 "id": "f10",
@@ -627,7 +689,8 @@
 "tr": "berbat etmek, batırmak",
 "ex": "I messed up the last question on the test.",
 "exTr": "Sınavdaki son soruyu batırdım.",
-"hl": "messed up"
+"hl": "messed up",
+"pos": "phrasal verb"
 },
 {
 "id": "t10",
@@ -637,7 +700,8 @@
 "tr": "… önerebilir misiniz?",
 "ex": "Could you recommend a good place to eat near here?",
 "exTr": "Buralarda yemek için iyi bir yer önerebilir misiniz?",
-"hl": "Could you recommend"
+"hl": "Could you recommend",
+"pos": "kalıp"
 },
 {
 "id": "o10",
@@ -647,7 +711,8 @@
 "tr": "serbest stil (yüzme)",
 "ex": "Freestyle is the fastest swimming style.",
 "exTr": "Serbest stil en hızlı yüzme stilidir.",
-"note": "'front crawl' da denir."
+"note": "'front crawl' da denir.",
+"pos": "isim"
 },
 {
 "id": "y10",
@@ -656,7 +721,8 @@
 "en": "gentle",
 "tr": "nazik, yumuşak huylu",
 "ex": "He was a huge man, but he was very gentle.",
-"exTr": "Kocaman bir adamdı ama çok yumuşak huyluydu."
+"exTr": "Kocaman bir adamdı ama çok yumuşak huyluydu.",
+"pos": "sıfat"
 },
 {
 "id": "f11",
@@ -666,7 +732,8 @@
 "tr": "gelmek, ortaya çıkmak",
 "ex": "He said he would come, but he never showed up.",
 "exTr": "Geleceğini söyledi ama hiç gelmedi.",
-"hl": "showed up"
+"hl": "showed up",
+"pos": "phrasal verb"
 },
 {
 "id": "t11",
@@ -677,7 +744,8 @@
 "ex": "Excuse me, can I pay by card?",
 "exTr": "Affedersiniz, kartla ödeyebilir miyim?",
 "hl": "pay by card",
-"note": "Nakit: in cash"
+"note": "Nakit: in cash",
+"pos": "kalıp"
 },
 {
 "id": "o11",
@@ -686,7 +754,8 @@
 "en": "breaststroke",
 "tr": "kurbağalama",
 "ex": "My coach says my breaststroke is getting better.",
-"exTr": "Antrenörüm kurbağalamamın giderek iyileştiğini söylüyor."
+"exTr": "Antrenörüm kurbağalamamın giderek iyileştiğini söylüyor.",
+"pos": "isim"
 },
 {
 "id": "y11",
@@ -695,7 +764,8 @@
 "en": "giant",
 "tr": "dev",
 "ex": "The new prisoner was a giant, almost seven feet tall.",
-"exTr": "Yeni mahkum bir devdi, boyu iki metreyi aşıyordu."
+"exTr": "Yeni mahkum bir devdi, boyu iki metreyi aşıyordu.",
+"pos": "isim"
 },
 {
 "id": "f12",
@@ -705,7 +775,8 @@
 "tr": "(sonunda) … çıkmak, anlaşılmak",
 "ex": "The quiet new student turned out to be really funny.",
 "exTr": "Sessiz yeni öğrenci gerçekten komik biri çıktı.",
-"hl": "turned out"
+"hl": "turned out",
+"pos": "phrasal verb"
 },
 {
 "id": "t12",
@@ -715,7 +786,8 @@
 "tr": "En yakın … nerede?",
 "ex": "Where is the nearest pharmacy?",
 "exTr": "En yakın eczane nerede?",
-"hl": "Where is the nearest"
+"hl": "Where is the nearest",
+"pos": "kalıp"
 },
 {
 "id": "o12",
@@ -725,7 +797,8 @@
 "tr": "sırtüstü (yüzme)",
 "ex": "In backstroke, you swim on your back.",
 "exTr": "Sırtüstü stilde sırtının üzerinde yüzersin.",
-"note": "butterfly = kelebek"
+"note": "butterfly = kelebek",
+"pos": "isim"
 },
 {
 "id": "y12",
@@ -734,7 +807,8 @@
 "en": "cruel",
 "tr": "zalim, acımasız",
 "ex": "One of the guards was cruel and enjoyed hurting people.",
-"exTr": "Gardiyanlardan biri zalimdi ve insanları incitmekten zevk alıyordu."
+"exTr": "Gardiyanlardan biri zalimdi ve insanları incitmekten zevk alıyordu.",
+"pos": "sıfat"
 },
 {
 "id": "f13",
@@ -744,7 +818,8 @@
 "tr": "mantıklı olmak, anlam ifade etmek",
 "ex": "Your plan doesn't make sense to me.",
 "exTr": "Planın bana mantıklı gelmiyor.",
-"hl": "make sense"
+"hl": "make sense",
+"pos": "kalıp"
 },
 {
 "id": "t13",
@@ -754,7 +829,8 @@
 "tr": "… arıyorum.",
 "ex": "I'm looking for the bus stop.",
 "exTr": "Otobüs durağını arıyorum.",
-"hl": "I'm looking for"
+"hl": "I'm looking for",
+"pos": "kalıp"
 },
 {
 "id": "o13",
@@ -764,7 +840,8 @@
 "tr": "ısınmak",
 "ex": "Always warm up before you start training.",
 "exTr": "Antrenmana başlamadan önce her zaman ısın.",
-"hl": "warm up"
+"hl": "warm up",
+"pos": "phrasal verb"
 },
 {
 "id": "y13",
@@ -773,7 +850,8 @@
 "en": "miracle",
 "tr": "mucize",
 "ex": "The doctors couldn't explain it. It was a miracle.",
-"exTr": "Doktorlar bunu açıklayamadı. Bir mucizeydi."
+"exTr": "Doktorlar bunu açıklayamadı. Bir mucizeydi.",
+"pos": "isim"
 },
 {
 "id": "f14",
@@ -783,7 +861,8 @@
 "tr": "(fikir) bulmak, aklına gelmek",
 "ex": "We need to come up with a better idea.",
 "exTr": "Daha iyi bir fikir bulmamız lazım.",
-"hl": "come up with"
+"hl": "come up with",
+"pos": "phrasal verb"
 },
 {
 "id": "t14",
@@ -793,7 +872,8 @@
 "tr": "kaybolmak",
 "ex": "We got lost in the old part of the city.",
 "exTr": "Şehrin eski kısmında kaybolduk.",
-"hl": "got lost"
+"hl": "got lost",
+"pos": "fiil"
 },
 {
 "id": "o14",
@@ -802,7 +882,8 @@
 "en": "out of breath",
 "tr": "nefes nefese",
 "ex": "After the race, I was completely out of breath.",
-"exTr": "Yarıştan sonra tamamen nefes nefeseydim."
+"exTr": "Yarıştan sonra tamamen nefes nefeseydim.",
+"pos": "kalıp"
 },
 {
 "id": "y14",
@@ -812,7 +893,8 @@
 "tr": "iyileştirmek, iyileşmek",
 "ex": "He could heal people just by touching them.",
 "exTr": "İnsanları sadece dokunarak iyileştirebiliyordu.",
-"hl": "heal"
+"hl": "heal",
+"pos": "fiil"
 },
 {
 "id": "f15",
@@ -822,7 +904,8 @@
 "tr": "(bir şey) tükenmek, bitmek",
 "ex": "We ran out of time before the end of the game.",
 "exTr": "Oyun bitmeden zamanımız tükendi.",
-"hl": "ran out of"
+"hl": "ran out of",
+"pos": "phrasal verb"
 },
 {
 "id": "t15",
@@ -831,7 +914,8 @@
 "en": "sightseeing",
 "tr": "gezip görme, turistik gezi",
 "ex": "We spent the whole day sightseeing in Rome.",
-"exTr": "Bütün günü Roma'yı gezerek geçirdik."
+"exTr": "Bütün günü Roma'yı gezerek geçirdik.",
+"pos": "isim"
 },
 {
 "id": "o15",
@@ -841,7 +925,8 @@
 "tr": "(kas) ağrıyan, tutulmuş",
 "ex": "My arms are sore after yesterday's training.",
 "exTr": "Dünkü antrenmandan sonra kollarım ağrıyor.",
-"note": "sore throat = boğaz ağrısı"
+"note": "sore throat = boğaz ağrısı",
+"pos": "sıfat"
 },
 {
 "id": "y15",
@@ -850,7 +935,8 @@
 "en": "nursing home",
 "tr": "huzurevi",
 "ex": "Now an old man, he tells the story from a nursing home.",
-"exTr": "Artık yaşlı bir adam olarak hikâyeyi bir huzurevinden anlatıyor."
+"exTr": "Artık yaşlı bir adam olarak hikâyeyi bir huzurevinden anlatıyor.",
+"pos": "isim"
 },
 {
 "id": "f16",
@@ -860,7 +946,8 @@
 "tr": "tam …mek üzere olmak",
 "ex": "I was about to leave when you called.",
 "exTr": "Sen aradığında tam çıkmak üzereydim.",
-"hl": "about to"
+"hl": "about to",
+"pos": "kalıp"
 },
 {
 "id": "t16",
@@ -870,7 +957,8 @@
 "tr": "kalkış, gidiş",
 "ex": "Please arrive two hours before departure.",
 "exTr": "Lütfen kalkıştan iki saat önce gelin.",
-"note": "arrival = varış. Havalimanında 'Departures' ve 'Arrivals' tabelalarını görürsün."
+"note": "arrival = varış. Havalimanında 'Departures' ve 'Arrivals' tabelalarını görürsün.",
+"pos": "isim"
 },
 {
 "id": "o16",
@@ -879,7 +967,8 @@
 "en": "coach",
 "tr": "antrenör, koç",
 "ex": "Our coach makes us swim faster every week.",
-"exTr": "Antrenörümüz bizi her hafta daha hızlı yüzdürüyor."
+"exTr": "Antrenörümüz bizi her hafta daha hızlı yüzdürüyor.",
+"pos": "isim"
 },
 {
 "id": "y16",
@@ -888,7 +977,8 @@
 "en": "afraid of the dark",
 "tr": "karanlıktan korkan",
 "ex": "Strangely, the big man was afraid of the dark.",
-"exTr": "İşin garibi, iri adam karanlıktan korkuyordu."
+"exTr": "İşin garibi, iri adam karanlıktan korkuyordu.",
+"pos": "kalıp"
 }
 ],
 "progress": {

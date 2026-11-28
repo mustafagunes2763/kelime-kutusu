@@ -1,0 +1,824 @@
+{
+"patch": {
+"k1": {
+"pos": "sıfat"
+},
+"i1": {
+"pos": "isim"
+},
+"g1": {
+"pos": "isim"
+},
+"d1": {
+"pos": "zarf"
+},
+"k2": {
+"pos": "fiil"
+},
+"i2": {
+"pos": "phrasal verb"
+},
+"g2": {
+"pos": "fiil"
+},
+"d2": {
+"pos": "kalıp"
+},
+"k3": {
+"pos": "kalıp"
+},
+"i3": {
+"pos": "isim"
+},
+"g3": {
+"pos": "isim"
+},
+"d3": {
+"pos": "phrasal verb"
+},
+"k4": {
+"pos": "sıfat"
+},
+"i4": {
+"pos": "phrasal verb"
+},
+"g4": {
+"pos": "fiil"
+},
+"d4": {
+"pos": "phrasal verb"
+},
+"k5": {
+"pos": "sıfat"
+},
+"i5": {
+"pos": "sıfat"
+},
+"g5": {
+"pos": "isim"
+},
+"d5": {
+"pos": "zarf"
+},
+"k6": {
+"pos": "fiil"
+},
+"i6": {
+"pos": "fiil"
+},
+"g6": {
+"pos": "fiil"
+},
+"d6": {
+"pos": "kalıp"
+},
+"k7": {
+"pos": "isim"
+},
+"i7": {
+"pos": "kalıp"
+},
+"f1": {
+"pos": "kalıp"
+},
+"t1": {
+"pos": "isim"
+},
+"o1": {
+"pos": "isim"
+},
+"y1": {
+"pos": "isim"
+},
+"f2": {
+"pos": "kalıp"
+},
+"t2": {
+"pos": "phrasal verb"
+},
+"o2": {
+"pos": "isim"
+},
+"y2": {
+"pos": "isim"
+},
+"f3": {
+"pos": "kalıp"
+},
+"t3": {
+"pos": "isim"
+},
+"o3": {
+"pos": "fiil"
+},
+"y3": {
+"pos": "isim"
+},
+"f4": {
+"pos": "kalıp"
+},
+"t4": {
+"pos": "sıfat"
+},
+"o4": {
+"pos": "fiil"
+},
+"y4": {
+"pos": "isim"
+},
+"f5": {
+"pos": "kalıp"
+},
+"t5": {
+"pos": "isim"
+},
+"o5": {
+"pos": "isim"
+},
+"y5": {
+"pos": "isim"
+},
+"f6": {
+"pos": "kalıp"
+},
+"t6": {
+"pos": "isim"
+},
+"o6": {
+"pos": "kalıp"
+},
+"y6": {
+"pos": "isim"
+},
+"f7": {
+"pos": "kalıp"
+},
+"t7": {
+"pos": "isim"
+},
+"o7": {
+"pos": "fiil"
+},
+"y7": {
+"pos": "fiil"
+},
+"f8": {
+"pos": "phrasal verb"
+},
+"t8": {
+"pos": "phrasal verb"
+},
+"o8": {
+"pos": "isim"
+},
+"y8": {
+"pos": "isim"
+},
+"f9": {
+"pos": "phrasal verb"
+},
+"t9": {
+"pos": "kalıp"
+},
+"o9": {
+"pos": "isim"
+},
+"y9": {
+"pos": "isim"
+},
+"f10": {
+"pos": "phrasal verb"
+},
+"t10": {
+"pos": "kalıp"
+},
+"o10": {
+"pos": "isim"
+},
+"y10": {
+"pos": "sıfat"
+},
+"f11": {
+"pos": "phrasal verb"
+},
+"t11": {
+"pos": "kalıp"
+},
+"o11": {
+"pos": "isim"
+},
+"y11": {
+"pos": "isim"
+},
+"f12": {
+"pos": "phrasal verb"
+},
+"t12": {
+"pos": "kalıp"
+},
+"o12": {
+"pos": "isim"
+},
+"y12": {
+"pos": "sıfat"
+},
+"f13": {
+"pos": "kalıp"
+},
+"t13": {
+"pos": "kalıp"
+},
+"o13": {
+"pos": "phrasal verb"
+},
+"y13": {
+"pos": "isim"
+},
+"f14": {
+"pos": "phrasal verb"
+},
+"t14": {
+"pos": "fiil"
+},
+"o14": {
+"pos": "kalıp"
+},
+"y14": {
+"pos": "fiil"
+},
+"f15": {
+"pos": "phrasal verb"
+},
+"t15": {
+"pos": "isim"
+},
+"o15": {
+"pos": "sıfat"
+},
+"y15": {
+"pos": "isim"
+},
+"f16": {
+"pos": "kalıp"
+},
+"t16": {
+"pos": "isim"
+},
+"o16": {
+"pos": "isim"
+},
+"y16": {
+"pos": "kalıp"
+},
+"a1": {
+"pos": "kalıp"
+},
+"a2": {
+"pos": "kalıp"
+},
+"a3": {
+"pos": "isim"
+},
+"a4": {
+"pos": "phrasal verb"
+},
+"a5": {
+"pos": "kalıp"
+},
+"a6": {
+"pos": "isim"
+},
+"a7": {
+"pos": "isim"
+},
+"a8": {
+"pos": "sıfat"
+},
+"a9": {
+"pos": "sıfat"
+},
+"a10": {
+"pos": "isim"
+},
+"a11": {
+"pos": "isim"
+},
+"a12": {
+"pos": "isim"
+},
+"a13": {
+"pos": "kalıp"
+},
+"a14": {
+"pos": "kalıp"
+},
+"a15": {
+"pos": "kalıp"
+},
+"b1": {
+"pos": "isim"
+},
+"b2": {
+"pos": "isim"
+},
+"b3": {
+"pos": "isim"
+},
+"b4": {
+"pos": "isim"
+},
+"b5": {
+"pos": "isim"
+},
+"b6": {
+"pos": "isim"
+},
+"b7": {
+"pos": "fiil"
+},
+"b8": {
+"pos": "isim"
+},
+"b9": {
+"pos": "isim"
+},
+"b10": {
+"pos": "isim"
+},
+"b11": {
+"pos": "fiil"
+},
+"b12": {
+"pos": "isim"
+},
+"b13": {
+"pos": "isim"
+},
+"b14": {
+"pos": "isim"
+},
+"b15": {
+"pos": "isim"
+},
+"b16": {
+"pos": "fiil"
+},
+"b17": {
+"pos": "isim"
+},
+"b18": {
+"pos": "sıfat"
+},
+"b19": {
+"pos": "isim"
+},
+"b20": {
+"pos": "kalıp"
+},
+"b21": {
+"pos": "isim"
+},
+"b22": {
+"pos": "isim"
+},
+"g6-1": {
+"pos": "isim"
+},
+"g6-2": {
+"pos": "isim"
+},
+"g6-3": {
+"pos": "isim"
+},
+"g6-4": {
+"pos": "fiil"
+},
+"g6-5": {
+"pos": "kalıp"
+},
+"g6-6": {
+"pos": "isim"
+},
+"g6-7": {
+"pos": "fiil"
+},
+"g6-8": {
+"pos": "phrasal verb"
+},
+"g6-9": {
+"pos": "kalıp"
+},
+"g6-10": {
+"pos": "isim"
+},
+"g6-11": {
+"pos": "kalıp"
+},
+"g6-12": {
+"pos": "fiil"
+},
+"g6-13": {
+"pos": "isim"
+},
+"g6-14": {
+"pos": "isim"
+},
+"g6-15": {
+"pos": "isim"
+},
+"g6-16": {
+"pos": "kalıp"
+},
+"g6-17": {
+"pos": "kalıp"
+},
+"g6-18": {
+"pos": "sıfat"
+},
+"mm2-1": {
+"pos": "kalıp"
+},
+"mm2-2": {
+"pos": "phrasal verb"
+},
+"mm2-3": {
+"pos": "isim"
+},
+"mm2-4": {
+"pos": "fiil"
+},
+"mm2-5": {
+"pos": "phrasal verb"
+},
+"mm2-6": {
+"pos": "isim"
+},
+"mm2-7": {
+"pos": "kalıp"
+},
+"mm2-8": {
+"pos": "isim"
+},
+"mm2-9": {
+"pos": "kalıp"
+},
+"mm2-10": {
+"pos": "kalıp"
+},
+"mm2-11": {
+"pos": "kalıp"
+},
+"mm2-12": {
+"pos": "phrasal verb"
+},
+"mm2-13": {
+"pos": "phrasal verb"
+},
+"mm2-14": {
+"pos": "phrasal verb"
+},
+"mm2-15": {
+"pos": "kalıp"
+},
+"mm2-16": {
+"pos": "kalıp"
+},
+"mm2-17": {
+"pos": "isim"
+},
+"mm2-18": {
+"pos": "phrasal verb"
+},
+"mm2-19": {
+"pos": "fiil"
+},
+"mm2-20": {
+"pos": "isim"
+},
+"mm1": {
+"pos": "isim"
+},
+"mm2": {
+"pos": "isim"
+},
+"mm3": {
+"pos": "phrasal verb"
+},
+"mm4": {
+"pos": "phrasal verb"
+},
+"mm5": {
+"pos": "isim"
+},
+"mm6": {
+"pos": "fiil"
+},
+"mm7": {
+"pos": "sıfat"
+},
+"mm8": {
+"pos": "phrasal verb"
+},
+"mm9": {
+"pos": "isim"
+},
+"mm10": {
+"pos": "fiil"
+},
+"mm11": {
+"pos": "isim"
+},
+"mm12": {
+"pos": "isim"
+},
+"mm13": {
+"pos": "isim"
+},
+"mm14": {
+"pos": "isim"
+},
+"mm15": {
+"pos": "phrasal verb"
+},
+"mm16": {
+"pos": "kalıp"
+},
+"mm17": {
+"pos": "kalıp"
+},
+"r2-1": {
+"pos": "kalıp"
+},
+"r2-2": {
+"pos": "isim"
+},
+"r2-3": {
+"pos": "isim"
+},
+"r2-4": {
+"pos": "kalıp"
+},
+"r2-5": {
+"pos": "isim"
+},
+"r2-6": {
+"pos": "phrasal verb"
+},
+"r2-7": {
+"pos": "kalıp"
+},
+"r2-8": {
+"pos": "sıfat"
+},
+"r2-9": {
+"pos": "fiil"
+},
+"r2-10": {
+"pos": "kalıp"
+},
+"r2-11": {
+"pos": "isim"
+},
+"r2-12": {
+"pos": "phrasal verb"
+},
+"r2-13": {
+"pos": "isim"
+},
+"r2-14": {
+"pos": "kalıp"
+},
+"r2-15": {
+"pos": "kalıp"
+},
+"r2-16": {
+"pos": "kalıp"
+},
+"r2-17": {
+"pos": "kalıp"
+},
+"r2-18": {
+"pos": "fiil"
+},
+"r2-19": {
+"pos": "isim"
+},
+"r2-20": {
+"pos": "isim"
+},
+"r1": {
+"pos": "isim"
+},
+"r2": {
+"pos": "isim"
+},
+"r3": {
+"pos": "isim"
+},
+"r4": {
+"pos": "isim"
+},
+"r5": {
+"pos": "sıfat"
+},
+"r6": {
+"pos": "isim"
+},
+"r7": {
+"pos": "fiil"
+},
+"r8": {
+"pos": "kalıp"
+},
+"r9": {
+"pos": "kalıp"
+},
+"r10": {
+"pos": "kalıp"
+},
+"r11": {
+"pos": "isim"
+},
+"r12": {
+"pos": "fiil"
+},
+"r13": {
+"pos": "isim"
+},
+"r14": {
+"pos": "fiil"
+},
+"r15": {
+"pos": "fiil"
+},
+"r16": {
+"pos": "isim"
+},
+"r17": {
+"pos": "phrasal verb"
+},
+"r18": {
+"pos": "isim"
+},
+"r19": {
+"pos": "fiil"
+},
+"r20": {
+"pos": "fiil"
+},
+"m1": {
+"pos": "fiil"
+},
+"m2": {
+"pos": "fiil"
+},
+"m3": {
+"pos": "kalıp"
+},
+"m4": {
+"pos": "fiil"
+},
+"m5": {
+"pos": "sıfat"
+},
+"m6": {
+"pos": "isim"
+},
+"m7": {
+"pos": "fiil"
+},
+"m8": {
+"pos": "kalıp"
+},
+"sp1": {
+"pos": "isim"
+},
+"sp2": {
+"pos": "fiil"
+},
+"sp3": {
+"pos": "isim"
+},
+"sp4": {
+"pos": "fiil"
+},
+"sp5": {
+"pos": "isim"
+},
+"sp6": {
+"pos": "phrasal verb"
+},
+"sp7": {
+"pos": "isim"
+},
+"sp8": {
+"pos": "isim"
+},
+"sp9": {
+"pos": "isim"
+},
+"sp10": {
+"pos": "fiil"
+},
+"sp11": {
+"pos": "isim"
+},
+"sp12": {
+"pos": "fiil"
+},
+"v1": {
+"pos": "isim"
+},
+"v2": {
+"pos": "kalıp"
+},
+"v3": {
+"pos": "isim"
+},
+"v4": {
+"pos": "isim"
+},
+"v5": {
+"pos": "isim"
+},
+"v6": {
+"pos": "isim"
+},
+"v7": {
+"pos": "sıfat"
+},
+"v8": {
+"pos": "fiil"
+},
+"v9": {
+"pos": "isim"
+},
+"v10": {
+"pos": "sıfat"
+},
+"v11": {
+"pos": "kalıp"
+},
+"v12": {
+"pos": "kalıp"
+},
+"v13": {
+"pos": "isim"
+},
+"v14": {
+"pos": "kalıp"
+},
+"lb1": {
+"pos": "kalıp"
+},
+"lb2": {
+"pos": "kalıp"
+},
+"lb3": {
+"pos": "isim"
+},
+"lb4": {
+"pos": "fiil"
+},
+"lb5": {
+"pos": "kalıp"
+},
+"lb6": {
+"pos": "isim"
+},
+"lb7": {
+"pos": "kalıp"
+},
+"lb8": {
+"pos": "kalıp"
+},
+"lb9": {
+"pos": "sıfat"
+},
+"lb10": {
+"pos": "sıfat"
+},
+"lb11": {
+"pos": "fiil"
+},
+"lb12": {
+"pos": "fiil"
+},
+"lb13": {
+"pos": "isim"
+},
+"lb14": {
+"pos": "kalıp"
+},
+"h-guilty": {
+"pos": "kalıp"
+},
+"h-apostrophe": {
+"pos": "kalıp"
+},
+"h-dodge": {
+"pos": "kalıp"
+}
+},
+"note": "Kartlarına kelime türü eklendi: isim, fiil, sıfat, zarf, phrasal verb, kalıp. Kartın üstündeki türe dokun, kısa açıklaması açılır."
+}

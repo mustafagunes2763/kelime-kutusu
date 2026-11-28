@@ -8,7 +8,8 @@
 "tr": "büyük soygun (planlı)",
 "ex": "The two of them planned a heist on a bank downtown.",
 "exTr": "İkisi şehir merkezindeki bir bankaya büyük bir soygun planladı.",
-"note": "Spider-Man'deki 'robbery'den farkı: heist daha büyük ve planlıdır."
+"note": "Spider-Man'deki 'robbery'den farkı: heist daha büyük ve planlıdır.",
+"pos": "isim"
 },
 {
 "id": "g6-2",
@@ -18,7 +19,8 @@
 "tr": "kaçış arabası",
 "ex": "The getaway car was waiting behind the building.",
 "exTr": "Kaçış arabası binanın arkasında bekliyordu.",
-"note": "get away = kaçmak, kurtulmak"
+"note": "get away = kaçmak, kurtulmak",
+"pos": "isim"
 },
 {
 "id": "g6-3",
@@ -28,7 +30,8 @@
 "tr": "polisler (konuşma dili)",
 "ex": "Run! The cops are coming!",
 "exTr": "Kaç! Polisler geliyor!",
-"note": "Resmî: the police"
+"note": "Resmî: the police",
+"pos": "isim"
 },
 {
 "id": "g6-4",
@@ -39,7 +42,8 @@
 "ex": "Take the highway if you want to lose the cops.",
 "exTr": "Polisleri atlatmak istiyorsan otobana çık.",
 "hl": "lose the cops",
-"note": "Oyunlarda sık görev: Lose the cops."
+"note": "Oyunlarda sık görev: Lose the cops.",
+"pos": "fiil"
 },
 {
 "id": "g6-5",
@@ -50,7 +54,8 @@
 "ex": "He got busted trying to steal a car.",
 "exTr": "Araba çalmaya çalışırken enselendi.",
 "hl": "got busted",
-"note": "Konuşma dili."
+"note": "Konuşma dili.",
+"pos": "kalıp"
 },
 {
 "id": "g6-6",
@@ -59,7 +64,8 @@
 "en": "wanted level",
 "tr": "aranma seviyesi (oyunda)",
 "ex": "Your wanted level goes up every time you hit a police car.",
-"exTr": "Bir polis arabasına her çarptığında aranma seviyen yükselir."
+"exTr": "Bir polis arabasına her çarptığında aranma seviyen yükselir.",
+"pos": "isim"
 },
 {
 "id": "g6-7",
@@ -70,7 +76,8 @@
 "ex": "She stole a sports car from the parking lot.",
 "exTr": "Otoparktan bir spor araba çaldı.",
 "hl": "stole",
-"note": "steal – stole – stolen (düzensiz fiil)"
+"note": "steal – stole – stolen (düzensiz fiil)",
+"pos": "fiil"
 },
 {
 "id": "g6-8",
@@ -80,7 +87,8 @@
 "tr": "(arabayı) kenara çekmek",
 "ex": "The police told him to pull over.",
 "exTr": "Polis ona kenara çekmesini söyledi.",
-"hl": "pull over"
+"hl": "pull over",
+"pos": "phrasal verb"
 },
 {
 "id": "g6-9",
@@ -91,7 +99,8 @@
 "ex": "They're right behind us! Floor it!",
 "exTr": "Hemen arkamızdalar! Gaza bas!",
 "hl": "Floor it",
-"note": "floor = taban; pedalı tabana kadar bastırmak."
+"note": "floor = taban; pedalı tabana kadar bastırmak.",
+"pos": "kalıp"
 },
 {
 "id": "g6-10",
@@ -101,7 +110,8 @@
 "tr": "ortak, partner",
 "ex": "In this game, you play as two partners in crime.",
 "exTr": "Bu oyunda suç ortağı iki kişiyi oynuyorsun.",
-"note": "partners in crime = suç ortakları (şaka olarak 'kafa dengi' anlamında da)"
+"note": "partners in crime = suç ortakları (şaka olarak 'kafa dengi' anlamında da)",
+"pos": "isim"
 },
 {
 "id": "g6-11",
@@ -111,7 +121,8 @@
 "tr": "birinin arkasında olmak, kollamak",
 "ex": "Don't worry, I've got your back.",
 "exTr": "Merak etme, arkandayım.",
-"hl": "got your back"
+"hl": "got your back",
+"pos": "kalıp"
 },
 {
 "id": "g6-12",
@@ -122,7 +133,8 @@
 "ex": "I don't trust anyone in this city.",
 "exTr": "Bu şehirde kimseye güvenmiyorum.",
 "hl": "trust",
-"note": "trust issues = güven sorunları"
+"note": "trust issues = güven sorunları",
+"pos": "fiil"
 },
 {
 "id": "g6-13",
@@ -132,7 +144,8 @@
 "tr": "anlaşma; iş",
 "ex": "We had a deal, and you broke it.",
 "exTr": "Bir anlaşmamız vardı ve sen onu bozdun.",
-"note": "Deal! = Anlaştık!"
+"note": "Deal! = Anlaştık!",
+"pos": "isim"
 },
 {
 "id": "g6-14",
@@ -142,7 +155,8 @@
 "tr": "mahalle, semt",
 "ex": "This neighborhood isn't safe at night.",
 "exTr": "Bu mahalle geceleri güvenli değil.",
-"note": "İngiliz yazımı: neighbourhood"
+"note": "İngiliz yazımı: neighbourhood",
+"pos": "isim"
 },
 {
 "id": "g6-15",
@@ -152,7 +166,8 @@
 "tr": "bataklık",
 "ex": "Be careful, there are alligators in the swamp.",
 "exTr": "Dikkat et, bataklıkta timsahlar var.",
-"note": "alligator = (Amerikan) timsahı"
+"note": "alligator = (Amerikan) timsahı",
+"pos": "isim"
 },
 {
 "id": "g6-16",
@@ -162,7 +177,8 @@
 "tr": "Gidelim buradan!",
 "ex": "This place is too dangerous. Let's get out of here!",
 "exTr": "Burası çok tehlikeli. Gidelim buradan!",
-"hl": "get out of here"
+"hl": "get out of here",
+"pos": "kalıp"
 },
 {
 "id": "g6-17",
@@ -172,7 +188,8 @@
 "tr": "birine bir iyilik borçlu olmak",
 "ex": "Thanks for the help. I owe you one.",
 "exTr": "Yardımın için sağ ol. Sana bir iyilik borçluyum.",
-"hl": "owe you one"
+"hl": "owe you one",
+"pos": "kalıp"
 },
 {
 "id": "g6-18",
@@ -181,7 +198,8 @@
 "en": "sketchy",
 "tr": "şüpheli, güvenilmez görünen (konuşma dili)",
 "ex": "That guy looks sketchy. Don't go with him.",
-"exTr": "O adam şüpheli görünüyor. Onunla gitme."
+"exTr": "O adam şüpheli görünüyor. Onunla gitme.",
+"pos": "sıfat"
 }
 ],
 "note": "GTA 6 paketi eklendi! Oyunu oynamadan önce kelimeleri öğrenirsen ilk görevden itibaren daha çok şey anlarsın."

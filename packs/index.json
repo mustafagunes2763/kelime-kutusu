@@ -1,5 +1,12 @@
 [
  {
+  "id": "turler",
+  "title": "Kelime türleri (güncelleme)",
+  "desc": "Mevcut kartlarına isim / fiil / sıfat etiketi ekler",
+  "file": "packs/turler.json",
+  "count": 273
+ },
+ {
   "id": "rdr2-2",
   "title": "Red Dead Redemption 2 #2",
   "desc": "Oyundaki konuşmalarda sık geçen kalıplar: Howdy, posse, Hold your fire…",

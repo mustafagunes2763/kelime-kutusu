@@ -7,7 +7,8 @@
 "en": "outlaw",
 "tr": "kanun kaçağı, eşkıya",
 "ex": "Arthur is an outlaw, and the law is always one step behind him.",
-"exTr": "Arthur bir kanun kaçağı ve kanun hep bir adım arkasında."
+"exTr": "Arthur bir kanun kaçağı ve kanun hep bir adım arkasında.",
+"pos": "isim"
 },
 {
 "id": "r2",
@@ -16,7 +17,8 @@
 "en": "gang",
 "tr": "çete",
 "ex": "The gang moves from place to place to stay safe.",
-"exTr": "Çete güvende kalmak için bir yerden bir yere taşınır."
+"exTr": "Çete güvende kalmak için bir yerden bir yere taşınır.",
+"pos": "isim"
 },
 {
 "id": "r3",
@@ -25,7 +27,8 @@
 "en": "camp",
 "tr": "kamp",
 "ex": "Don't forget to bring food back to camp.",
-"exTr": "Kampa yiyecek getirmeyi unutma."
+"exTr": "Kampa yiyecek getirmeyi unutma.",
+"pos": "isim"
 },
 {
 "id": "r4",
@@ -35,7 +38,8 @@
 "tr": "(birinin başına konan) ödül",
 "ex": "There's a $50 bounty on your head in this state.",
 "exTr": "Bu eyalette başına 50 dolar ödül konmuş.",
-"note": "bounty hunter = ödül avcısı"
+"note": "bounty hunter = ödül avcısı",
+"pos": "isim"
 },
 {
 "id": "r5",
@@ -45,7 +49,8 @@
 "tr": "aranan",
 "ex": "He is wanted for robbery in two states.",
 "exTr": "İki eyalette soygundan aranıyor.",
-"note": "WANTED: Dead or Alive = Aranıyor: Ölü ya da diri"
+"note": "WANTED: Dead or Alive = Aranıyor: Ölü ya da diri",
+"pos": "sıfat"
 },
 {
 "id": "r6",
@@ -55,7 +60,8 @@
 "tr": "şerif",
 "ex": "The sheriff and his men are looking for us.",
 "exTr": "Şerif ve adamları bizi arıyor.",
-"note": "lawman = kanun adamı"
+"note": "lawman = kanun adamı",
+"pos": "isim"
 },
 {
 "id": "r7",
@@ -66,7 +72,8 @@
 "ex": "They robbed a train in the middle of the night.",
 "exTr": "Gecenin ortasında bir treni soydular.",
 "hl": "robbed",
-"note": "robbery = soygun"
+"note": "robbery = soygun",
+"pos": "fiil"
 },
 {
 "id": "r8",
@@ -76,7 +83,8 @@
 "tr": "bir süre ortalıktan kaybolmak, sessiz durmak",
 "ex": "We need to lay low for a while until things calm down.",
 "exTr": "Ortalık sakinleşene kadar bir süre sessiz durmamız lazım.",
-"hl": "lay low"
+"hl": "lay low",
+"pos": "kalıp"
 },
 {
 "id": "r9",
@@ -87,7 +95,8 @@
 "ex": "I reckon it's going to rain tonight.",
 "exTr": "Sanırım bu gece yağmur yağacak.",
 "hl": "I reckon",
-"note": "Bugün daha çok 'I think' denir; western ve güney aksanında çok duyarsın."
+"note": "Bugün daha çok 'I think' denir; western ve güney aksanında çok duyarsın.",
+"pos": "kalıp"
 },
 {
 "id": "r10",
@@ -98,7 +107,8 @@
 "ex": "That ain't right, and you know it.",
 "exTr": "Bu doğru değil ve bunu sen de biliyorsun.",
 "hl": "ain't",
-"note": "Konuşma dili. Sınavda ya da yazıda kullanma."
+"note": "Konuşma dili. Sınavda ya da yazıda kullanma.",
+"pos": "kalıp"
 },
 {
 "id": "r11",
@@ -108,7 +118,8 @@
 "tr": "adam, herif (fellow'un konuşma hâli)",
 "ex": "Who's that fella standing by the horses?",
 "exTr": "Atların yanında duran o adam kim?",
-"hl": "fella"
+"hl": "fella",
+"pos": "isim"
 },
 {
 "id": "r12",
@@ -119,7 +130,8 @@
 "ex": "He owes us money, so we're going to collect it.",
 "exTr": "Bize borcu var, o yüzden tahsil edeceğiz.",
 "hl": "owes",
-"note": "debt = borç"
+"note": "debt = borç",
+"pos": "fiil"
 },
 {
 "id": "r13",
@@ -129,7 +141,8 @@
 "tr": "sadakat",
 "ex": "In this gang, loyalty is everything.",
 "exTr": "Bu çetede sadakat her şeydir.",
-"note": "loyal = sadık"
+"note": "loyal = sadık",
+"pos": "isim"
 },
 {
 "id": "r14",
@@ -140,7 +153,8 @@
 "ex": "You can track the deer by following its footprints.",
 "exTr": "Ayak izlerini takip ederek geyiğin izini sürebilirsin.",
 "hl": "track",
-"note": "tracks = iz, ayak izi"
+"note": "tracks = iz, ayak izi",
+"pos": "fiil"
 },
 {
 "id": "r15",
@@ -151,7 +165,8 @@
 "ex": "I spent the whole day hunting in the mountains.",
 "exTr": "Bütün günü dağlarda avlanarak geçirdim.",
 "hl": "hunting",
-"note": "pelt = post, hayvan derisi"
+"note": "pelt = post, hayvan derisi",
+"pos": "fiil"
 },
 {
 "id": "r16",
@@ -160,7 +175,8 @@
 "en": "trail",
 "tr": "patika, iz",
 "ex": "Follow the trail north until you reach the river.",
-"exTr": "Nehre varana kadar patikayı kuzeye doğru takip et."
+"exTr": "Nehre varana kadar patikayı kuzeye doğru takip et.",
+"pos": "isim"
 },
 {
 "id": "r17",
@@ -171,7 +187,8 @@
 "ex": "Two men held up the stagecoach on the road.",
 "exTr": "İki adam yolda posta arabasını silah zoruyla soydu.",
 "hl": "held up",
-"note": "stagecoach = posta arabası. Günlük dilde 'hold up' = bekle demek de olur."
+"note": "stagecoach = posta arabası. Günlük dilde 'hold up' = bekle demek de olur.",
+"pos": "phrasal verb"
 },
 {
 "id": "r18",
@@ -180,7 +197,8 @@
 "en": "hideout",
 "tr": "saklanma yeri, sığınak",
 "ex": "The gang has a hideout deep in the woods.",
-"exTr": "Çetenin ormanın derinliklerinde bir sığınağı var."
+"exTr": "Çetenin ormanın derinliklerinde bir sığınağı var.",
+"pos": "isim"
 },
 {
 "id": "r19",
@@ -190,7 +208,8 @@
 "tr": "keşfe çıkmak, etrafı kollamak",
 "ex": "Go and scout the area before we ride in.",
 "exTr": "Biz atla içeri girmeden önce git, etrafı keşfet.",
-"hl": "scout"
+"hl": "scout",
+"pos": "fiil"
 },
 {
 "id": "r20",
@@ -201,7 +220,8 @@
 "ex": "Brush and feed your horse to bond with it.",
 "exTr": "Atınla bağ kurmak için onu tımarla ve besle.",
 "hl": "bond",
-"note": "Oyunda: Horse bonding level = atla bağ seviyesi"
+"note": "Oyunda: Horse bonding level = atla bağ seviyesi",
+"pos": "fiil"
 }
 ],
 "note": "RDR2 paketi eklendi: kanun kaçakları, kamp hayatı ve 1899'un konuşma dili (I reckon, ain't, fella). Oyuna dönmeden önce bu desteyi bitir!"

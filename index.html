@@ -181,6 +181,8 @@ body.navon .wrap{padding-bottom:100px}
 .slist .meta{font-size:12px;color:var(--muted);margin-top:3px}
 .sent-ta{width:100%;min-height:96px;font:17px/1.45 "Work Sans",sans-serif;padding:10px;border-radius:8px;border:2px solid var(--inbd);background:var(--inbg);color:var(--cink);margin:8px 0 10px;resize:vertical}
 .cardbtn{border:0;border-radius:10px;background:var(--cink);color:var(--card);font-weight:600;font-size:16px;min-height:48px;width:100%}
+.tag.pos{border:1.5px solid currentColor;border-radius:99px;padding:2px 10px;background:none;color:var(--trc);font:700 12px 'Work Sans',sans-serif;min-height:28px;cursor:pointer}
+.poshelp{margin:0 0 10px;font-size:15px;line-height:1.45;background:var(--notebg);color:var(--noteink);border-radius:6px;padding:8px 10px}
 .linkbtn{background:none;border:0;color:var(--cmuted);text-decoration:underline;font-size:15px;min-height:44px;width:100%}
 </style>
 </head>
@@ -235,7 +237,8 @@ body.navon .wrap{padding-bottom:100px}
   </div>
   <div class="card" id="card" tabindex="0">
     <span class="redline"></span>
-    <div class="ctop"><span class="tag" id="cDeck"></span><span class="tag new" id="cNew" hidden>yeni</span><span class="tag" id="cMode" style="margin-left:auto;color:var(--cmuted)"></span></div>
+    <div class="ctop"><span class="tag" id="cDeck"></span><button class="tag pos" id="cPos" hidden aria-expanded="false"></button><span class="tag new" id="cNew" hidden>yeni</span><span class="tag" id="cMode" style="margin-left:auto;color:var(--cmuted)"></span></div>
+    <p class="poshelp" id="posHelp" hidden></p>
     <div id="front"></div>
     <div class="back" id="back" hidden></div>
   </div>
@@ -391,7 +394,7 @@ import {getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStat
 import {initializeFirestore,getFirestore,persistentLocalCache,persistentMultipleTabManager,collection,doc,setDoc,deleteDoc,onSnapshot,query,orderBy as fsOrderBy,limit as fsLimit,writeBatch,getDocFromServer} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 const firebaseConfig={apiKey:"AIzaSyD6qa_2d6x9d670KUIGalp8iiJHkBFup18",authDomain:"kelimecim-59671.firebaseapp.com",projectId:"kelimecim-59671",storageBucket:"kelimecim-59671.firebasestorage.app",messagingSenderId:"687418566304",appId:"1:687418566304:web:06cd6c3ddb35a4bac00bc5"};
 {
-const APP_VERSION='14';
+const APP_VERSION='15';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const reEsc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
@@ -405,6 +408,14 @@ const MODES=[['flip','Kart'],['rev','Ters'],['type','Yazarak'],['cloze','Boşluk
 const MODE_NAME=Object.fromEntries(MODES);
 const MODE_LBL={flip:'EN → TR',rev:'TR → EN',type:'yazarak',cloze:'boşluk',listen:'dinleme'};
 const TABS=['home','list','vids','claude','set'];
+const POS_HELP={
+  'isim':"İsim: bir şeyin, kişinin ya da yerin adı. Tekilse önüne genelde a/an ya da the gelir: a quest, the warden.",
+  'fiil':"Fiil: bir eylem. Zamana göre değişir: stare → stared. Cümlede 'to' olmadan kullanılır: I stare at the dog.",
+  'phrasal verb':"Phrasal verb: fiil + küçük bir kelime (up, out, off, down…) birlikte yeni bir anlam kazanır. Ayrı ayrı çevirme: give up = pes etmek.",
+  'sıfat':"Sıfat: bir ismi niteler. Tek başına 'a' almaz: I'm guilty ✓, I'm a guilty ✗. İsimle birlikte alır: a guilty man ✓. 'be' ile kullanılır: He is tired.",
+  'zarf':"Zarf: fiili ya da cümleyi niteler. Çoğu -ly ile biter: quietly, eventually. Genelde cümlenin başında ya da sonunda durur.",
+  'kalıp':"Kalıp: kelime kelime değil, bütün olarak öğrenilir. Olduğu gibi kullan, içini değiştirme."
+};
 const SRCS=['Dizi/film','Oyun','Kitap','Basketbol','Video','Okul','Diğer'];let src='Dizi/film';
 const KINDS=['Kelime','Cümle','Soru'];let kind='Kelime',clearArmed=false;
 const FBK=['Hata','İstek','Fikir'];let fbKind='Hata',fbArmed=false;
@@ -546,7 +557,7 @@ function renderList(){
   const lab={n:'yeni',l:'öğreniliyor',k:'oturdu'};
   $('wlist').innerHTML=rows.length?rows.slice(0,400).map(c=>{const s=stateOf(c),p=S.prog[c.id];let when='';
     if(p){const d=Math.round((p.due-sod())/DAY);when=d<=0?' · bugün':` · ${d} gün sonra`}
-    return `<li><div><span class="w">${esc(c.en)}</span><span class="t">${esc(c.tr)} · ${esc(c.deck||'')}${when}</span></div><span class="pill ${s}">${lab[s]}</span></li>`}).join(''):'<li class="empty">Kelime bulunamadı.</li>';
+    return `<li><div><span class="w">${esc(c.en)}</span><span class="t">${c.pos?esc(c.pos)+' · ':''}${esc(c.tr)} · ${esc(c.deck||'')}${when}</span></div><span class="pill ${s}">${lab[s]}</span></li>`}).join(''):'<li class="empty">Kelime bulunamadı.</li>';
 }
 const fmtT=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
 function renderVids(){
@@ -600,7 +611,7 @@ function renderSent(){
   $('sDone').hidden=!doneGoal;$('sBox').hidden=doneGoal;
   if(!doneGoal){
     if(!sWord)nextSentWord();
-    if(sWord){$('sWord').textContent=sWord.en;$('sTr').textContent=sWord.tr}
+    if(sWord){$('sWord').textContent=sWord.en;$('sTr').textContent=(sWord.pos?sWord.pos+' · ':'')+sWord.tr}
     else{$('sWord').textContent='Önce birkaç kart çalış';$('sTr').textContent='Cümle için gördüğün kelimelerden seçiyorum.'}
     $('sSave').disabled=!sWord;
   }
@@ -633,7 +644,8 @@ function startPractice(){
 function next(){
   if(!Q.length){finish();return}
   cur=Q[0];cm=pickMode(cur);
-  $('cDeck').textContent=cur.deck||'';$('cNew').hidden=!!S.prog[cur.id];$('cMode').textContent=(sess.practice?'serbest · ':'')+MODE_LBL[cm];
+  $('cDeck').textContent=cur.deck||'';$('cNew').hidden=!!S.prog[cur.id];
+  $('cPos').hidden=!cur.pos;$('cPos').textContent=cur.pos||'';$('cPos').setAttribute('aria-expanded','false');$('posHelp').hidden=true;$('posHelp').textContent=POS_HELP[cur.pos]||'';$('cMode').textContent=(sess.practice?'serbest · ':'')+MODE_LBL[cm];
   $('front').innerHTML=frontHTML(cur,cm);$('back').innerHTML='';$('back').hidden=true;
   $('rate').hidden=true;$('rate').querySelectorAll('button').forEach(b=>b.classList.remove('sug'));
   $('showBtn').hidden=cm==='type'||cm==='cloze';
@@ -709,7 +721,7 @@ function outText(){
   if(ps.length){L.push('','CÜMLELERİM (lütfen düzelt):');ps.slice().reverse().forEach(s=>L.push(`- [${s.id}] (${s.word}) ${s.text}`))}
   if(S.inbox.length){L.push('','İLETİLECEKLER:');S.inbox.slice().reverse().forEach(i=>L.push(`- [${i.kind||'Kelime'}] ${i.text}${i.src?' ('+i.src+')':''}`))}
   if($('incReport').checked){L.push('',report())}
-  if(ps.length)L.push('','Düzeltme kodu biçimi: {"corrections":[{"id":"…","ok":false,"corrected":"…","explanation":"kısa Türkçe açıklama"}],"cards":[… "deck":"Hatalarım" …]}');
+  if(ps.length)L.push('','Düzeltme kodu biçimi: {"corrections":[{"id":"…","ok":false,"corrected":"…","explanation":"kısa Türkçe açıklama"}],"cards":[… "deck":"Hatalarım", "pos":"isim|fiil|sıfat|zarf|phrasal verb|kalıp" …]}');
   return L.join('\n');
 }
 
@@ -740,6 +752,7 @@ $('sSave').addEventListener('click',()=>{
 });
 $('showBtn').addEventListener('click',()=>reveal());
 $('card').addEventListener('click',e=>{
+  if(e.target.closest('#cPos')){const ph=$('posHelp');ph.hidden=!ph.hidden||!ph.textContent;$('cPos').setAttribute('aria-expanded',!ph.hidden);return}
   const s=e.target.closest('[data-say]');
   if(s){if(cur)speak(s.dataset.say==='w'?cur.en:(cur.ex||cur.en));return}
   if(e.target.closest('#skipBtn')){reveal({r:0,input:'',right:rightAnswer()});return}
@@ -770,7 +783,7 @@ $('packList').addEventListener('click',async e=>{
     const t=await (await fetch(p.file,{cache:'no-store'})).text();
     const n=await FB.importJSON(t);
     await db.doc('meta/packs').set({ids:[...new Set([...S.packsDone,p.id])]});
-    $('packMsg').textContent=`${p.title}: ${n} kelime eklendi.`;
+    $('packMsg').textContent=S.lastPatch?`${p.title}: ${S.lastPatch} karta kelime türü eklendi.`:`${p.title}: ${n} kelime eklendi.`;
   }catch(x){b.disabled=false;b.textContent='Ekle';$('packMsg').textContent='Eklenemedi: '+(x.message||x.code||'hata')}
 });
 let vArmed=null;
@@ -800,6 +813,7 @@ $('impBtn').addEventListener('click',async()=>{
     const n=await FB.importJSON(t);const parts=[];
     if(S.lastVideo)parts.push(S.lastVideo.merged?`Videoya yeni parça eklendi: ${S.lastVideo.title} (+${S.lastVideo.added} cümle).`:`Video eklendi: ${S.lastVideo.title}.`);
     if(S.lastCorr)parts.push(`${S.lastCorr} cümle düzeltmesi geldi (Çalış → Bugünün cümleleri).`);
+    if(S.lastPatch)parts.push(S.lastPatch+' kart güncellendi.');
     if(n)parts.push(n+' kart eklendi/güncellendi.');
     $('impMsg').textContent=parts.join(' ')||'Kodda eklenecek bir şey bulunamadı.';$('impText').value='';
   }catch(e){$('impMsg').textContent=e.message||('Hata: '+e.code)}
@@ -899,7 +913,7 @@ const FB=(()=>{
       await b.commit();return true;
     }catch(e){status('Başlangıç kelimeleri yüklenemedi ('+(e&&e.code||e.message||'hata')+').');return false}
   }
-  const FIELDS=['en','tr','ex','exTr','hl','note','deck','n','alt'];
+  const FIELDS=['en','tr','ex','exTr','hl','note','deck','n','alt','pos'];
   function parseLoose(txt){
     let s=String(txt||'').replace(/^﻿/,'').replace(/```(?:json)?/gi,'').trim();
     const a=s.search(/[\[{]/),b=Math.max(s.lastIndexOf('}'),s.lastIndexOf(']'));
@@ -919,8 +933,9 @@ const FB=(()=>{
       const d={};FIELDS.forEach(f=>{if(c[f]!==undefined&&c[f]!==null)d[f]=c[f]});
       b.set(doc(fs,P('cards/'+id)),d);n++;
     }
-    S.lastVideo=null;S.lastCorr=0;
+    S.lastVideo=null;S.lastCorr=0;S.lastPatch=0;
     if(!Array.isArray(obj)){
+      if(obj.patch&&typeof obj.patch==='object'){const have=new Set(S.cards.map(c=>c.id));for(const [id,f] of Object.entries(obj.patch).slice(0,450)){if(!have.has(id)||!f||typeof f!=='object')continue;const d={};for(const k of FIELDS)if(f[k]!==undefined)d[k]=f[k];if(Object.keys(d).length){b.set(doc(fs,P('cards/'+String(id).replace(/[\/]/g,'-'))),d,{merge:true});S.lastPatch++}}}
       if(obj.note){const t=new Date();b.set(doc(fs,P('meta/note')),{text:String(obj.note),date:t.getDate()+' '+AYLAR[t.getMonth()]+' '+t.getFullYear()})}
       if(obj.clearInbox)S.inbox.forEach(i=>b.delete(doc(fs,P('inbox/'+i.id))));
       if(obj.deleteCards)obj.deleteCards.forEach(id=>b.delete(doc(fs,P('cards/'+id))));

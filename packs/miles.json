@@ -7,7 +7,8 @@
 "en": "mentor",
 "tr": "akıl hocası, rehber",
 "ex": "Peter is Miles's mentor and teaches him how to be Spider-Man.",
-"exTr": "Peter, Miles'ın akıl hocası; ona nasıl Spider-Man olunacağını öğretiyor."
+"exTr": "Peter, Miles'ın akıl hocası; ona nasıl Spider-Man olunacağını öğretiyor.",
+"pos": "isim"
 },
 {
 "id": "mm2",
@@ -17,7 +18,8 @@
 "tr": "çaylak, acemi",
 "ex": "He's still a rookie, but he learns fast.",
 "exTr": "Hâlâ çaylak ama hızlı öğreniyor.",
-"note": "Sporda da çok kullanılır: NBA rookie = ilk sezonundaki oyuncu."
+"note": "Sporda da çok kullanılır: NBA rookie = ilk sezonundaki oyuncu.",
+"pos": "isim"
 },
 {
 "id": "mm3",
@@ -27,7 +29,8 @@
 "tr": "sorumluluk almak, öne çıkmak",
 "ex": "With Peter away, Miles has to step up and protect the city.",
 "exTr": "Peter yokken Miles'ın sorumluluk alıp şehri koruması gerekiyor.",
-"hl": "step up"
+"hl": "step up",
+"pos": "phrasal verb"
 },
 {
 "id": "mm4",
@@ -37,7 +40,8 @@
 "tr": "örnek almak, hayranlık duymak",
 "ex": "Miles looks up to Peter like a big brother.",
 "exTr": "Miles, Peter'ı bir ağabey gibi örnek alıyor.",
-"hl": "looks up to"
+"hl": "looks up to",
+"pos": "phrasal verb"
 },
 {
 "id": "mm5",
@@ -46,7 +50,8 @@
 "en": "secret identity",
 "tr": "gizli kimlik",
 "ex": "It's hard to keep a secret identity from your family.",
-"exTr": "Gizli kimliğini ailenden saklamak zor."
+"exTr": "Gizli kimliğini ailenden saklamak zor.",
+"pos": "isim"
 },
 {
 "id": "mm6",
@@ -56,7 +61,8 @@
 "tr": "sır tutmak",
 "ex": "Can you keep a secret? Don't tell anyone.",
 "exTr": "Sır tutabilir misin? Kimseye söyleme.",
-"hl": "keep a secret"
+"hl": "keep a secret",
+"pos": "fiil"
 },
 {
 "id": "mm7",
@@ -66,7 +72,8 @@
 "tr": "görünmez",
 "ex": "Miles can turn invisible for a few seconds.",
 "exTr": "Miles birkaç saniyeliğine görünmez olabiliyor.",
-"note": "turn invisible = görünmez olmak"
+"note": "turn invisible = görünmez olmak",
+"pos": "sıfat"
 },
 {
 "id": "mm8",
@@ -77,7 +84,8 @@
 "ex": "Wear normal clothes so you blend in with the crowd.",
 "exTr": "Kalabalığa karışman için normal kıyafetler giy.",
 "hl": "blend in",
-"note": "stand out = göze batmak (tersi)"
+"note": "stand out = göze batmak (tersi)",
+"pos": "phrasal verb"
 },
 {
 "id": "mm9",
@@ -87,7 +95,8 @@
 "tr": "gizlilik, sessizce ilerleme (oyunda)",
 "ex": "This mission is easier if you use stealth.",
 "exTr": "Bu görev gizlilikle oynarsan daha kolay.",
-"note": "stealth mission = gizlilik görevi"
+"note": "stealth mission = gizlilik görevi",
+"pos": "isim"
 },
 {
 "id": "mm10",
@@ -97,7 +106,8 @@
 "tr": "yeniden dolmak, şarj olmak",
 "ex": "Your power needs a few seconds to recharge.",
 "exTr": "Gücünün yeniden dolması için birkaç saniye gerekiyor.",
-"hl": "recharge"
+"hl": "recharge",
+"pos": "fiil"
 },
 {
 "id": "mm11",
@@ -106,7 +116,8 @@
 "en": "power outage",
 "tr": "elektrik kesintisi",
 "ex": "The whole neighborhood was dark because of a power outage.",
-"exTr": "Elektrik kesintisi yüzünden bütün mahalle karanlıktı."
+"exTr": "Elektrik kesintisi yüzünden bütün mahalle karanlıktı.",
+"pos": "isim"
 },
 {
 "id": "mm12",
@@ -115,7 +126,8 @@
 "en": "community",
 "tr": "topluluk, mahalle halkı",
 "ex": "Miles cares a lot about his community in Harlem.",
-"exTr": "Miles, Harlem'deki mahalle halkını çok önemsiyor."
+"exTr": "Miles, Harlem'deki mahalle halkını çok önemsiyor.",
+"pos": "isim"
 },
 {
 "id": "mm13",
@@ -125,7 +137,8 @@
 "tr": "köşe bakkalı (New York)",
 "ex": "I'm going to the bodega to get some snacks.",
 "exTr": "Atıştırmalık almak için köşe bakkalına gidiyorum.",
-"note": "New York'a özgü bir kelime. Oyunda bodega kedisini de unutma!"
+"note": "New York'a özgü bir kelime. Oyunda bodega kedisini de unutma!",
+"pos": "isim"
 },
 {
 "id": "mm14",
@@ -134,7 +147,8 @@
 "en": "holiday season",
 "tr": "yılbaşı dönemi, tatil sezonu",
 "ex": "New York looks beautiful in the holiday season, with snow everywhere.",
-"exTr": "New York yılbaşı döneminde, her yer karla kaplıyken çok güzel görünüyor."
+"exTr": "New York yılbaşı döneminde, her yer karla kaplıyken çok güzel görünüyor.",
+"pos": "isim"
 },
 {
 "id": "mm15",
@@ -145,7 +159,8 @@
 "ex": "Can you swing by the store on your way home?",
 "exTr": "Eve giderken markete uğrayabilir misin?",
 "hl": "swing by",
-"note": "Günlük dilde çok yaygın. Spider-Man için de tam bir kelime oyunu!"
+"note": "Günlük dilde çok yaygın. Spider-Man için de tam bir kelime oyunu!",
+"pos": "phrasal verb"
 },
 {
 "id": "mm16",
@@ -156,7 +171,8 @@
 "ex": "Hang in there! Help is on the way!",
 "exTr": "Dayan! Yardım geliyor!",
 "hl": "Hang in there",
-"note": "on the way = yolda"
+"note": "on the way = yolda",
+"pos": "kalıp"
 },
 {
 "id": "mm17",
@@ -166,7 +182,8 @@
 "tr": "Dışarıda dikkatli ol.",
 "ex": "Be careful out there. The city is dangerous tonight.",
 "exTr": "Dışarıda dikkatli ol. Şehir bu gece tehlikeli.",
-"hl": "Be careful out there"
+"hl": "Be careful out there",
+"pos": "kalıp"
 }
 ],
 "note": "Miles Morales paketi eklendi! Remastered'ı bitirdin, şimdi sıra Harlem'de. Altyazılar İngilizce, unutma."

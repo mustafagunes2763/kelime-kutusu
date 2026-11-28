@@ -8,7 +8,8 @@
 "tr": "ribaund",
 "ex": "Şengün grabbed the rebound and passed it quickly.",
 "exTr": "Şengün ribaundu aldı ve topu hızlıca pasladı.",
-"hl": "rebound"
+"hl": "rebound",
+"pos": "isim"
 },
 {
 "id": "b2",
@@ -18,7 +19,8 @@
 "tr": "asist",
 "ex": "He had ten assists in the game.",
 "exTr": "Maçta on asisti vardı.",
-"hl": "assists"
+"hl": "assists",
+"pos": "isim"
 },
 {
 "id": "b3",
@@ -27,7 +29,8 @@
 "en": "double-double",
 "tr": "double-double (iki istatistikte 10+)",
 "ex": "Şengün finished with a double-double: 20 points and 12 rebounds.",
-"exTr": "Şengün maçı double-double ile bitirdi: 20 sayı ve 12 ribaund."
+"exTr": "Şengün maçı double-double ile bitirdi: 20 sayı ve 12 ribaund.",
+"pos": "isim"
 },
 {
 "id": "b4",
@@ -37,7 +40,8 @@
 "tr": "triple-double (üç istatistikte 10+)",
 "ex": "A triple-double means ten or more in three categories.",
 "exTr": "Triple-double, üç istatistikte on ve üzeri demek.",
-"note": "category = kategori, alan"
+"note": "category = kategori, alan",
+"pos": "isim"
 },
 {
 "id": "b5",
@@ -47,7 +51,8 @@
 "tr": "pivot (oyun pozisyonu)",
 "ex": "Alperen Şengün plays center for the Houston Rockets.",
 "exTr": "Alperen Şengün Houston Rockets'ta pivot oynuyor.",
-"note": "point guard = oyun kurucu, forward = forvet"
+"note": "point guard = oyun kurucu, forward = forvet",
+"pos": "isim"
 },
 {
 "id": "b6",
@@ -57,7 +62,8 @@
 "tr": "ayak çalışması",
 "ex": "His footwork in the post is amazing.",
 "exTr": "Pota altındaki ayak çalışması inanılmaz.",
-"note": "in the post = pota altında, sırtı potaya dönük"
+"note": "in the post = pota altında, sırtı potaya dönük",
+"pos": "isim"
 },
 {
 "id": "b7",
@@ -68,7 +74,8 @@
 "ex": "He dribbled past two defenders.",
 "exTr": "İki savunmacının arasından top sürerek geçti.",
 "hl": "dribbled",
-"note": "defender = savunmacı"
+"note": "defender = savunmacı",
+"pos": "fiil"
 },
 {
 "id": "b8",
@@ -79,7 +86,8 @@
 "ex": "Too many turnovers cost them the game.",
 "exTr": "Çok fazla top kaybı onlara maçı kaybettirdi.",
 "hl": "turnovers",
-"note": "cost someone the game = birine maçı kaybettirmek"
+"note": "cost someone the game = birine maçı kaybettirmek",
+"pos": "isim"
 },
 {
 "id": "b9",
@@ -90,7 +98,8 @@
 "ex": "He made both free throws at the end of the game.",
 "exTr": "Maçın sonunda iki serbest atışı da attı.",
 "hl": "free throws",
-"note": "make a shot = atışı sokmak; miss = kaçırmak"
+"note": "make a shot = atışı sokmak; miss = kaçırmak",
+"pos": "isim"
 },
 {
 "id": "b10",
@@ -99,7 +108,8 @@
 "en": "three-pointer",
 "tr": "üçlük",
 "ex": "He's been working on his three-pointer this summer.",
-"exTr": "Bu yaz üçlüğü üzerinde çalışıyor."
+"exTr": "Bu yaz üçlüğü üzerinde çalışıyor.",
+"pos": "isim"
 },
 {
 "id": "b11",
@@ -109,7 +119,8 @@
 "tr": "blok yapmak",
 "ex": "He jumped and blocked the shot.",
 "exTr": "Zıpladı ve şutu blokladı.",
-"hl": "blocked"
+"hl": "blocked",
+"pos": "fiil"
 },
 {
 "id": "b12",
@@ -119,7 +130,8 @@
 "tr": "faul",
 "ex": "The referee called a foul on the defender.",
 "exTr": "Hakem savunmacıya faul çaldı.",
-"note": "And-one! = Basket + faul, bir serbest atış daha"
+"note": "And-one! = Basket + faul, bir serbest atış daha",
+"pos": "isim"
 },
 {
 "id": "b13",
@@ -128,7 +140,8 @@
 "en": "bench",
 "tr": "yedek kulübesi",
 "ex": "The coach kept him on the bench for the last minutes.",
-"exTr": "Antrenör son dakikalarda onu kulübede tuttu."
+"exTr": "Antrenör son dakikalarda onu kulübede tuttu.",
+"pos": "isim"
 },
 {
 "id": "b14",
@@ -137,7 +150,8 @@
 "en": "overtime",
 "tr": "uzatma",
 "ex": "The game went to overtime after a last-second shot.",
-"exTr": "Son saniye atışından sonra maç uzatmaya gitti."
+"exTr": "Son saniye atışından sonra maç uzatmaya gitti.",
+"pos": "isim"
 },
 {
 "id": "b15",
@@ -147,7 +161,8 @@
 "tr": "son saniye basketi",
 "ex": "He won the game with a buzzer-beater!",
 "exTr": "Maçı son saniye basketiyle kazandırdı!",
-"note": "buzzer = süre bitiş sinyali"
+"note": "buzzer = süre bitiş sinyali",
+"pos": "isim"
 },
 {
 "id": "b16",
@@ -157,7 +172,8 @@
 "tr": "smaç yapmak",
 "ex": "He dunked over two players.",
 "exTr": "İki oyuncunun üstünden smaç bastı.",
-"hl": "dunked"
+"hl": "dunked",
+"pos": "fiil"
 },
 {
 "id": "b17",
@@ -166,7 +182,8 @@
 "en": "playoffs",
 "tr": "play-off",
 "ex": "The Rockets are fighting for a place in the playoffs.",
-"exTr": "Rockets play-off'ta yer almak için mücadele ediyor."
+"exTr": "Rockets play-off'ta yer almak için mücadele ediyor.",
+"pos": "isim"
 },
 {
 "id": "b18",
@@ -176,7 +193,8 @@
 "tr": "kritik anda işi bitiren",
 "ex": "He's really clutch in close games.",
 "exTr": "Çekişmeli maçlarda kritik anlarda gerçekten işi bitiriyor.",
-"note": "clutch shot = kritik an atışı"
+"note": "clutch shot = kritik an atışı",
+"pos": "sıfat"
 },
 {
 "id": "b19",
@@ -186,7 +204,8 @@
 "tr": "geri dönüş",
 "ex": "They were down by 20 points, but they made an amazing comeback.",
 "exTr": "20 sayı gerideydiler ama inanılmaz bir geri dönüş yaptılar.",
-"note": "be down by = ... sayı geride olmak"
+"note": "be down by = ... sayı geride olmak",
+"pos": "isim"
 },
 {
 "id": "b20",
@@ -196,7 +215,8 @@
 "tr": "(sporda) alev almak, durdurulamamak",
 "ex": "He's on fire tonight! He can't miss!",
 "exTr": "Bu gece alev almış! Hiç kaçırmıyor!",
-"hl": "on fire"
+"hl": "on fire",
+"pos": "kalıp"
 },
 {
 "id": "b21",
@@ -206,7 +226,8 @@
 "tr": "takım arkadaşı",
 "ex": "He always finds his teammates with great passes.",
 "exTr": "Harika paslarla takım arkadaşlarını her zaman buluyor.",
-"hl": "teammates"
+"hl": "teammates",
+"pos": "isim"
 },
 {
 "id": "b22",
@@ -215,7 +236,8 @@
 "en": "national team",
 "tr": "milli takım",
 "ex": "Şengün also plays for the Turkish national team.",
-"exTr": "Şengün aynı zamanda Türkiye milli takımında oynuyor."
+"exTr": "Şengün aynı zamanda Türkiye milli takımında oynuyor.",
+"pos": "isim"
 }
 ],
 "note": "Basketbol paketi eklendi! Şengün'ün maçlarını İngilizce yorumla izlersen bu kelimeleri hemen duyarsın: rebound, assist, double-double, and-one…"

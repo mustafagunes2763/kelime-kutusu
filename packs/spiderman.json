@@ -7,7 +7,8 @@
 "en": "villain",
 "tr": "kötü adam",
 "ex": "Every good story needs a good villain.",
-"exTr": "Her iyi hikâyenin iyi bir kötü adama ihtiyacı vardır."
+"exTr": "Her iyi hikâyenin iyi bir kötü adama ihtiyacı vardır.",
+"pos": "isim"
 },
 {
 "id": "sp2",
@@ -18,7 +19,8 @@
 "ex": "Spider-Man had to rescue the people trapped in the building.",
 "exTr": "Spider-Man binada mahsur kalan insanları kurtarmak zorundaydı.",
 "hl": "rescue",
-"note": "trapped = mahsur kalmış"
+"note": "trapped = mahsur kalmış",
+"pos": "fiil"
 },
 {
 "id": "sp3",
@@ -28,7 +30,8 @@
 "tr": "suç",
 "ex": "There's a crime in progress near you.",
 "exTr": "Yakınında işlenmekte olan bir suç var.",
-"note": "criminal = suçlu"
+"note": "criminal = suçlu",
+"pos": "isim"
 },
 {
 "id": "sp4",
@@ -38,7 +41,8 @@
 "tr": "kovalamak",
 "ex": "The police are chasing a car through the city.",
 "exTr": "Polis şehirde bir arabayı kovalıyor.",
-"hl": "chasing"
+"hl": "chasing",
+"pos": "fiil"
 },
 {
 "id": "sp5",
@@ -47,7 +51,8 @@
 "en": "suspect",
 "tr": "şüpheli",
 "ex": "The suspect ran into the subway.",
-"exTr": "Şüpheli metroya kaçtı."
+"exTr": "Şüpheli metroya kaçtı.",
+"pos": "isim"
 },
 {
 "id": "sp6",
@@ -57,7 +62,8 @@
 "tr": "alt etmek, etkisiz hâle getirmek",
 "ex": "You have to take down all the enemies without being seen.",
 "exTr": "Görülmeden bütün düşmanları etkisiz hâle getirmen gerekiyor.",
-"hl": "take down"
+"hl": "take down",
+"pos": "phrasal verb"
 },
 {
 "id": "sp7",
@@ -66,7 +72,8 @@
 "en": "gadget",
 "tr": "alet, ufak cihaz",
 "ex": "Use your gadgets to stop the enemies from far away.",
-"exTr": "Düşmanları uzaktan durdurmak için aletlerini kullan."
+"exTr": "Düşmanları uzaktan durdurmak için aletlerini kullan.",
+"pos": "isim"
 },
 {
 "id": "sp8",
@@ -75,7 +82,8 @@
 "en": "citizen",
 "tr": "vatandaş",
 "ex": "He always tries to protect the citizens of New York.",
-"exTr": "Her zaman New York vatandaşlarını korumaya çalışır."
+"exTr": "Her zaman New York vatandaşlarını korumaya çalışır.",
+"pos": "isim"
 },
 {
 "id": "sp9",
@@ -85,7 +93,8 @@
 "tr": "belediye başkanı",
 "ex": "The mayor gave a speech in front of City Hall.",
 "exTr": "Belediye başkanı belediye binasının önünde konuşma yaptı.",
-"note": "City Hall = belediye binası"
+"note": "City Hall = belediye binası",
+"pos": "isim"
 },
 {
 "id": "sp10",
@@ -95,7 +104,8 @@
 "tr": "sallanmak, (ağla) salınarak gitmek",
 "ex": "It's so fun to swing between the buildings.",
 "exTr": "Binaların arasında salınarak gitmek çok eğlenceli.",
-"hl": "swing"
+"hl": "swing",
+"pos": "fiil"
 },
 {
 "id": "sp11",
@@ -104,7 +114,8 @@
 "en": "backup",
 "tr": "destek (ekip)",
 "ex": "We need backup! There are too many of them!",
-"exTr": "Desteğe ihtiyacımız var! Çok fazlalar!"
+"exTr": "Desteğe ihtiyacımız var! Çok fazlalar!",
+"pos": "isim"
 },
 {
 "id": "sp12",
@@ -115,7 +126,8 @@
 "ex": "Hurry up, or we won't make it in time!",
 "exTr": "Acele et, yoksa zamanında yetişemeyeceğiz!",
 "hl": "make it",
-"note": "Did you make it? = Başardın mı? / Yetiştin mi?"
+"note": "Did you make it? = Başardın mı? / Yetiştin mi?",
+"pos": "fiil"
 }
 ]
 }

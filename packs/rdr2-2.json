@@ -9,7 +9,8 @@
 "ex": "Howdy, mister. Nice horse you got there.",
 "exTr": "Selam bayım. Güzel bir atın var.",
 "hl": "Howdy",
-"note": "'How do you do?'nun kısaltması. Kasabalarda insanlar seni böyle selamlar."
+"note": "'How do you do?'nun kısaltması. Kasabalarda insanlar seni böyle selamlar.",
+"pos": "kalıp"
 },
 {
 "id": "r2-2",
@@ -18,7 +19,8 @@
 "en": "posse",
 "tr": "silahlı takip ekibi",
 "ex": "A posse is coming after us. Ride, now!",
-"exTr": "Peşimizden silahlı bir ekip geliyor. Hemen sür!"
+"exTr": "Peşimizden silahlı bir ekip geliyor. Hemen sür!",
+"pos": "isim"
 },
 {
 "id": "r2-3",
@@ -28,7 +30,8 @@
 "tr": "kanun; polis, şerifler (topluca)",
 "ex": "The law is everywhere in this town. We need to be careful.",
 "exTr": "Bu kasabada her yer kanun adamı dolu. Dikkatli olmalıyız.",
-"note": "'The law is after us' = Kanun peşimizde."
+"note": "'The law is after us' = Kanun peşimizde.",
+"pos": "isim"
 },
 {
 "id": "r2-4",
@@ -39,7 +42,8 @@
 "ex": "Get on your horse, boys. Let's ride!",
 "exTr": "Atlarınıza binin çocuklar. Hadi gidelim!",
 "hl": "Let's ride",
-"note": "ride = ata binmek, atla gitmek"
+"note": "ride = ata binmek, atla gitmek",
+"pos": "kalıp"
 },
 {
 "id": "r2-5",
@@ -49,7 +53,8 @@
 "tr": "eyer",
 "ex": "Put the saddle on your horse before we leave.",
 "exTr": "Gitmeden önce atına eyeri tak.",
-"note": "saddle up = eyerlemek, yola hazırlanmak"
+"note": "saddle up = eyerlemek, yola hazırlanmak",
+"pos": "isim"
 },
 {
 "id": "r2-6",
@@ -59,7 +64,8 @@
 "tr": "(yaptığının) yanına kâr kalmak",
 "ex": "You think you can rob us and get away with it?",
 "exTr": "Bizi soyup yanına kâr kalacağını mı sanıyorsun?",
-"hl": "get away with"
+"hl": "get away with",
+"pos": "phrasal verb"
 },
 {
 "id": "r2-7",
@@ -70,7 +76,8 @@
 "ex": "Don't worry about the sheriff. I'll take care of him.",
 "exTr": "Şerifi dert etme. Ben hallederim.",
 "hl": "take care of",
-"note": "Take care! = Kendine iyi bak!"
+"note": "Take care! = Kendine iyi bak!",
+"pos": "kalıp"
 },
 {
 "id": "r2-8",
@@ -80,7 +87,8 @@
 "tr": "medeni, uygar",
 "ex": "They call it a civilized world, but it's full of thieves in nice suits.",
 "exTr": "Buna medeni dünya diyorlar ama şık takım elbiseli hırsızlarla dolu.",
-"note": "civilization = medeniyet"
+"note": "civilization = medeniyet",
+"pos": "sıfat"
 },
 {
 "id": "r2-9",
@@ -90,7 +98,8 @@
 "tr": "(borç) tahsil etmek",
 "ex": "I'm here to collect the money you owe us.",
 "exTr": "Bize olan borcunu tahsil etmeye geldim.",
-"hl": "collect"
+"hl": "collect",
+"pos": "fiil"
 },
 {
 "id": "r2-10",
@@ -100,7 +109,8 @@
 "tr": "geçimini sağlamak",
 "ex": "It's hard to make a living out here without breaking the law.",
 "exTr": "Burada kanunu çiğnemeden geçimini sağlamak zor.",
-"hl": "make a living"
+"hl": "make a living",
+"pos": "kalıp"
 },
 {
 "id": "r2-11",
@@ -109,7 +119,8 @@
 "en": "saloon",
 "tr": "salon, western barı",
 "ex": "Let's get a drink at the saloon before we head back.",
-"exTr": "Dönmeden önce barda bir şey içelim."
+"exTr": "Dönmeden önce barda bir şey içelim.",
+"pos": "isim"
 },
 {
 "id": "r2-12",
@@ -119,7 +130,8 @@
 "tr": "yerleşmek, durulup düzen kurmak",
 "ex": "One day I want to buy some land and settle down.",
 "exTr": "Bir gün biraz arazi alıp yerleşmek istiyorum.",
-"hl": "settle down"
+"hl": "settle down",
+"pos": "phrasal verb"
 },
 {
 "id": "r2-13",
@@ -128,7 +140,8 @@
 "en": "honest work",
 "tr": "namuslu iş, dürüst kazanç",
 "ex": "Maybe it's time we tried some honest work.",
-"exTr": "Belki de artık namuslu bir iş denemenin zamanı gelmiştir."
+"exTr": "Belki de artık namuslu bir iş denemenin zamanı gelmiştir.",
+"pos": "isim"
 },
 {
 "id": "r2-14",
@@ -139,7 +152,8 @@
 "ex": "Hold your fire! There are people in that wagon!",
 "exTr": "Ateş etmeyin! O arabada insanlar var!",
 "hl": "Hold your fire",
-"note": "wagon = at arabası, yük arabası"
+"note": "wagon = at arabası, yük arabası",
+"pos": "kalıp"
 },
 {
 "id": "r2-15",
@@ -149,7 +163,8 @@
 "tr": "Yakınımda kal.",
 "ex": "It's dark out here. Stay close.",
 "exTr": "Burası karanlık. Yakınımda kal.",
-"hl": "Stay close"
+"hl": "Stay close",
+"pos": "kalıp"
 },
 {
 "id": "r2-16",
@@ -160,7 +175,8 @@
 "ex": "Keep your head down in town. Everybody's looking for us.",
 "exTr": "Kasabada dikkat çekme. Herkes bizi arıyor.",
 "hl": "Keep your head down",
-"note": "Silahlı çatışmada gerçek anlamda: eğil, siper al."
+"note": "Silahlı çatışmada gerçek anlamda: eğil, siper al.",
+"pos": "kalıp"
 },
 {
 "id": "r2-17",
@@ -171,7 +187,8 @@
 "ex": "Have a little faith, son. I have a plan.",
 "exTr": "Biraz güven evlat. Bir planım var.",
 "hl": "Have a little faith",
-"note": "faith = inanç, güven"
+"note": "faith = inanç, güven",
+"pos": "kalıp"
 },
 {
 "id": "r2-18",
@@ -182,7 +199,8 @@
 "ex": "Stop shooting! You spooked my horse!",
 "exTr": "Ateş etmeyi kes! Atımı ürküttün!",
 "hl": "spooked",
-"note": "spooky = ürkütücü"
+"note": "spooky = ürkütücü",
+"pos": "fiil"
 },
 {
 "id": "r2-19",
@@ -192,7 +210,8 @@
 "tr": "yabancı",
 "ex": "A stranger in town asked me for help.",
 "exTr": "Kasabadaki bir yabancı benden yardım istedi.",
-"note": "Haritadaki '?' işaretleri: Stranger görevleri."
+"note": "Haritadaki '?' işaretleri: Stranger görevleri.",
+"pos": "isim"
 },
 {
 "id": "r2-20",
@@ -202,7 +221,8 @@
 "tr": "insanlar, ahali, millet",
 "ex": "Folks around here don't like outlaws.",
 "exTr": "Buralardaki insanlar kanun kaçaklarını sevmez.",
-"note": "my folks = ailem, annemle babam"
+"note": "my folks = ailem, annemle babam",
+"pos": "isim"
 }
 ],
 "note": "RDR2 paketi #2: Howdy!, posse, Hold your fire!, Have a little faith… Oyunda karakterlerden bu kalıpları çok duyacaksın."
