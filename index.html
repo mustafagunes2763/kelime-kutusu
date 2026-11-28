@@ -389,12 +389,9 @@ body.navon .wrap{padding-bottom:100px}
   <button data-tab="set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>Ayarlar</button>
 </nav>
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import {getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-import {initializeFirestore,getFirestore,persistentLocalCache,persistentMultipleTabManager,collection,doc,setDoc,deleteDoc,onSnapshot,query,orderBy as fsOrderBy,limit as fsLimit,writeBatch,getDocFromServer} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 const firebaseConfig={apiKey:"AIzaSyD6qa_2d6x9d670KUIGalp8iiJHkBFup18",authDomain:"kelimecim-59671.firebaseapp.com",projectId:"kelimecim-59671",storageBucket:"kelimecim-59671.firebasestorage.app",messagingSenderId:"687418566304",appId:"1:687418566304:web:06cd6c3ddb35a4bac00bc5"};
 {
-const APP_VERSION='15';
+const APP_VERSION='16';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const reEsc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
@@ -426,6 +423,21 @@ let mode='mix';try{mode=localStorage.getItem('kk-mode')||'mix'}catch(e){}
 const chains={};
 
 function status(t){const el=$('status');el.textContent=t;el.hidden=!t}
+let hasEntry=false,ignorePop=false;
+const PARENT={hist:'list',player:'vids',done:'home',sent:'home',list:'home',vids:'home',claude:'home',set:'home'};
+function syncHistory(){
+  if(view==='login')return;
+  if(view!=='home'&&!hasEntry){history.pushState({kk:1},'');hasEntry=true}
+  else if(view==='home'&&hasEntry){ignorePop=true;hasEntry=false;history.back()}
+}
+window.addEventListener('popstate',()=>{
+  if(ignorePop){ignorePop=false;return}
+  hasEntry=false;
+  if(!$('modeSheet').hidden){$('modeSheet').hidden=true;render();return}
+  if(view==='study'){$('quit').click();return}
+  if(view==='player'){closePlayer();return}
+  const p=PARENT[view];if(p)show(p);
+});
 function show(v){
   view=v;
   for(const k of ['login','home','study','done','list','hist','vids','player','claude','set','sent'])$('v-'+k).hidden=k!==v;
@@ -433,7 +445,7 @@ function show(v){
   $('tabbar').hidden=!nav;document.body.classList.toggle('navon',nav);
   const tab=v==='hist'?'list':v;
   document.querySelectorAll('#tabbar [data-tab]').forEach(b=>{if(b.dataset.tab===tab)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
-  window.scrollTo(0,0);render();
+  window.scrollTo(0,0);render();syncHistory();
 }
 
 /* --- aralıklı tekrar (SM-2 tarzı) --- */
@@ -514,7 +526,15 @@ function backHTML(c,m,res){
 /* --- çizim --- */
 const newPacks=()=>S.packs.filter(p=>!S.packsDone.includes(p.id));
 const pendingSent=()=>S.sent.filter(s=>s.status!=='corrected');
+const CK='kk-cache-v1';let persistT=null;
+function persist(){clearTimeout(persistT);persistT=setTimeout(()=>{try{localStorage.setItem(CK,JSON.stringify({uid:S.uid,email:$('acct').textContent,cards:S.cards,prog:S.prog,sessions:S.sessions.slice(0,60),settings:S.settings,note:S.note,packsDone:S.packsDone,sent:S.sent.slice(0,60),inbox:S.inbox,feedback:S.feedback}))}catch(e){}},1500)}
+function hydrate(){
+  try{const c=JSON.parse(localStorage.getItem(CK)||'null');if(!c||!Array.isArray(c.cards)||!c.cards.length)return false;
+    Object.assign(S,{cards:c.cards,prog:c.prog||{},sessions:c.sessions||[],settings:{...S.settings,...(c.settings||{})},note:c.note||null,packsDone:c.packsDone||[],sent:c.sent||[],inbox:c.inbox||[],feedback:c.feedback||[]});
+    S.ready=true;S.cached=true;S.cacheUid=c.uid||null;$('acct').textContent=c.email||'';return true}catch(e){return false}
+}
 function render(){
+  if(db&&S.ready)persist();
   const st=streak();$('streak').innerHTML=st?`<b>${st}</b> gün seri`:'';
   const np=newPacks().length;$('dotList').hidden=!np;$('dotList').textContent=np;
   const nc=S.inbox.length+pendingSent().length;$('dotClaude').hidden=!nc;$('dotClaude').textContent=nc;
@@ -628,14 +648,14 @@ function openSent(){sWord=null;sSkip=new Set();show('sent');setTimeout(()=>$('sT
 
 /* --- çalışma --- */
 function start(){
-  if(!S.ready||!db)return;
+  if(!S.ready)return;
   Q=[...dueCards(),...newCards()];
   if(!Q.length)return;
   sess={start:Date.now(),ans:[0,0,0,0],seen:new Set(),wrong:new Set(),newCount:0,done:0};
   show('study');next();
 }
 function startPractice(){
-  if(!S.ready||!db)return;
+  if(!S.ready)return;
   const list=S.cards.filter(c=>inDeck(c)&&S.prog[c.id]);if(!list.length)return;
   for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]]}
   Q=list;sess={start:Date.now(),ans:[0,0,0,0],seen:new Set(),wrong:new Set(),newCount:0,done:0,practice:true};
@@ -661,7 +681,10 @@ function reveal(res){
   const sk=$('skipBtn');if(sk)sk.hidden=true;
   for(const b of $('rate').querySelectorAll('button')){const r=+b.dataset.r;b.querySelector('small').textContent=sess&&sess.practice?(r===0?'tekrara ekle':'aynı kalır'):fmtIvl(schedule(S.prog[cur.id],r).ivl);b.classList.toggle('sug',!!res&&res.r===r)}
 }
+const pendingSaves=[];
+function flushSaves(){while(pendingSaves.length){const [p,d]=pendingSaves.shift();save(p,d)}}
 function save(path,data){
+  if(!db){pendingSaves.push([path,data]);return Promise.resolve()}
   const p=(chains[path]||Promise.resolve()).then(()=>db.doc(path).set(data)).catch(e=>{status('Kaydedilemedi ('+(e&&e.code||'hata')+'). Bağlantını kontrol et.')});
   chains[path]=p;return p;
 }
@@ -730,10 +753,10 @@ $('tabbar').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');
 document.addEventListener('click',e=>{const b=e.target.closest('[data-back]');if(b)show(b.dataset.back)});
 $('stack').addEventListener('click',start);
 $('practiceBtn').addEventListener('click',startPractice);
-$('modeBtn').addEventListener('click',()=>{renderSheet();$('modeSheet').hidden=false});
-$('sheetClose').addEventListener('click',()=>{$('modeSheet').hidden=true;render()});
+$('modeBtn').addEventListener('click',()=>{renderSheet();$('modeSheet').hidden=false;if(!hasEntry){history.pushState({kk:1},'');hasEntry=true}});
+$('sheetClose').addEventListener('click',()=>{$('modeSheet').hidden=true;render();syncHistory()});
 $('modeSheet').addEventListener('click',e=>{
-  if(e.target===$('modeSheet')){$('modeSheet').hidden=true;render();return}
+  if(e.target===$('modeSheet')){$('modeSheet').hidden=true;render();syncHistory();return}
   const m=e.target.closest('[data-mode]');if(m&&!m.disabled){mode=m.dataset.mode;try{localStorage.setItem('kk-mode',mode)}catch(x){}renderSheet();return}
   const d=e.target.closest('[data-deck]');if(d){S.deck=d.dataset.deck;renderSheet()}
 });
@@ -781,6 +804,7 @@ $('packList').addEventListener('click',async e=>{
   b.disabled=true;b.textContent='Ekleniyor…';
   try{
     const t=await (await fetch(p.file,{cache:'no-store'})).text();
+    if(!FB)throw new Error('Bağlantı henüz hazır değil, birkaç saniye sonra tekrar dene.');
     const n=await FB.importJSON(t);
     await db.doc('meta/packs').set({ids:[...new Set([...S.packsDone,p.id])]});
     $('packMsg').textContent=S.lastPatch?`${p.title}: ${S.lastPatch} karta kelime türü eklendi.`:`${p.title}: ${n} kelime eklendi.`;
@@ -810,6 +834,7 @@ $('impBtn').addEventListener('click',async()=>{
   const t=$('impText').value.trim();if(!t||!db)return;
   $('impBtn').disabled=true;$('impMsg').textContent='Aktarılıyor…';
   try{
+    if(!FB)throw new Error('Bağlantı henüz hazır değil, birkaç saniye sonra tekrar dene.');
     const n=await FB.importJSON(t);const parts=[];
     if(S.lastVideo)parts.push(S.lastVideo.merged?`Videoya yeni parça eklendi: ${S.lastVideo.title} (+${S.lastVideo.added} cümle).`:`Video eklendi: ${S.lastVideo.title}.`);
     if(S.lastCorr)parts.push(`${S.lastCorr} cümle düzeltmesi geldi (Çalış → Bugünün cümleleri).`);
@@ -848,6 +873,7 @@ $('restoreFile').addEventListener('change',async e=>{
   const f=e.target.files&&e.target.files[0];e.target.value='';if(!f||!db)return;
   $('setMsg').textContent='Yedek okunuyor…';
   try{const obj=JSON.parse(await f.text());if(obj.app!=='kelime-kutusu')throw new Error('Bu dosya bir Kelime Kutusu yedeği değil.');
+    if(!FB)throw new Error('Bağlantı henüz hazır değil.');
     const n=await FB.restore(obj);$('setMsg').textContent=`Yedek geri yüklendi (${n} kayıt).`;
   }catch(x){$('setMsg').textContent='Geri yüklenemedi: '+(x.message||x.code||'hata')}
 });
@@ -879,7 +905,9 @@ function initDb(){
   db.doc('meta/settings').onSnapshot(d=>{if(d.exists)S.settings={...S.settings,...d.data()};render()},onErr);
 }
 /* --- Firebase --- */
-const FB=(()=>{
+async function makeFB(){
+  const V='https://www.gstatic.com/firebasejs/11.0.2/';
+  const [{initializeApp},{getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,signOut},{initializeFirestore,getFirestore,persistentLocalCache,persistentMultipleTabManager,collection,doc,setDoc,deleteDoc,onSnapshot,query,orderBy:fsOrderBy,limit:fsLimit,writeBatch,getDocFromServer}]=await Promise.all([import(V+'firebase-app.js'),import(V+'firebase-auth.js'),import(V+'firebase-firestore.js')]);
   const app=initializeApp(firebaseConfig),auth=getAuth(app),provider=new GoogleAuthProvider();
   let fs;try{fs=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})})}catch(e){fs=getFirestore(app)}
   let base='';
@@ -978,19 +1006,21 @@ const FB=(()=>{
         else $('loginMsg').textContent=e.code==='auth/popup-closed-by-user'?'Giriş penceresi kapatıldı.':'Giriş olmadı: '+(e.code||e.message);
       });
     });
-    $('logout').addEventListener('click',()=>signOut(auth).then(()=>location.reload()));
+    $('logout').addEventListener('click',()=>{try{localStorage.removeItem(CK)}catch(e){}signOut(auth).then(()=>location.reload())});
     onAuthStateChanged(auth,async u=>{
-      if(!u){status('');show('login');return}
+      if(!u){try{localStorage.removeItem(CK)}catch(e){}S.cached=false;status('');show('login');return}
       if(db)return;
-      base='users/'+u.uid+'/';$('acct').textContent=u.email||'';
-      status('Yükleniyor…');show('home');
-      db=api;initDb();
+      if(S.cached&&S.cacheUid&&S.cacheUid!==u.uid){try{localStorage.removeItem(CK)}catch(e){}location.reload();return}
+      S.uid=u.uid;base='users/'+u.uid+'/';$('acct').textContent=u.email||'';
+      if(!S.cached){status('Yükleniyor…');show('home')}
+      db=api;initDb();flushSaves();
       const sk='kk-seeded-'+u.uid;let done=false;try{done=localStorage.getItem(sk)==='1'}catch(e){}
       if(!done)seed().then(ok=>{if(ok){try{localStorage.setItem(sk,'1')}catch(e){}}});
     });
   }
   return {start,importJSON,restore};
-})();
+}
+let FB=null;
 
 /* --- video oynatıcı --- */
 let yt=null,ytReady=null,curVid=null,curLine=-1,stopEach=false,stopAt=null,tick=null,selWord='';
@@ -1076,7 +1106,8 @@ $('updBtn').addEventListener('click',async()=>{
   try{const reg=await navigator.serviceWorker?.getRegistration();if(reg)await reg.update()}catch(e){}
   location.reload();
 });
-FB.start();
+if(hydrate()){status('');show('home')}
+makeFB().then(f=>{FB=f;f.start()}).catch(e=>{if(!S.cached)status('Bağlantı kurulamadı. İnternetini kontrol edip uygulamayı yeniden aç.')});
 checkVersion();setInterval(checkVersion,5*60e3);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkVersion()});
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});

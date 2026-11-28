@@ -1,5 +1,5 @@
 // Kelime Kutusu servis çalışanı: uygulamayı önbellekten anında açar, arka planda günceller.
-const CACHE = 'kk-v6';
+const CACHE = 'kk-v7';
 const FB = 'https://www.gstatic.com/firebasejs/11.0.2/';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png',
   FB + 'firebase-app.js', FB + 'firebase-auth.js', FB + 'firebase-firestore.js'];
